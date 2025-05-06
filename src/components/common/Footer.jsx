@@ -9,39 +9,57 @@ const Footer = () => {
         <div className="row justify-content-between">
           <div className=" col-md-4  col-sm-6 col-12 ">
             <ul className="ps-0 ">
-              <li className="fs_16 mt-4 mt-md-0 fw-bold text-decoration-none list-unstyled ff_n clr_theme">
-                About Us
-              </li>
+              <Link to="/about">
+                <li className="fs_16 mt-4 mt-md-0 fw-bold text-decoration-none list-unstyled ff_n clr_theme">
+                  About Us
+                </li>
+              </Link>
 
-              <li className="fs_16 mt-3 fw-bold text-decoration-none list-unstyled ff_n clr_theme">
-                Student Verification
-              </li>
-
-              <li className="fs_16 mt-3 fw-bold text-decoration-none list-unstyled ff_n clr_theme">
-                Course Category
-              </li>
-
-              <li className="fs_16 mt-3 fw-bold text-decoration-none list-unstyled ff_n clr_theme">
-                Top University
-              </li>
-              <li className="fs_16 mt-3 fw-bold text-decoration-none list-unstyled ff_n clr_theme">
-                Result
-              </li>
-              <li className="fs_16 mt-3 fw-bold text-decoration-none list-unstyled ff_n clr_theme">
-                Apply Franchise
-              </li>
-              <li className="fs_16 mt-3 fw-bold text-decoration-none list-unstyled ff_n clr_theme">
-                Franchise Login
-              </li>
-              <li className="fs_16 mt-3 fw-bold text-decoration-none list-unstyled ff_n clr_theme">
-                Contact Us
-              </li>
-              <li className="fs_16 mt-3 fw-bold text-decoration-none list-unstyled ff_n clr_theme">
-                Privacy Policy
-              </li>
-              <li className="fs_16 mt-3 fw-bold text-decoration-none list-unstyled ff_n clr_theme">
-                Terms & Conditions
-              </li>
+              <Link to="/enrollment">
+                <li className="fs_16 mt-3 fw-bold text-decoration-none list-unstyled ff_n clr_theme">
+                  Student Verification
+                </li>
+              </Link>
+              <Link to="/category">
+                <li className="fs_16 mt-3 fw-bold text-decoration-none list-unstyled ff_n clr_theme">
+                  Course Category
+                </li>
+              </Link>
+              <Link to="/top-university">
+                <li className="fs_16 mt-3 fw-bold text-decoration-none list-unstyled ff_n clr_theme">
+                  Top University
+                </li>
+              </Link>
+              <Link to="/result">
+                <li className="fs_16 mt-3 fw-bold text-decoration-none list-unstyled ff_n clr_theme">
+                  Result
+                </li>
+              </Link>
+              <Link to="/apply-franchise">
+                <li className="fs_16 mt-3 fw-bold text-decoration-none list-unstyled ff_n clr_theme">
+                  Apply Franchise
+                </li>
+              </Link>
+              <Link to="/my-account">
+                <li className="fs_16 mt-3 fw-bold text-decoration-none list-unstyled ff_n clr_theme">
+                  Franchise Login
+                </li>
+              </Link>
+              <Link to="/contact-us">
+                <li className="fs_16 mt-3 fw-bold text-decoration-none list-unstyled ff_n clr_theme">
+                  Contact Us
+                </li>
+              </Link>
+              <Link to="/privacy-policy">
+                <li className="fs_16 mt-3 fw-bold text-decoration-none list-unstyled ff_n clr_theme">
+                  Privacy Policy
+                </li>
+              </Link>
+              <Link to="/terms-and-conditions">
+                <li className="fs_16 mt-3 fw-bold text-decoration-none list-unstyled ff_n clr_theme">
+                  Terms & Conditions
+                </li>
+              </Link>
             </ul>
           </div>
           <div className="col-md-4  col-sm-6 col-12 mt-lg-0 mt-4">

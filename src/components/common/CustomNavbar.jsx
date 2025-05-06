@@ -124,14 +124,14 @@ const CustomNavbar = () => {
               <Nav.Link
                 className=" fs_12 ff_p mb-0 pb-0 clr_theme ps-0 "
                 as={Link}
-                to="/college"
+                to="/top-college"
               >
                 College
               </Nav.Link>
               <Nav.Link
                 className=" fs_12 ff_p mb-0 pb-0 clr_theme ps-0 "
                 as={Link}
-                to="/iti"
+                to="/top-iti"
               >
                 Iti
               </Nav.Link>
@@ -225,7 +225,7 @@ const CustomNavbar = () => {
             <Nav.Link
               className=" fs_12 ff_p mb-0 pb-0 clr_theme ps-0 mt-2"
               as={Link}
-              to="/college"
+              to="/top-college"
               onClick={toggleOffcanvas}
             >
               College
@@ -233,7 +233,7 @@ const CustomNavbar = () => {
             <Nav.Link
               className=" fs_12 ff_p mb-0 pb-0 clr_theme ps-0 mt-2"
               as={Link}
-              to="/iti"
+              to="/top-iti"
               onClick={toggleOffcanvas}
             >
               Iti

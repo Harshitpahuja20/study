@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import HomePage from "./pages/HomePage";
@@ -11,10 +11,18 @@ import FranchiseLoginPage from "./pages/FranchiseLoginPage";
 import ContactUsPage from "./pages/ContactUsPage";
 import CourseCategoriesPage from "./pages/CourseCategoriesPage";
 import NewsPage from "./pages/NewsPage";
+import TopUniversityPage from "./pages/TopUniversityPage";
+import TopITIPage from "./pages/TopITIPage";
+import TopCollegePage from "./pages/TopCollegePage";
+import ApplyFranchisePage from "./pages/ApplyFranchisePage";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsAndConditionsPage from "./pages/TermsAndConditionsPage";
 function App() {
+  const location = useLocation();
+
   return (
     <>
-      <TopToBottom />
+      {location.pathname !== "/apply-franchise" && <TopToBottom />}
 
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -25,8 +33,17 @@ function App() {
         <Route path="/contact-us" element={<ContactUsPage />} />
         <Route path="/category" element={<CourseCategoriesPage />} />
         <Route path="/news" element={<NewsPage />} />
+        <Route path="/top-university" element={<TopUniversityPage />} />
+        <Route path="/top-iti" element={<TopITIPage />} />
+        <Route path="/top-college" element={<TopCollegePage />} />
+        <Route path="/apply-franchise" element={<ApplyFranchisePage />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route
+          path="/terms-and-conditions"
+          element={<TermsAndConditionsPage />}
+        />
       </Routes>
-      <Footer />
+      {location.pathname !== "/apply-franchise" && <Footer />}
     </>
   );
 }

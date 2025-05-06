@@ -1,19 +1,19 @@
 import React, { useEffect } from "react";
 import CustomNavbar from "../components/common/CustomNavbar";
 import BannerSection from "../components/common/BannerSection";
-import StudentHero from "../components/studentverificationPage/StudentHero";
+import TopCollegeHero from "../components/topcollegepage/TopCollegeHero";
 
-const StudentVerificationPage = () => {
+const TopCollegePage = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scroll to top
   }, []);
   return (
     <div>
       <CustomNavbar />
-      <BannerSection title="Student Verification" page="Student Verification" />
-      <StudentHero />
+      <BannerSection title="Top Colleges" page="Top Colleges" />
+      <TopCollegeHero />
     </div>
   );
 };
 
-export default StudentVerificationPage;
+export default TopCollegePage;
