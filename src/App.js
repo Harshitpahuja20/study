@@ -25,6 +25,9 @@ import { useStudy } from "./context/study.context";
 import AdminLogin from "./admin/pages/AdminLogin";
 import AdminDashobard from "./admin/pages/AdminDashobard";
 import AdminStreams from "./admin/pages/AdminStreams";
+import AdminPlaces from "./admin/pages/AdminPlaces";
+import AdminFranchiseRequests from "./admin/pages/AdminFranchiseRequests";
+import AdminContactQueries from "./admin/pages/AdminContactQueries";
 
 function App() {
   const { isEnquiryPopup, setIsEnquiryPopup, currentUser } = useStudy();
@@ -93,10 +96,10 @@ function App() {
         >
           <Route path="dashboard" element={<AdminDashobard />} />
           <Route path="streams" element={<AdminStreams />} />
-          <Route path="places" element={<AdminDashobard />} />
+          <Route path="places" element={<AdminPlaces />} />
           <Route path="studentRequests" element={<AdminDashobard />} />
-          <Route path="franchiseRequests" element={<AdminDashobard />} />
-          <Route path="contactQuery" element={<AdminDashobard />} />
+          <Route path="franchiseRequests" element={<AdminFranchiseRequests />} />
+          <Route path="contactQuerys" element={<AdminContactQueries />} />
           <Route path="*" element={<Navigate to={"dashboard"} />} />
         </Route>
       </Routes>

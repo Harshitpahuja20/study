@@ -3,14 +3,12 @@ import {
   Breadcrumb,
   Col,
   Row,
-  Card,
   Spinner,
   Table,
   Button,
   Form,
 } from "react-bootstrap";
 import ReactPaginate from "react-paginate";
-import { Link } from "react-router-dom";
 import BrokenImage from "../../assets/image/png/broken-image.png";
 import mediaPicker from "../../assets/image/png/media-picker.png";
 import AddModal from "../components/popup/AddModal";
@@ -18,15 +16,15 @@ import DeleteModal from "../components/popup/DeleteModal";
 import { toast } from "react-toastify";
 import { IoIosCloseCircle } from "react-icons/io";
 import {
-  addStream,
-  deleteStreams,
-  getStreams,
-  updateStream,
-} from "../services/adminStreams.service";
+  addPlace,
+  deletePlace,
+  getPlaces,
+  updatePlace,
+} from "../services/adminPlaces.service";
 import { FaTrash } from "react-icons/fa";
 import { BsFillPencilFill } from "react-icons/bs";
 
-const AdminStreams = () => {
+const AdminPlaces = () => {
   const [tableData, setTableData] = useState([]);
   const [pagination, setPagination] = useState({
     currentPage: 1,
@@ -41,7 +39,6 @@ const AdminStreams = () => {
   const [dataLoading, setDataLoading] = useState(false);
   const [file, setFile] = useState(null);
   const [title, setTitle] = useState("");
-  const [key, setKey] = useState("");
   const imageRef = useRef();
   const [filters, setFilters] = useState({
     dateRange: [null, null],
@@ -69,7 +66,7 @@ const AdminStreams = () => {
 
   const fetchData = async (page) => {
     setDataLoading(true);
-    const response = await getStreams(page, filters);
+    const response = await getPlaces(page, filters);
     if (response.data.status) {
       setDataLoading(false);
       setTableData(response.data.data);
@@ -86,7 +83,7 @@ const AdminStreams = () => {
   const handleDelete = async () => {
     try {
       if (selectedId) {
-        await deleteStreams(selectedId).then((response) => {
+        await deletePlace(selectedId).then((response) => {
           if (response.data.status) {
             toast.success(response.data.message);
             fetchData({
@@ -118,8 +115,8 @@ const AdminStreams = () => {
       setIsLoading(true);
       const formData = new FormData();
       formData.append("title", title);
-      formData.append("stream", file);
-      await addStream(formData).then((res) => {
+      formData.append("place", file);
+      await addPlace(formData).then((res) => {
         if (res.data.status) {
           toast.success("Added Successfully");
           setIsLoading(false);
@@ -147,10 +144,10 @@ const AdminStreams = () => {
       formData.append("title", isEditData?.title);
       formData.append("id", isEditData?._id);
       if (file) {
-        formData.append("stream", file);
+        formData.append("place", file);
       }
 
-      await updateStream(formData).then((res) => {
+      await updatePlace(formData).then((res) => {
         if (res.data.status) {
           toast.success("Updated Successfully");
           setIsLoading(false);
@@ -175,7 +172,7 @@ const AdminStreams = () => {
       <Breadcrumb>
         <Breadcrumb.Item href="/admin/dashboard">Home</Breadcrumb.Item>
         <Breadcrumb.Item active className="fw-semibold">
-          Streams
+          Places
         </Breadcrumb.Item>
       </Breadcrumb>
 
@@ -367,7 +364,7 @@ const AdminStreams = () => {
           </>
         }
         onConfirm={() => handleAddCleaningType()}
-        title="Add New Stream"
+        title="Add New Place"
         loading={loading}
       />
 
@@ -460,11 +457,11 @@ const AdminStreams = () => {
           </>
         }
         onConfirm={() => handleUpdateCleaningType()}
-        title="Update Stream"
+        title="Update Place"
         loading={loading}
       />
     </div>
   );
 };
 
-export default AdminStreams;
+export default AdminPlaces;
