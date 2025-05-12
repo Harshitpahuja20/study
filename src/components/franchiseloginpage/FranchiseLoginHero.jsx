@@ -15,7 +15,7 @@ const FranchiseLoginHero = () => {
                 Check your all details before submit
               </p>
               <div className="d-flex mt-4 ff_p flex-column">
-                <label htmlFor="EnrollmentNumber">Email / Username</label>
+                <label htmlFor="EnrollmentNumber">Email</label>
                 <input className="mt-2 py-2 px-3" type="text" />
               </div>
               <div className="d-flex mt-3 ff_p flex-column">

@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import HomePage from "./pages/HomePage";
@@ -17,14 +17,41 @@ import TopCollegePage from "./pages/TopCollegePage";
 import ApplyFranchisePage from "./pages/ApplyFranchisePage";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsAndConditionsPage from "./pages/TermsAndConditionsPage";
+import "./index.css";
+import AdminLayout from "./admin/layout/layout";
+import { ToastContainer } from "react-toastify";
+import EnquiryPopupModal from "./components/popup/EnquiryPopup";
+import { useStudy } from "./context/study.context";
+import AdminLogin from "./admin/pages/AdminLogin";
+import AdminDashobard from "./admin/pages/AdminDashobard";
+import AdminStreams from "./admin/pages/AdminStreams";
+
 function App() {
+  const { isEnquiryPopup, setIsEnquiryPopup, currentUser } = useStudy();
   const location = useLocation();
+  const token = localStorage.getItem("token");
+
+  const AdminPrivateRoute = ({ children }) => {
+    if (token || (currentUser && currentUser.role === "admin")) {
+      return children;
+    }
+    return <Navigate to="/" />;
+  };
 
   return (
     <>
-      {location.pathname !== "/apply-franchise" && <TopToBottom />}
+      {isEnquiryPopup && (
+        <EnquiryPopupModal
+          show={isEnquiryPopup}
+          handleClose={() => setIsEnquiryPopup(false)}
+        />
+      )}
+
+      {location.pathname !== "/admin/login" && <TopToBottom />}
+      <ToastContainer />
 
       <Routes>
+        {/* Public Routes */}
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutUsPage />} />
         <Route path="/enrollment" element={<StudentVerificationPage />} />
@@ -42,8 +69,39 @@ function App() {
           path="/terms-and-conditions"
           element={<TermsAndConditionsPage />}
         />
+
+        {/* Admin Login with redirect if already logged in */}
+        <Route
+          path="/admin/login"
+          element={
+            token || (currentUser && currentUser.role === "admin") ? (
+              <Navigate to="/admin/dashboard" />
+            ) : (
+              <AdminLogin />
+            )
+          }
+        />
+
+        {/* Protected Admin Routes */}
+        <Route
+          path="/admin/*"
+          element={
+            <AdminPrivateRoute>
+              <AdminLayout />
+            </AdminPrivateRoute>
+          }
+        >
+          <Route path="dashboard" element={<AdminDashobard />} />
+          <Route path="streams" element={<AdminStreams />} />
+          <Route path="places" element={<AdminDashobard />} />
+          <Route path="studentRequests" element={<AdminDashobard />} />
+          <Route path="franchiseRequests" element={<AdminDashobard />} />
+          <Route path="contactQuery" element={<AdminDashobard />} />
+          <Route path="*" element={<Navigate to={"dashboard"} />} />
+        </Route>
       </Routes>
-      {location.pathname !== "/apply-franchise" && <Footer />}
+
+      {/* {location.pathname !== "/admin/login" && <Footer />} */}
     </>
   );
 }
