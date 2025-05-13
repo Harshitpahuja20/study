@@ -26,6 +26,8 @@ import AdminLogin from "./admin/pages/AdminLogin";
 import AdminDashobard from "./admin/pages/AdminDashobard";
 import AdminStreams from "./admin/pages/AdminStreams";
 
+import PopupModal from "./components/common/PopupModal";
+import { useEffect, useState } from "react";
 function App() {
   const { isEnquiryPopup, setIsEnquiryPopup, currentUser } = useStudy();
   const location = useLocation();
