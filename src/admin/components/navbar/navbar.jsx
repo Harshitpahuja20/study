@@ -7,23 +7,38 @@ import {
   Button,
   Offcanvas,
 } from "react-bootstrap";
+
+import { FaUserCircle } from "react-icons/fa";
+import { Link, useLocation } from "react-router-dom";
 import {
-  FaPhoneAlt,
-  FaTwitter,
-  FaFacebookF,
-  FaLinkedinIn,
+  FaHome,
+  FaInfoCircle,
+  FaEnvelope,
+  FaChevronDown,
+  FaMinus,
+  FaPlus,
+  FaTools,
 } from "react-icons/fa";
-import { MdOutlineMail } from "react-icons/md";
-import { LuUserRound } from "react-icons/lu";
-import { BiSearch } from "react-icons/bi";
-// import logo from "../../../src/assets/image/svg/maineLogo.png";
-import { Link } from "react-router-dom";
+import logo from "../../../assets/image/svg/maineLogo.png";
 
 const AdminNavbar = () => {
   const [showSidebar, setShowSidebar] = useState(false);
   const handleClose = () => setShowSidebar(false);
   const handleShow = () => setShowSidebar(true);
   const [show, setShow] = useState(false);
+  const location = useLocation();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // state to manage dropdown toggle
+
+  const navItems = [
+    { to: "/", label: "Home", icon: <FaHome /> },
+    { to: "/about", label: "About", icon: <FaInfoCircle /> },
+    { to: "/contact", label: "Contact", icon: <FaEnvelope /> },
+  ];
+
+  // Toggle function for dropdown
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
 
   const toggleOffcanvas = () => setShow((prev) => !prev);
 
@@ -36,25 +51,21 @@ const AdminNavbar = () => {
         expand="sm"
         className="  d-flex flex-column align-items-start ff_p  pt-0 pb-0"
       >
-        <div className="bg-light p-2 py-3 w-100">
-          <Container>
+        <div className="bg-light w-100">
+          <Container fluid>
             <div className="d-flex align-items-center justify-content-between w-100">
               <Navbar.Brand className="w-100">
-                <div className="d-flex justify-content-between align-items-center gap-3">
+                <div className="d-flex justify-content-between align-items-center">
                   <Link to="/" className="pb-0">
                     <div className="d-flex clr_theme align-items-center gap-2">
-                      <h6 className="ff_p  fw-bold mb-0">
-                        Admin Panel
-                      </h6>
+                      <h6 className="ff_p  fw-bold mb-0">Admin Panel</h6>
                     </div>
                   </Link>
-                  
+
                   <div className="d-lg-block d-none">
                     <div className="d-flex  align-items-center gap-2 clr_theme small">
-                      <FaPhoneAlt />
-                      <span className=" fs_14">
-                        +91-7357777796 | 9729957434
-                      </span>
+                      <FaUserCircle size={32} />
+                      <span className=" fs_14 fw-semibold">Rahul Jangra</span>
                     </div>
                   </div>
                 </div>
@@ -72,110 +83,96 @@ const AdminNavbar = () => {
       </Navbar>
 
       {/* Mobile Sidebar Navigation */}
-      <Offcanvas show={showSidebar} onHide={handleClose} placement="end">
+      <Offcanvas
+        className="Side"
+        show={showSidebar}
+        onHide={handleClose}
+        placement="end"
+      >
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>
-            {/* <img src={logo} alt="logo" style={{ maxHeight: "60px" }} /> */}
+            <div className="d-flex align-items-center justify-content-center gap-2 cursor-pointer py-3 border-0 border-secondary fs-5 fw-bold">
+              <img width={50} className=" rounded-5" src={logo} alt="logo" />
+              <h6 className="ff_p  fw-bold mb-0">
+                JBS INSTITUTE OF <br className=""></br>SKILL EDUCATION
+              </h6>
+            </div>
           </Offcanvas.Title>
         </Offcanvas.Header>
-        <Offcanvas.Body>
+        <div className="px-3">
+          <div className="border my-3  border-2 w-100"></div>
+        </div>
+        <Offcanvas.Body className="pt-0">
           <Nav className="flex-column gap-2">
-            <Nav.Link
-              className=" fs_12 ff_p mb-0 pb-0 clr_theme ps-0 mt-2"
-              as={Link}
-              to="/"
-              onClick={toggleOffcanvas}
-            >
-              Home
-            </Nav.Link>
-            <Nav.Link
-              className=" fs_12 ff_p mb-0 pb-0 clr_theme ps-0 mt-2"
-              as={Link}
-              to="/about"
-              onClick={toggleOffcanvas}
-            >
-              About Us
-            </Nav.Link>
-            <Nav.Link
-              className=" fs_12 ff_p mb-0 pb-0 clr_theme ps-0 mt-2"
-              as={Link}
-              to="/top-university"
-              onClick={toggleOffcanvas}
-            >
-              Top University
-            </Nav.Link>
-            <Nav.Link
-              className=" fs_12 ff_p mb-0 pb-0 clr_theme ps-0 mt-2"
-              as={Link}
-              to="/top-college"
-              onClick={toggleOffcanvas}
-            >
-              College
-            </Nav.Link>
-            <Nav.Link
-              className=" fs_12 ff_p mb-0 pb-0 clr_theme ps-0 mt-2"
-              as={Link}
-              to="/top-iti"
-              onClick={toggleOffcanvas}
-            >
-              Iti
-            </Nav.Link>
-            <Nav.Link
-              className=" fs_12 ff_p mb-0 pb-0 clr_theme ps-0 mt-2"
-              as={Link}
-              to="/news"
-              onClick={toggleOffcanvas}
-            >
-              News
-            </Nav.Link>
-            <Nav.Link
-              className=" fs_12 ff_p mb-0 pb-0 clr_theme ps-0 mt-2"
-              as={Link}
-              to="/student-verification"
-              onClick={toggleOffcanvas}
-            >
-              Student Verification
-            </Nav.Link>
-            <Nav.Link
-              className=" fs_12 ff_p mb-0 pb-0 clr_theme ps-0 mt-2"
-              as={Link}
-              to="/result"
-              onClick={toggleOffcanvas}
-            >
-              Result
-            </Nav.Link>
-            <Nav.Link
-              className=" fs_12 ff_p mb-0 pb-0 clr_theme ps-0 mt-2"
-              as={Link}
-              to="/contact-us"
-              onClick={toggleOffcanvas}
-            >
-              Contact Us
-            </Nav.Link>
-            <Nav.Link
-              className=" fs_12 ff_p mb-0 pb-0 clr_theme ps-0 mt-2"
-              as={Link}
-              to="/apply-franchise"
-              onClick={toggleOffcanvas}
-            >
-              Apply Franchise
-            </Nav.Link>
-            <Nav.Link
-              className=" fs_12 ff_p mb-0 pb-0 clr_theme ps-0 mt-2"
-              as={Link}
-              to="/my-account"
-              onClick={toggleOffcanvas}
-            >
-              Franchise Login
-            </Nav.Link>
-            <Nav.Link
-              className=" fs_12 ff_p mb-0 pb-0 clr_theme ps-0 mt-2"
-              as={Link}
-              to="/category"
-              onClick={toggleOffcanvas}
-            >
-              Category
-            </Nav.Link>
+            <div className="flex-grow-1 px-2">
+              {navItems.map((item) => (
+                <Link
+                  key={item.to}
+                  to={item.to}
+                  className={`d-flex align-items-center px-4 py-2 mt-3 text-decoration-none text-black ff_p sidebar-link ${
+                    location.pathname === item.to ? "bg-primary" : ""
+                  }`}
+                >
+                  <span className="me-3">{item.icon}</span>
+                  {item.label}
+                </Link>
+              ))}
+
+              {/* Dropdown Menu */}
+              <div className={`w-100 mt-3`}>
+                <div
+                  onClick={toggleDropdown}
+                  className={`text-black px-4 py-2 w-100 align-items-center  text-start sidebar-link dropdown-toggle ${
+                    location.pathname.includes("/services")
+                      ? "bg-primary d-flex justify-content-between align-items-center"
+                      : " d-flex justify-content-between align-items-center "
+                  }`}
+                  style={{ cursor: "pointer" }}
+                >
+                  <span className="me-3">
+                    {" "}
+                    <span className="me-3">
+                      <FaTools />
+                    </span>
+                    Services
+                  </span>
+                  <span>
+                    {" "}
+                    {isDropdownOpen ? (
+                      <FaMinus size={12} />
+                    ) : (
+                      <FaPlus size={12} />
+                    )}{" "}
+                  </span>
+                  {/* Plus/Minus Toggle */}
+                </div>
+
+                {isDropdownOpen && (
+                  <div className=" mt-2 px-3">
+                    <div className="bg-dark w-100">
+                      <Link
+                        to="/services/design"
+                        className="text-white ff_p border-bottom border-2 d-block px-4 py-2"
+                      >
+                        Design
+                      </Link>
+                      <Link
+                        to="/services/development"
+                        className="text-white ff_p border-bottom border-2 d-block px-4 py-2"
+                      >
+                        Development
+                      </Link>
+                      <Link
+                        to="/services/marketing"
+                        className="text-white ff_p border-bottom border-2 d-block px-4 py-2"
+                      >
+                        Marketing
+                      </Link>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
           </Nav>
         </Offcanvas.Body>
       </Offcanvas>

@@ -37,7 +37,7 @@ const AdminLayout = () => {
           </Col>
 
           {/* Main content area */}
-          <Col xs={12} lg={10} className="p-4">
+          <Col xs={12} lg={10} className="p-md-4 p-0">
             <Outlet /> {/* Dynamic pages rendered here */}
           </Col>
         </Row>
