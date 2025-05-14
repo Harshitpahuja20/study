@@ -31,6 +31,11 @@ import AdminContactQueries from "./admin/pages/AdminContactQueries";
 
 import PopupModal from "./components/common/PopupModal";
 import { useEffect, useState } from "react";
+import AdminAddNews from "./admin/pages/AdminAddNews";
+import AdminViewNews from "./admin/pages/AdminViewNews";
+import AdminAddFranchise from "./admin/pages/AdminAddFranchise";
+import AdminViewFranchise from "./admin/pages/AdminViewFranchise";
+import AdminViewSingleFranchise from "./admin/pages/AdminViewSingleFranchise";
 function App() {
   const { isEnquiryPopup, setIsEnquiryPopup, currentUser } = useStudy();
   const location = useLocation();
@@ -102,6 +107,11 @@ function App() {
           <Route path="studentRequests" element={<AdminDashobard />} />
           <Route path="franchiseRequests" element={<AdminFranchiseRequests />} />
           <Route path="contactQuerys" element={<AdminContactQueries />} />
+          <Route path="news/add" element={<AdminAddNews />} />
+          <Route path="news/view" element={<AdminViewNews />} />
+          <Route path="franchise/add" element={<AdminAddFranchise />} />
+          <Route path="franchise/view" element={<AdminViewFranchise />} />
+          <Route path="franchise/view/:id" element={<AdminViewSingleFranchise />} />
           <Route path="*" element={<Navigate to={"dashboard"} />} />
         </Route>
       </Routes>

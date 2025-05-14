@@ -8,38 +8,106 @@ import {
   FaMinus,
   FaPlus,
   FaTools,
+  FaUserGraduate,
+  FaHandshake,
+  FaPhoneAlt,
+  FaStream,
+  FaMapMarkerAlt,
 } from "react-icons/fa";
 import logo from "../../../assets/image/svg/maineLogo.png";
-function Sidebar({ isSidebarOpen }) {
+
+// ✅ Reusable Dropdown Component
+function DropdownMenu({ label, icon, items = [], basePath = "" }) {
   const location = useLocation();
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // state to manage dropdown toggle
+  const [isOpen, setIsOpen] = useState(false);
 
-  const navItems = [
-    { to: "/", label: "Home", icon: <FaHome /> },
-    { to: "/about", label: "About", icon: <FaInfoCircle /> },
-    { to: "/contact", label: "Contact", icon: <FaEnvelope /> },
-  ];
-
-  // Toggle function for dropdown
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
+  const toggle = () => setIsOpen((prev) => !prev);
+  const isActive = location.pathname.includes(basePath);
 
   return (
-    <div className={`bg-dark text-white Side `} id="sidebar">
+    <div className="w-100 mt-2">
+      <div
+        onClick={toggle}
+        className={`text-white px-4 py-2 w-100 text-start sidebar-link dropdown-toggle d-flex justify-content-between align-items-center ${
+          isActive ? "" : "bg-dark"
+        }`}
+        style={{ cursor: "pointer" }}
+      >
+        <span className="me-3 d-flex align-items-center gap-2">
+          {icon} {label}
+        </span>
+        {isOpen ? <FaMinus size={12} /> : <FaPlus size={12} />}
+      </div>
+
+      {isOpen && (
+        <div className="mt-2 px-3">
+          <div className="bg-white rounded shadow-sm overflow-hidden">
+            {items.map((item) => (
+              <Link
+                key={item.to}
+                to={item.to}
+                className="text-black ff_p border-bottom border-2 d-block px-4 py-2 text-decoration-none"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ✅ Main Sidebar Component
+function Sidebar({ isSidebarOpen }) {
+  const location = useLocation();
+
+  const navItems = [
+    { to: "/admin/dashboard", label: "Dashboard", icon: <FaHome /> },
+    {
+      to: "/admin/studentRequests",
+      label: "Student Requests",
+      icon: <FaUserGraduate />,
+    },
+    {
+      to: "/admin/franchiseRequests",
+      label: "Franchise Requests",
+      icon: <FaHandshake />,
+    },
+    {
+      to: "/admin/contactQuerys",
+      label: "Contact Queries",
+      icon: <FaPhoneAlt />,
+    },
+    {
+      to: "/admin/Streams",
+      label: "Streams",
+      icon: <FaStream />,
+    },
+    {
+      to: "/admin/Places",
+      label: "Places",
+      icon: <FaMapMarkerAlt />,
+    },
+  ];
+  
+  return (
+    <div className={`bg-dark text-white Side`} id="sidebar">
       <div className="d-flex align-items-center justify-content-center gap-2 cursor-pointer py-3 border-bottom border-secondary fs-5 fw-bold">
-        <img width={50} className=" rounded-5" src={logo} alt="logo" />
-        <h6 className="ff_p  fw-bold mb-0">
-          JBS INSTITUTE OF <br className=""></br>SKILL EDUCATION
+        <img width={50} className="rounded-5" src={logo} alt="logo" />
+        <h6 className="ff_p fw-bold mb-0 text-center">
+          JBS INSTITUTE OF <br />
+          SKILL EDUCATION
         </h6>
       </div>
+
       <div className="flex-grow-1 px-2">
         {navItems.map((item) => (
           <Link
             key={item.to}
             to={item.to}
-            className={`d-flex align-items-center px-4 py-2 mt-3 text-decoration-none text-white sidebar-link ${
-              location.pathname === item.to ? "bg-primary" : "bg-dark"
+            className={`d-flex rounded align-items-center px-4 py-2 mt-2 text-decoration-none text-white sidebar-link ${
+              location.pathname === item.to ? "bg-secondary" : "bg-dark"
             }`}
           >
             <span className="me-3">{item.icon}</span>
@@ -47,60 +115,25 @@ function Sidebar({ isSidebarOpen }) {
           </Link>
         ))}
 
-        {/* Dropdown Menu */}
-        <div className={`w-100 mt-3`}>
-          <div
-            onClick={toggleDropdown}
-            className={`text-white px-4 py-2 w-100  text-start sidebar-link dropdown-toggle ${
-              location.pathname.includes("/services")
-                ? "bg-primary d-flex justify-content-between align-items-center"
-                : "bg-dark d-flex justify-content-between align-items-center"
-            }`}
-            style={{ cursor: "pointer" }}
-          >
-            <span className="me-3">
-              {" "}
-              <span className="me-3">
-                <FaTools />
-              </span>
-              Services
-            </span>
-            <span>
-              {" "}
-              {isDropdownOpen ? (
-                <FaMinus size={12} />
-              ) : (
-                <FaPlus size={12} />
-              )}{" "}
-            </span>
-            {/* Plus/Minus Toggle */}
-          </div>
-
-          {isDropdownOpen && (
-            <div className=" mt-2 px-3">
-              <div className="bg-white w-100">
-                <Link
-                  to="/services/design"
-                  className="text-black ff_p border-bottom border-2 d-block px-4 py-2"
-                >
-                  Design
-                </Link>
-                <Link
-                  to="/services/development"
-                  className="text-black ff_p border-bottom border-2 d-block px-4 py-2"
-                >
-                  Development
-                </Link>
-                <Link
-                  to="/services/marketing"
-                  className="text-black ff_p border-bottom border-2 d-block px-4 py-2"
-                >
-                  Marketing
-                </Link>
-              </div>
-            </div>
-          )}
-        </div>
+        {/* ✅ Reusable Dropdown */}
+        <DropdownMenu
+          label="News"
+          icon={<FaTools />}
+          items={[
+            { to: "/admin/news/add", label: "Add" },
+            { to: "/admin/news/view", label: "List" },
+          ]}
+          basePath="/news/add"
+        />
+        <DropdownMenu
+          label="Franchise"
+          icon={<FaTools />}
+          items={[
+            { to: "/admin/franchise/add", label: "Add" },
+            { to: "/admin/franchise/view", label: "List" },
+          ]}
+          basePath="/news/add"
+        />
       </div>
     </div>
   );

@@ -9,9 +9,10 @@ const AddModal = ({
   content,
   loading,
   isUpdate,
+  size="md"
 }) => {
   return (
-    <Modal show={show} onHide={handleClose} backdrop="static">
+    <Modal show={show} onHide={handleClose} backdrop="static" size={size}>
       <Modal.Header closeButton>
         <Modal.Title className="fw-semibold fs-5">{title}</Modal.Title>
       </Modal.Header>
