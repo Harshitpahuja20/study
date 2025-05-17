@@ -55,7 +55,7 @@ const CustomNavbar = () => {
                     </div>
                   </Link>
                   <div className=" d-sm-flex d-none justify-content-center">
-                    <div
+                    {/* <div
                       className="input-group border rounded-1"
                       style={{ width: "100%", maxWidth: "400px" }}
                     >
@@ -71,7 +71,7 @@ const CustomNavbar = () => {
                       >
                         <BiSearch />
                       </button>
-                    </div>
+                    </div> */}
                   </div>
                   <div className="d-lg-block d-none">
                     <div className="d-flex  align-items-center gap-2 clr_theme small">

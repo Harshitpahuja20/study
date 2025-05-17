@@ -19,7 +19,7 @@ export const addPlace = async (data) => {
 export const getPlaces = async (page = 1, filters) => {
   const params = new URLSearchParams();
   params.append("page", String(page));
-  params.append("limit", "10");
+  params.append("limit", Infinity);
 
   const [startDate, endDate] = filters?.dateRange || [];
 

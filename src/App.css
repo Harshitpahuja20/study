@@ -421,10 +421,13 @@ button.btn-danger:hover {
   transition: transform 0.3s ease;
 }
 
-.ck-editor__editable_inline {
-  min-height: 200px;
+.quill {
+  height: 200px;  /* Change the height of the editor */
 }
 
+.ql-toolbar {
+  background-color: #f5f5f5; /* Customize toolbar background color */
+}
 
 @keyframes revealText {
   0% {

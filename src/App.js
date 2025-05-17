@@ -36,13 +36,29 @@ import AdminViewNews from "./admin/pages/AdminViewNews";
 import AdminAddFranchise from "./admin/pages/AdminAddFranchise";
 import AdminViewFranchise from "./admin/pages/AdminViewFranchise";
 import AdminViewSingleFranchise from "./admin/pages/AdminViewSingleFranchise";
+import FranchiseLayout from "./franchise/layout/layout";
+import FranchiseDashobard from "./franchise/pages/FranchiseDashboard";
+import 'react-quill/dist/quill.snow.css';
+import AddInstitute from "./admin/pages/AddInstitute";
+import AdminViewInstitutes from "./admin/pages/ViewInstitutes";
+
 function App() {
   const { isEnquiryPopup, setIsEnquiryPopup, currentUser } = useStudy();
   const location = useLocation();
   const token = localStorage.getItem("token");
+  const franchisetoken = localStorage.getItem("franchisetoken");
 
+  // Admin private route that checks for either token or admin role
   const AdminPrivateRoute = ({ children }) => {
     if (token || (currentUser && currentUser.role === "admin")) {
+      return children;
+    }
+    return <Navigate to="/" />;
+  };
+
+  // Franchise private route that checks for either franchise token or franchise role
+  const FranchisePrivateRoute = ({ children }) => {
+    if (franchisetoken || (currentUser && currentUser.role === "franchise")) {
       return children;
     }
     return <Navigate to="/" />;
@@ -66,7 +82,6 @@ function App() {
         <Route path="/about" element={<AboutUsPage />} />
         <Route path="/enrollment" element={<StudentVerificationPage />} />
         <Route path="/result" element={<ResultPage />} />
-        <Route path="/my-account" element={<FranchiseLoginPage />} />
         <Route path="/contact-us" element={<ContactUsPage />} />
         <Route path="/category" element={<CourseCategoriesPage />} />
         <Route path="/news" element={<NewsPage />} />
@@ -92,6 +107,18 @@ function App() {
           }
         />
 
+        <Route
+          path="/my-account"
+          element={
+            franchisetoken ||
+            (currentUser && currentUser.role === "franchise") ? (
+              <Navigate to="/franchise/dashboard" />
+            ) : (
+              <FranchiseLoginPage />
+            )
+          }
+        />
+
         {/* Protected Admin Routes */}
         <Route
           path="/admin/*"
@@ -105,18 +132,45 @@ function App() {
           <Route path="streams" element={<AdminStreams />} />
           <Route path="places" element={<AdminPlaces />} />
           <Route path="studentRequests" element={<AdminDashobard />} />
-          <Route path="franchiseRequests" element={<AdminFranchiseRequests />} />
+          <Route
+            path="franchiseRequests"
+            element={<AdminFranchiseRequests />}
+          />
           <Route path="contactQuerys" element={<AdminContactQueries />} />
           <Route path="news/add" element={<AdminAddNews />} />
           <Route path="news/view" element={<AdminViewNews />} />
           <Route path="franchise/add" element={<AdminAddFranchise />} />
           <Route path="franchise/view" element={<AdminViewFranchise />} />
-          <Route path="franchise/view/:id" element={<AdminViewSingleFranchise />} />
+          <Route
+            path="franchise/view/:id"
+            element={<AdminViewSingleFranchise />}
+          />
+          <Route path="collage_iti/add" element={<AddInstitute />} />
+          <Route path="university/view" element={<AdminViewInstitutes role={"University"} />} />
+          <Route path="collage/view" element={<AdminViewInstitutes role={"Collage"} />} />
+          <Route path="iti/view" element={<AdminViewInstitutes role={"ITI"} />} />
+          <Route path="*" element={<Navigate to={"dashboard"} />} />
+        </Route>
+
+        {/* Protected Franchise Routes */}
+        <Route
+          path="/franchise/*"
+          element={
+            <FranchisePrivateRoute>
+              <FranchiseLayout />
+            </FranchisePrivateRoute>
+          }
+        >
+          <Route path="dashboard" element={<FranchiseDashobard />} />
           <Route path="*" element={<Navigate to={"dashboard"} />} />
         </Route>
       </Routes>
 
-      {/* {location.pathname !== "/admin/login" && <Footer />} */}
+      {/* Optional Footer */}
+      {!(
+        location.pathname.includes("/admin") ||
+        location.pathname.includes("/franchise")
+      ) && <Footer />}
     </>
   );
 }

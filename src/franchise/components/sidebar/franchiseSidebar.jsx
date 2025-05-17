@@ -2,21 +2,11 @@ import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   FaHome,
-  FaInfoCircle,
-  FaEnvelope,
-  FaChevronDown,
   FaMinus,
   FaPlus,
-  FaTools,
-  FaUserGraduate,
-  FaHandshake,
-  FaPhoneAlt,
-  FaStream,
-  FaMapMarkerAlt,
-  FaBookReader,
+  FaUserGraduate
 } from "react-icons/fa";
 import logo from "../../../assets/image/svg/maineLogo.png";
-import { MdDeviceHub } from "react-icons/md";
 
 // ✅ Reusable Dropdown Component
 function DropdownMenu({ label, icon, items = [], basePath = "" }) {
@@ -61,36 +51,11 @@ function DropdownMenu({ label, icon, items = [], basePath = "" }) {
 }
 
 // ✅ Main Sidebar Component
-function Sidebar({ isSidebarOpen }) {
+function FranchiseSidebar({ isSidebarOpen }) {
   const location = useLocation();
 
   const navItems = [
-    { to: "/admin/dashboard", label: "Dashboard", icon: <FaHome /> },
-    {
-      to: "/admin/studentRequests",
-      label: "Student Requests",
-      icon: <FaUserGraduate />,
-    },
-    {
-      to: "/admin/franchiseRequests",
-      label: "Franchise Requests",
-      icon: <FaHandshake />,
-    },
-    {
-      to: "/admin/contactQuerys",
-      label: "Contact Queries",
-      icon: <FaPhoneAlt />,
-    },
-    {
-      to: "/admin/Streams",
-      label: "Streams",
-      icon: <FaStream />,
-    },
-    {
-      to: "/admin/Places",
-      label: "Places",
-      icon: <FaMapMarkerAlt />,
-    },
+    { to: "/franchise/dashboard", label: "Dashboard", icon: <FaHome /> },
   ];
   
   return (
@@ -119,37 +84,17 @@ function Sidebar({ isSidebarOpen }) {
 
         {/* ✅ Reusable Dropdown */}
         <DropdownMenu
-          label="News"
-          icon={<FaTools />}
+          label="Students"
+          icon={<FaUserGraduate />}
           items={[
-            { to: "/admin/news/add", label: "Add" },
-            { to: "/admin/news/view", label: "List" },
+            { to: "/franchise/students/add", label: "Add" },
+            { to: "/franchise/students/view", label: "List" },
           ]}
-          basePath="/admin/news/add"
-        />
-        <DropdownMenu
-          label="Franchise"
-          icon={<MdDeviceHub />}
-          items={[
-            { to: "/admin/franchise/add", label: "Add" },
-            { to: "/admin/franchise/view", label: "List" },
-          ]}
-          basePath="/admin/franchise/add"
-        />
-         <DropdownMenu
-          label="Collage / ITI"
-          icon={<FaBookReader />}
-          items={[
-            { to: "/admin/collage_iti/add", label: "Add Section" },
-            { to: "/admin/university/view", label: "All University" },
-            { to: "/admin/collage/view", label: "All Collages" },
-            { to: "/admin/iti/view", label: "All ITI" },
-          ]}
-          basePath="/news/add"
+          basePath="/franchise/students/add"
         />
       </div>
     </div>
   );
 }
 
-export default Sidebar;
+export default FranchiseSidebar;
