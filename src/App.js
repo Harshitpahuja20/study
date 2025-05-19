@@ -38,9 +38,10 @@ import AdminViewFranchise from "./admin/pages/AdminViewFranchise";
 import AdminViewSingleFranchise from "./admin/pages/AdminViewSingleFranchise";
 import FranchiseLayout from "./franchise/layout/layout";
 import FranchiseDashobard from "./franchise/pages/FranchiseDashboard";
-import 'react-quill/dist/quill.snow.css';
+import "react-quill/dist/quill.snow.css";
 import AddInstitute from "./admin/pages/AddInstitute";
 import AdminViewInstitutes from "./admin/pages/ViewInstitutes";
+import DetailsPage from "./pages/DetailsPage";
 
 function App() {
   const { isEnquiryPopup, setIsEnquiryPopup, currentUser } = useStudy();
@@ -90,6 +91,7 @@ function App() {
         <Route path="/top-college" element={<TopCollegePage />} />
         <Route path="/apply-franchise" element={<ApplyFranchisePage />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/details" element={<DetailsPage />} />
         <Route
           path="/terms-and-conditions"
           element={<TermsAndConditionsPage />}
@@ -146,9 +148,18 @@ function App() {
             element={<AdminViewSingleFranchise />}
           />
           <Route path="collage_iti/add" element={<AddInstitute />} />
-          <Route path="university/view" element={<AdminViewInstitutes role={"University"} />} />
-          <Route path="collage/view" element={<AdminViewInstitutes role={"Collage"} />} />
-          <Route path="iti/view" element={<AdminViewInstitutes role={"ITI"} />} />
+          <Route
+            path="university/view"
+            element={<AdminViewInstitutes role={"University"} />}
+          />
+          <Route
+            path="collage/view"
+            element={<AdminViewInstitutes role={"Collage"} />}
+          />
+          <Route
+            path="iti/view"
+            element={<AdminViewInstitutes role={"ITI"} />}
+          />
           <Route path="*" element={<Navigate to={"dashboard"} />} />
         </Route>
 

@@ -9,6 +9,7 @@ import {
 } from "react-bootstrap";
 import { FaMapMarkerAlt, FaCheck, FaFilter } from "react-icons/fa";
 import universityLogo from "../../assets/image/png/universityLogo.jpg";
+import { Link } from "react-router-dom";
 
 const streams = [
   "Computer Science",
@@ -171,12 +172,14 @@ const UniversityHeroSection = () => {
                   >
                     Apply Now
                   </Button>
-                  <Button
-                    variant="primary"
-                    className="px-4 ff_p rounded-0 fs_14"
-                  >
-                    View Details
-                  </Button>
+                  <Link to="/details">
+                    <Button
+                      variant="primary"
+                      className="px-4 ff_p rounded-0 fs_14"
+                    >
+                      View Details
+                    </Button>
+                  </Link>
                 </div>
               </div>
             ))}

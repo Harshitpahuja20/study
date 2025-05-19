@@ -421,8 +421,12 @@ button.btn-danger:hover {
   transition: transform 0.3s ease;
 }
 
+.list {
+  list-style-type: disc !important;
+}
+
 .quill {
-  height: 200px;  /* Change the height of the editor */
+  height: 200px; /* Change the height of the editor */
 }
 
 .ql-toolbar {
