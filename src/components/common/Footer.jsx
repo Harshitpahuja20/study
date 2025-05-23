@@ -1,8 +1,11 @@
 import React from "react";
 import logo from "../../assets/image/svg/maineLogo.png";
 import { Link } from "react-router-dom";
+import { useStudy } from "../../context/study.context";
 
 const Footer = () => {
+  const { places, streams } = useStudy();
+
   return (
     <div className=" bg-light ff_p pt-md-5 pt-4">
       <div className="container">
@@ -150,96 +153,38 @@ const Footer = () => {
           </div>
         </div>
         <div className="mt-3 pb-5">
-          <div className="mt-4">
-            <h4 className=" fs_16 ff_p fw-bold clr_theme mb-0 ">
-              Popular Stream
-            </h4>
-            <div className="d-flex flex-wrap align-items-center gap-3 mt-3">
-              <span className=" ff_p fs_14 clr_theme bg_theme mb-0 rounded-4 p-1 px-3 text-white ">
-                Computer Science
-              </span>
-              <span className=" ff_p fs_14 clr_theme bg_theme mb-0 rounded-4 p-1 px-3 text-white ">
-                Engineering
-              </span>
-              <span className=" ff_p fs_14 clr_theme bg_theme mb-0 rounded-4 p-1 px-3 text-white ">
-                Commerce
-              </span>
-              <span className=" ff_p fs_14 clr_theme bg_theme mb-0 rounded-4 p-1 px-3 text-white ">
-                Science
-              </span>
-              <span className=" ff_p fs_14 clr_theme bg_theme mb-0 rounded-4 p-1 px-3 text-white ">
-                Arts & Social Science
-              </span>
+          {places?.length > 0 && (
+            <div className="mt-4">
+              <h4 className=" fs_16 ff_p fw-bold clr_theme mb-0 ">
+                Popular Places
+              </h4>
+              <div className="d-flex flex-wrap align-items-center gap-3 mt-3">
+                {places?.map((place) => {
+                  return (
+                    <span className=" ff_p fs_14 clr_theme bg_theme mb-0 rounded-4 p-1 px-3 text-white ">
+                      {place?.title}
+                    </span>
+                  );
+                })}
+              </div>
             </div>
-          </div>
-          <div className="mt-5">
-            <h4 className=" fs_16 ff_p fw-bold clr_theme mb-0 ">
-              Popular Stream
-            </h4>
-            <div className="d-flex flex-wrap align-items-center gap-3 mt-3">
-              <span className=" ff_p fs_14 clr_theme bg_theme mb-0 rounded-4 p-1 px-3 text-white ">
-                Computer Science
-              </span>
-              <span className=" ff_p fs_14 clr_theme bg_theme mb-0 rounded-4 p-1 px-3 text-white ">
-                Engineering
-              </span>
-              <span className=" ff_p fs_14 clr_theme bg_theme mb-0 rounded-4 p-1 px-3 text-white ">
-                Commerce
-              </span>
-              <span className=" ff_p fs_14 clr_theme bg_theme mb-0 rounded-4 p-1 px-3 text-white ">
-                Science
-              </span>
-              <span className=" ff_p fs_14 clr_theme bg_theme mb-0 rounded-4 p-1 px-3 text-white ">
-                Arts & Social Science
-              </span>
-              <span className=" ff_p fs_14 clr_theme bg_theme mb-0 rounded-4 p-1 px-3 text-white ">
-                Computer Science
-              </span>
-              <span className=" ff_p fs_14 clr_theme bg_theme mb-0 rounded-4 p-1 px-3 text-white ">
-                Engineering
-              </span>
-              <span className=" ff_p fs_14 clr_theme bg_theme mb-0 rounded-4 p-1 px-3 text-white ">
-                Commerce
-              </span>
-              <span className=" ff_p fs_14 clr_theme bg_theme mb-0 rounded-4 p-1 px-3 text-white ">
-                Science
-              </span>
-              <span className=" ff_p fs_14 clr_theme bg_theme mb-0 rounded-4 p-1 px-3 text-white ">
-                Arts & Social Science
-              </span>
+          )}
+          {streams?.length > 0 && (
+            <div className="mt-5">
+              <h4 className=" fs_16 ff_p fw-bold clr_theme mb-0 ">
+                Popular Stream
+              </h4>
+              <div className="d-flex flex-wrap align-items-center gap-3 mt-3">
+              {streams?.map((stream) => {
+                  return (
+                    <span className=" ff_p fs_14 clr_theme bg_theme mb-0 rounded-4 p-1 px-3 text-white ">
+                      {stream?.title}
+                    </span>
+                  );
+                })}
+              </div>
             </div>
-          </div>
-          <div className="mt-5">
-            <h4 className=" fs_16 ff_p fw-bold clr_theme mb-0 ">
-              Popular Stream
-            </h4>
-            <div className="d-flex flex-wrap align-items-center gap-3 mt-3">
-              <span className=" ff_p fs_14 clr_theme bg_theme mb-0 rounded-4 p-1 px-3 text-white ">
-                Computer Science
-              </span>
-              <span className=" ff_p fs_14 clr_theme bg_theme mb-0 rounded-4 p-1 px-3 text-white ">
-                Engineering
-              </span>
-              <span className=" ff_p fs_14 clr_theme bg_theme mb-0 rounded-4 p-1 px-3 text-white ">
-                Commerce
-              </span>
-              <span className=" ff_p fs_14 clr_theme bg_theme mb-0 rounded-4 p-1 px-3 text-white ">
-                Science
-              </span>
-              <span className=" ff_p fs_14 clr_theme bg_theme mb-0 rounded-4 p-1 px-3 text-white ">
-                Arts & Social Science
-              </span>
-              <span className=" ff_p fs_14 clr_theme bg_theme mb-0 rounded-4 p-1 px-3 text-white ">
-                Commerce
-              </span>
-              <span className=" ff_p fs_14 clr_theme bg_theme mb-0 rounded-4 p-1 px-3 text-white ">
-                Science
-              </span>
-              <span className=" ff_p fs_14 clr_theme bg_theme mb-0 rounded-4 p-1 px-3 text-white ">
-                Arts & Social Science
-              </span>
-            </div>
-          </div>
+          )}
         </div>
       </div>
     </div>

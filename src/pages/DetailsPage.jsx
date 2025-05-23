@@ -1,9 +1,52 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CustomNavbar from "../components/common/CustomNavbar";
 import { Col, Container, Row } from "react-bootstrap";
 import helpline from "../assets/image/png/helpline.png";
+import { useParams } from "react-router-dom";
+import { useStudy } from "../context/study.context";
 
 const DetailsPage = () => {
+  const { name, id } = useParams();
+  const [selectedData, setSelectedData] = useState({});
+  const { getInstitutes, universities, iti, collages, getAllNews, news } =
+    useStudy();
+
+  useEffect(() => {
+    if (id && name) {
+      if (name === "University") {
+        if (universities?.loading) {
+          getInstitutes("University");
+        } else {
+          const found =
+            universities?.data?.find((item) => item._id === id) || null;
+          setSelectedData(found);
+        }
+      } else if (name === "ITI") {
+        if (iti?.loading) {
+          getInstitutes("ITI");
+        } else {
+          const found = iti?.data?.find((item) => item._id === id) || null;
+          setSelectedData(found);
+        }
+      } else if (name === "Collage") {
+        if (collages?.loading) {
+          getInstitutes("Collage");
+        } else {
+          const found = collages?.data?.find((item) => item._id === id) || null;
+          alert("found" + found);
+          setSelectedData(found);
+        }
+      } else if (name === "news") {
+        if (news?.loading) {
+          getAllNews();
+        } else {
+          const found = news?.data?.find((item) => item._id === id) || null;
+          setSelectedData(found);
+        }
+      }
+    }
+  }, [id, name, universities, iti, collages, news]);
+
   return (
     <div>
       <CustomNavbar />
@@ -11,32 +54,20 @@ const DetailsPage = () => {
         <Container className="pb-5 pt-2">
           <Row>
             <Col className="mt-4 pe-0 pe-md-5" md={8}>
-              <h4 className=" ff_p fw-bold fs_18 mb-0">
-                India Education Center University (IECU)-
-              </h4>
-              <p className=" ff_p mt-3">
-                India Education Center (IEC) is a private educational university
-                situated in Solan, Himachal Pradesh, India. The University was
-                founded on May 11, 2012 to deliver a wide spectrum of
-                undergraduate and postgraduate and doctoral studies throughout
-                engineering along with management and law and pharmacy and
-                computer science and commerce disciplines.
-              </p>
-              <h6 className=" ff_p mt-5 fw-bold mb-0">
-                Campus and Facilities:
-              </h6>
-              <p className=" ff_p mt-2">
-                The University occupies a space of 14.5 acres within the HIMUDA
-                Education Hub situated near Kallujhanda village surrounded by
-                Shivalik Mountain foots. It features state-of-the-art
-                infrastructure, including:
-              </p>
-              <ul>
-                <li className="mt-3 list">Academic blocks</li>
-                <li className="mt-3 list">Academic blocks</li>
-                <li className="mt-3 list">Academic blocks</li>
-                <li className="mt-3 list">Academic blocks</li>
-              </ul>
+              {selectedData !== null && (
+                <>
+                  <h4 className=" ff_p fw-bold fs_18 mb-0">
+                    {id === "news"
+                      ? selectedData?.heading
+                      : selectedData?.instituteName}
+                  </h4>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: selectedData?.description,
+                    }}
+                  />
+                </>
+              )}
             </Col>
             <Col className="mt-4" md={4}>
               <div className="card text-center p-4">

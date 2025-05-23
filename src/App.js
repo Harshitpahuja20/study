@@ -74,7 +74,10 @@ function App() {
         />
       )}
 
-      {location.pathname !== "/admin/login" && <TopToBottom />}
+      {!(
+        location.pathname.includes("/admin") ||
+        location.pathname.includes("/franchise")
+      ) && <TopToBottom />}
       <ToastContainer />
 
       <Routes>
@@ -91,7 +94,7 @@ function App() {
         <Route path="/top-college" element={<TopCollegePage />} />
         <Route path="/apply-franchise" element={<ApplyFranchisePage />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-        <Route path="/details" element={<DetailsPage />} />
+        <Route path="/details/:name/:id" element={<DetailsPage />} />
         <Route
           path="/terms-and-conditions"
           element={<TermsAndConditionsPage />}
