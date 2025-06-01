@@ -222,6 +222,18 @@ const AdminNavbar = () => {
                 handleClick={toggleOffcanvas}
               />
               <DropdownMenu
+                label="Collage/ITI"
+                icon={<FaTools />}
+                items={[
+                  { to: "/admin/collage_iti/add", label: "Add" },
+                  { to: "/admin/university/view", label: "All University" },
+                  { to: "/admin/collage/view", label: "All collages" },
+                  { to: "/admin/iti/view", label: "All ITI" },
+                ]}
+                basePath="/admin/news/add"
+                handleClick={toggleOffcanvas}
+              />
+              <DropdownMenu
                 label="Franchise"
                 icon={<MdDeviceHub />}
                 items={[
