@@ -64,7 +64,7 @@ function getCurrentSession() {
 
 const TopITIHeroSection = () => {
   const [showFilters, setShowFilters] = useState(false);
-  const { iti, getInstitutes } = useStudy();
+  const { iti, getInstitutes , setIsEnquiryPopup } = useStudy();
   const { data, loading } = iti;
 
   useEffect(() => {
@@ -178,6 +178,7 @@ const TopITIHeroSection = () => {
                     <Button
                       variant="danger"
                       className="btn-orange px-4 ff_p fs_14 rounded-0"
+                      onClick={()=>setIsEnquiryPopup(true)}
                     >
                       Apply Now
                     </Button>

@@ -14,9 +14,12 @@ import {
   FaStream,
   FaMapMarkerAlt,
   FaBookReader,
+  FaBook,
 } from "react-icons/fa";
 import logo from "../../../assets/image/svg/maineLogo.png";
 import { MdDeviceHub } from "react-icons/md";
+import { PiStudent } from "react-icons/pi";
+import { IoBookSharp } from "react-icons/io5";
 
 // ✅ Reusable Dropdown Component
 function DropdownMenu({ label, icon, items = [], basePath = "" }) {
@@ -92,7 +95,7 @@ function Sidebar({ isSidebarOpen }) {
       icon: <FaMapMarkerAlt />,
     },
   ];
-  
+
   return (
     <div className={`bg-dark text-white Side`} id="sidebar">
       <div className="d-flex align-items-center justify-content-center gap-2 cursor-pointer py-3 border-bottom border-secondary fs-5 fw-bold">
@@ -136,16 +139,32 @@ function Sidebar({ isSidebarOpen }) {
           ]}
           basePath="/admin/franchise/add"
         />
-         <DropdownMenu
-          label="Collage / ITI"
-          icon={<FaBookReader />}
+        <DropdownMenu
+          label="Students"
+          icon={<PiStudent />}
           items={[
-            { to: "/admin/collage_iti/add", label: "Add Section" },
-            { to: "/admin/university/view", label: "All University" },
-            { to: "/admin/collage/view", label: "All Collages" },
-            { to: "/admin/iti/view", label: "All ITI" },
+            { to: "/admin/student/add", label: "Add Students" },
+            { to: "/admin/students/view", label: "Students List" },
           ]}
-          basePath="/news/add"
+          basePath="/admin/student/add"
+        />
+        <DropdownMenu
+          label="Courses"
+          icon={<FaBook />}
+          items={[
+            { to: "/admin/course/main", label: "Main Courses" },
+            { to: "/admin/course/sub", label: "Sub Courses" },
+          ]}
+          basePath="/admin/news/add"
+        />
+        <DropdownMenu
+          label="Vocational Courses"
+          icon={<IoBookSharp />}
+          items={[
+            { to: "/admin/vocationalCourse/add", label: "Add" },
+            { to: "/admin/vocationalCourse/view", label: "List" },
+          ]}
+          basePath="/admin/vocationalCourse/add"
         />
       </div>
     </div>

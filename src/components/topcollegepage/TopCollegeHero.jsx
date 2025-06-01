@@ -64,7 +64,7 @@ function getCurrentSession() {
 
 const TopCollegeHero = () => {
   const [showFilters, setShowFilters] = useState(false);
-  const { collages, getInstitutes } = useStudy();
+  const { collages, getInstitutes, setIsEnquiryPopup } = useStudy();
   const { data, loading } = collages;
 
   useEffect(() => {
@@ -178,6 +178,7 @@ const TopCollegeHero = () => {
                     <Button
                       variant="danger"
                       className="btn-orange px-4 ff_p fs_14 rounded-0"
+                      onClick={() => setIsEnquiryPopup(true)}
                     >
                       Apply Now
                     </Button>

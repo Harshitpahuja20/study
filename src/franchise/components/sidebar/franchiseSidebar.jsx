@@ -1,12 +1,8 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import {
-  FaHome,
-  FaMinus,
-  FaPlus,
-  FaUserGraduate
-} from "react-icons/fa";
+import { FaHome, FaMinus, FaPlus, FaUserGraduate } from "react-icons/fa";
 import logo from "../../../assets/image/svg/maineLogo.png";
+import { IoBookSharp } from "react-icons/io5";
 
 // ✅ Reusable Dropdown Component
 function DropdownMenu({ label, icon, items = [], basePath = "" }) {
@@ -57,7 +53,7 @@ function FranchiseSidebar({ isSidebarOpen }) {
   const navItems = [
     { to: "/franchise/dashboard", label: "Dashboard", icon: <FaHome /> },
   ];
-  
+
   return (
     <div className={`bg-dark text-white Side`} id="sidebar">
       <div className="d-flex align-items-center justify-content-center gap-2 cursor-pointer py-3 border-bottom border-secondary fs-5 fw-bold">
@@ -91,6 +87,15 @@ function FranchiseSidebar({ isSidebarOpen }) {
             { to: "/franchise/students/view", label: "List" },
           ]}
           basePath="/franchise/students/add"
+        />
+        <DropdownMenu
+          label="Vocational Courses"
+          icon={<IoBookSharp />}
+          items={[
+            { to: "/franchise/vocationalCourse/add", label: "Add" },
+            { to: "/franchise/vocationalCourse/view", label: "List" },
+          ]}
+          basePath="/franchise/vocationalCourse/add"
         />
       </div>
     </div>

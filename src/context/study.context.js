@@ -23,6 +23,7 @@ export const StudyProvider = ({ children }) => {
       await getCurrentUser()
         .then((response) => {
           if (response?.data?.status) {
+            console.log(response?.data?.data);
             setCurrentUser(response?.data?.data);
           } else {
             handleLogOut();
@@ -112,7 +113,7 @@ export const StudyProvider = ({ children }) => {
   const handleLogOut = () => {
     setCurrentUser(null);
     localStorage.removeItem("token");
-    window.location.reload();
+    localStorage.removeItem("franchisetoken");
   };
 
   useEffect(() => {
@@ -124,6 +125,7 @@ export const StudyProvider = ({ children }) => {
   return (
     <StudyContext.Provider
       value={{
+        handleLogOut,
         isEnquiryPopup,
         setIsEnquiryPopup,
         currentUser,

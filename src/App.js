@@ -42,6 +42,22 @@ import "react-quill/dist/quill.snow.css";
 import AddInstitute from "./admin/pages/AddInstitute";
 import AdminViewInstitutes from "./admin/pages/ViewInstitutes";
 import DetailsPage from "./pages/DetailsPage";
+import AddMainCourse from "./admin/pages/AddMainCourse";
+import AddSubCourse from "./admin/pages/AddSubCourse";
+import AddStudent from "./admin/pages/AddStudent";
+import AdminViewStudents from "./admin/pages/ViewStudents";
+import AdminViewSubCourses from "./admin/pages/AdminViewSubCourses";
+import AddVocationalCourse from "./admin/pages/AddVocationalCourse";
+import ViewVocationalCourse from "./admin/pages/ViewVocationalCourse";
+import AdminVocationalCourseSubject from "./admin/pages/AdminVocationalCourseSubject";
+import StudentDetailsCard from "./admin/pages/ViewSingleStudent";
+import AdminStudentRequests from "./admin/pages/AdminStudentRequests";
+import FranchiseViewStudents from "./franchise/pages/ViewStudents";
+import FranchiseStudentDetailsCard from "./franchise/pages/ViewSingleStudent";
+import AddFranchiseStudent from "./franchise/pages/AddStudent";
+import AddFranchiseVocationalCourse from "./franchise/pages/AddVocationalCourse";
+import ViewFranchiseVocationalCourse from "./franchise/pages/ViewVocationalCourse";
+import FranchiseSubjectForm from "./franchise/pages/AdminVocationalCourseSubject";
 
 function App() {
   const { isEnquiryPopup, setIsEnquiryPopup, currentUser } = useStudy();
@@ -136,7 +152,7 @@ function App() {
           <Route path="dashboard" element={<AdminDashobard />} />
           <Route path="streams" element={<AdminStreams />} />
           <Route path="places" element={<AdminPlaces />} />
-          <Route path="studentRequests" element={<AdminDashobard />} />
+          <Route path="studentRequests" element={<AdminStudentRequests />} />
           <Route
             path="franchiseRequests"
             element={<AdminFranchiseRequests />}
@@ -144,7 +160,25 @@ function App() {
           <Route path="contactQuerys" element={<AdminContactQueries />} />
           <Route path="news/add" element={<AdminAddNews />} />
           <Route path="news/view" element={<AdminViewNews />} />
+          <Route path="student/add" element={<AddStudent />} />
+          <Route path="student/view/:id" element={<StudentDetailsCard />} />
+          <Route path="students/view" element={<AdminViewStudents />} />
+          <Route path="course/main" element={<AddMainCourse />} />
+          <Route path="course/sub/add/:id" element={<AddSubCourse />} />
+          <Route path="course/sub" element={<AdminViewSubCourses />} />
           <Route path="franchise/add" element={<AdminAddFranchise />} />
+          <Route
+            path="vocationalCourse/add"
+            element={<AddVocationalCourse />}
+          />
+          <Route
+            path="vocationalCourse/view"
+            element={<ViewVocationalCourse />}
+          />
+          <Route
+            path="vocationalCourse/subject/details"
+            element={<AdminVocationalCourseSubject />}
+          />
           <Route path="franchise/view" element={<AdminViewFranchise />} />
           <Route
             path="franchise/view/:id"
@@ -176,6 +210,22 @@ function App() {
           }
         >
           <Route path="dashboard" element={<FranchiseDashobard />} />
+            <Route
+            path="vocationalCourse/add"
+            element={<AddFranchiseVocationalCourse />}
+          />
+          <Route
+            path="vocationalCourse/view"
+            element={<ViewFranchiseVocationalCourse />}
+          />
+          <Route
+            path="vocationalCourse/subject/details"
+            element={<FranchiseSubjectForm />}
+          />
+          
+          <Route path="students/add" element={<AddFranchiseStudent />} />
+          <Route path="student/view/:id" element={<FranchiseStudentDetailsCard />} />
+          <Route path="students/view" element={<FranchiseViewStudents />} />
           <Route path="*" element={<Navigate to={"dashboard"} />} />
         </Route>
       </Routes>

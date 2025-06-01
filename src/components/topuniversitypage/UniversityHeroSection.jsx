@@ -85,7 +85,7 @@ function getCurrentSession() {
 
 const UniversityHeroSection = () => {
   const [showFilters, setShowFilters] = useState(false);
-  const { universities, getInstitutes } = useStudy();
+  const { universities, getInstitutes , setIsEnquiryPopup } = useStudy();
   const { data, loading } = universities;
 
   useEffect(() => {
@@ -199,6 +199,7 @@ const UniversityHeroSection = () => {
                     <Button
                       variant="danger"
                       className="btn-orange px-4 ff_p fs_14 rounded-0"
+                      onClick={()=>setIsEnquiryPopup(true)}
                     >
                       Apply Now
                     </Button>
