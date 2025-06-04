@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
+import "../../App.css";
 import { Container, Row, Col, Navbar, Nav } from "react-bootstrap";
 import Sidebar from "../components/sidebar/sidebar"; // Your custom Sidebar component
 import AdminNavbar from "../components/navbar/navbar";
@@ -37,7 +38,7 @@ const AdminLayout = () => {
           </Col>
 
           {/* Main content area */}
-          <Col xs={12} lg={10} className="p-md-4 p-0">
+          <Col xs={12} lg={10} className="p-md-4 ps-lg-5 ps-xxl-3  p-0">
             <Outlet /> {/* Dynamic pages rendered here */}
           </Col>
         </Row>
