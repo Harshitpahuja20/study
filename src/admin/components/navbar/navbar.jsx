@@ -124,7 +124,7 @@ const AdminNavbar = () => {
       {/* Main Navbar */}
       <Navbar
         expand="sm"
-        className="  d-flex flex-column align-items-start ff_p  pt-0 pb-0"
+        className=" d-flex flex-column align-items-start ff_p  pt-0 pb-0"
       >
         <div className="bg-light w-100">
           <Container fluid className="py-3">
@@ -222,7 +222,7 @@ const AdminNavbar = () => {
                 handleClick={toggleOffcanvas}
               />
               <DropdownMenu
-                label="Collage/ITI"
+                label="University/ITI"
                 icon={<FaTools />}
                 items={[
                   { to: "/admin/collage_iti/add", label: "Add" },

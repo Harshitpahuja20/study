@@ -192,7 +192,6 @@ const AdminPlaces = () => {
                 <th className="ps-4 py-3 bg-dark text-white">Sr. No.</th>
                 <th className="py-3 bg-dark text-white">Title</th>
                 <th className="py-3 bg-dark text-white">Image</th>
-                <th className="py-3 bg-dark text-white">Created At</th>
                 <th className="py-3 bg-dark text-white text-center">Action</th>
               </tr>
             </thead>
@@ -217,7 +216,6 @@ const AdminPlaces = () => {
                           style={{ objectFit: "cover", cursor: "pointer" }}
                         />
                       </td>
-                      <td>{getFormattedDate(data?.createdAt)}</td>
                       <td className="text-center">
                         <div className="d-flex justify-content-center">
                           <Button

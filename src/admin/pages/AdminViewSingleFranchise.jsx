@@ -280,7 +280,6 @@ const AdminViewSingleFranchise = () => {
                 <th className="ps-4 py-3 bg-dark text-white w-25">Total</th>
                 <th className="py-3 bg-dark text-white w-25">Add Amount</th>
                 <th className="py-3 bg-dark text-white w-25">Less Amount</th>
-                <th className="py-3 bg-dark text-white w-25">Created At</th>
               </tr>
             </thead>
             <tbody style={{ minHeight: "400px" }}>
@@ -290,9 +289,6 @@ const AdminViewSingleFranchise = () => {
                     <td className="ps-4 w-25">{data?.total}</td>
                     <td className="w-25">{data?.addAmount || 0}</td>
                     <td className="w-25">{data?.lessAmount || 0}</td>
-                    <td className="w-25">
-                      {getFormattedDate(data?.createdAt)}
-                    </td>
                   </tr>
                 ))
               ) : (

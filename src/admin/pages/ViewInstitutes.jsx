@@ -39,7 +39,6 @@ const AdminViewInstitutes = ({ role }) => {
   const [dataLoading, setDataLoading] = useState();
   const [formData, setFormData] = useState({
     instituteName: "",
-    instituteUrl: "",
     address: "",
     approvedBy: "",
     city: "",
@@ -124,7 +123,6 @@ const AdminViewInstitutes = ({ role }) => {
           setSelectedData(null)          // Reset formData after successful submission
           setFormData({
             instituteName: "", // Reset Institute Name
-            instituteUrl: "", // Reset Institute URL
             address: "", // Reset Address
             approvedBy: "", // Reset Approved By
             city: "", // Reset City
@@ -196,7 +194,6 @@ const AdminViewInstitutes = ({ role }) => {
               <tr>
                 <th className="ps-4 py-3 bg-dark text-white">Sr. No.</th>
                 <th className="py-3 bg-dark text-white">Institute Name</th>
-                <th className="py-3 bg-dark text-white">Created At</th>
                 <th className="py-3 bg-dark text-white text-center">Action</th>
               </tr>
             </thead>
@@ -207,9 +204,6 @@ const AdminViewInstitutes = ({ role }) => {
                     <tr key={index}>
                       <td className="ps-4 py-3">{index + 1}</td>
                       <td className="py-3">{data?.instituteName}</td>
-                      <td className="py-3">
-                        {new Date(data?.createdAt).toLocaleDateString()}
-                      </td>
                       <td className="text-center py-3">
                         <div className="d-flex justify-content-center">
                           <Button
@@ -386,7 +380,7 @@ const AdminViewInstitutes = ({ role }) => {
               </Row>
 
               <Row>
-                <Col md={4}>
+                <Col md={6}>
                   <Form.Group controlId="address" className="mb-3">
                     <Form.Label>Address</Form.Label>
                     <Form.Control
@@ -400,7 +394,7 @@ const AdminViewInstitutes = ({ role }) => {
                   </Form.Group>
                 </Col>
 
-                <Col md={4}>
+                <Col md={6}>
                   <Form.Group controlId="state" className="mb-3">
                     <Form.Label>State</Form.Label>
                     <Form.Control
@@ -413,31 +407,17 @@ const AdminViewInstitutes = ({ role }) => {
                     />
                   </Form.Group>
                 </Col>
+              </Row>
 
-                <Col md={4}>
-                  <Form.Group controlId="city" className="mb-3">
+              <Row>
+                <Col md={6}>
+                   <Form.Group controlId="city" className="mb-3">
                     <Form.Label>City</Form.Label>
                     <Form.Control
                       type="text"
                       placeholder="City"
                       name="city"
                       value={formData.city}
-                      onChange={handleChange}
-                      className="p-2"
-                    />
-                  </Form.Group>
-                </Col>
-              </Row>
-
-              <Row>
-                <Col md={6}>
-                  <Form.Group controlId="instituteUrl" className="mb-3">
-                    <Form.Label>Institute URL</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Institute URL"
-                      name="instituteUrl"
-                      value={formData.instituteUrl}
                       onChange={handleChange}
                       className="p-2"
                     />

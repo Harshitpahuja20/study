@@ -138,7 +138,6 @@ const AdminViewNews = () => {
               <tr>
                 <th className="ps-4 py-3 bg-dark text-white">Sr. No.</th>
                 <th className="py-3 bg-dark text-white">Heading</th>
-                <th className="py-3 bg-dark text-white">Created At</th>
                 <th className="py-3 bg-dark text-white text-center">Action</th>
               </tr>
             </thead>
@@ -149,9 +148,6 @@ const AdminViewNews = () => {
                     <tr key={index}>
                       <td className="ps-4 py-3">{index + 1}</td>
                       <td className="py-3">{data?.heading}</td>
-                      <td className="py-3">
-                        {new Date(data?.createdAt).toLocaleDateString()}
-                      </td>
                       <td className="text-center py-3">
                         <div className="d-flex justify-content-center">
                           <Button

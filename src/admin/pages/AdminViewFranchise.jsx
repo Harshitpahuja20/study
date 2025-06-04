@@ -73,7 +73,6 @@ const AdminViewFranchise = () => {
                 <th className="py-3 bg-dark text-white">Name</th>
                 <th className="py-3 bg-dark text-white">Phone</th>
                 <th className="py-3 bg-dark text-white">Email</th>
-                <th className="py-3 bg-dark text-white">Created At</th>
                 <th className="py-3 bg-dark text-white text-center">Action</th>
               </tr>
             </thead>
@@ -87,9 +86,6 @@ const AdminViewFranchise = () => {
                       <td className=" py-3">{data?.fullName}</td>
                       <td className=" py-3">{data?.phoneNumber}</td>
                       <td className=" py-3">{data?.email}</td>
-                      <td className=" py-3">
-                        {getFormattedDate(data?.createdAt)}
-                      </td>
                       <td className="text-center py-3">
                         <div className="d-flex justify-content-center">
                           <Button variant="" size="sm" onClick={()=>navigate(`/admin/franchise/view/${data?._id}`)}>

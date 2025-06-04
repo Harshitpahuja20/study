@@ -20,6 +20,7 @@ import logo from "../../../assets/image/svg/maineLogo.png";
 import { MdDeviceHub } from "react-icons/md";
 import { PiStudent } from "react-icons/pi";
 import { IoBookSharp } from "react-icons/io5";
+import { AiOutlineGlobal } from "react-icons/ai";
 
 // ✅ Reusable Dropdown Component
 function DropdownMenu({ label, icon, items = [], basePath = "" }) {
@@ -33,7 +34,7 @@ function DropdownMenu({ label, icon, items = [], basePath = "" }) {
     <div className="w-100 mt-2">
       <div
         onClick={toggle}
-        className={`text-white px-4 py-2 w-100 text-start sidebar-link dropdown-toggle d-flex justify-content-between align-items-center ${
+        className={`text-white px-3 py-2 w-100 text-start sidebar-link dropdown-toggle d-flex justify-content-between align-items-center small-text ${
           isActive ? "" : "bg-dark"
         }`}
         style={{ cursor: "pointer" }}
@@ -68,6 +69,7 @@ function Sidebar({ isSidebarOpen }) {
   const location = useLocation();
 
   const navItems = [
+    { to: "/", label: "Visit Website", icon: <AiOutlineGlobal /> },
     { to: "/admin/dashboard", label: "Dashboard", icon: <FaHome /> },
     {
       to: "/admin/studentRequests",
@@ -106,12 +108,12 @@ function Sidebar({ isSidebarOpen }) {
         </h6>
       </div>
 
-      <div className="flex-grow-1 px-2">
+      <div className="flex-grow-1 px-2 nav-scroll">
         {navItems.map((item) => (
           <Link
             key={item.to}
             to={item.to}
-            className={`d-flex rounded align-items-center px-4 py-2 mt-2 text-decoration-none text-white sidebar-link ${
+            className={`d-flex rounded align-items-center px-3 py-2 mt-2 text-decoration-none text-white sidebar-link small-text ${
               location.pathname === item.to ? "bg-secondary" : "bg-dark"
             }`}
           >
@@ -131,7 +133,7 @@ function Sidebar({ isSidebarOpen }) {
           basePath="/admin/news/add"
         />
         <DropdownMenu
-          label="Collage/ITI"
+          label="University/ITI"
           icon={<FaTools />}
           items={[
             { to: "/admin/collage_iti/add", label: "Add" },

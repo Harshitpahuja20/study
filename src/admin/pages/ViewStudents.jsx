@@ -184,7 +184,6 @@ const AdminViewStudents = () => {
                 <th className="bg-dark text-white py-3 ">Profile</th>
                 <th className="bg-dark text-white py-3 ">Details</th>
                 <th className="bg-dark text-white py-3 ">Subject / Comment</th>
-                <th className="bg-dark text-white py-3 ">Created At</th>
                 <th className="bg-dark text-white py-3 text-center">Action</th>
               </tr>
             </thead>
@@ -219,7 +218,6 @@ const AdminViewStudents = () => {
                         <br />
                         {data?.vocationalCourse?.code}
                       </td>
-                      <td>{getFormattedDate(data?.createdAt)}</td>
                       <td className="text-center">
                         <div className="d-flex justify-content-center gap-2">
                           <Button

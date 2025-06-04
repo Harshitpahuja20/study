@@ -100,7 +100,6 @@ const AdminFranchiseRequests = () => {
                 </th>
                 <th className="py-3 bg-dark text-white">Contact Details</th>
                 <th className="py-3 bg-dark text-white">Address</th>
-                <th className="py-3 bg-dark text-white">Created At</th>
                 <th className="py-3 bg-dark text-white text-center">Action</th>
               </tr>
             </thead>
@@ -118,9 +117,6 @@ const AdminFranchiseRequests = () => {
                       </td>
                       <td className=" py-3">
                         {data?.city}, {data?.state} <br /> {data?.address}
-                      </td>
-                      <td className=" py-3">
-                        {getFormattedDate(data?.createdAt)}
                       </td>
                       <td className="text-center py-3">
                         <div className="d-flex justify-content-center">

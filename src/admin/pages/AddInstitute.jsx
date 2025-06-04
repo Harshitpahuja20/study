@@ -7,7 +7,6 @@ import { addInstitute } from "../services/AdminInstitute.service";
 const AddInstitute = () => {
   const [formData, setFormData] = useState({
     instituteName: "",
-    instituteUrl: "",
     address: "",
     approvedBy: "",
     city: "",
@@ -55,7 +54,6 @@ const AddInstitute = () => {
       instituteName: "Institute Name is required!",
       address: "Address is required!",
       description: "Description is required!",
-      instituteUrl: "Institute URL is required!",
       role: "Role is required!",
       instituteType: "Institute Type is required!",
       state: "State is required!",
@@ -95,7 +93,6 @@ const AddInstitute = () => {
           // Reset formData after successful submission
           setFormData({
             instituteName: "", // Reset Institute Name
-            instituteUrl: "", // Reset Institute URL
             address: "", // Reset Address
             approvedBy: "", // Reset Approved By
             city: "", // Reset City
@@ -170,7 +167,7 @@ const AddInstitute = () => {
         </Row>
 
         <Row>
-          <Col md={4}>
+          <Col md={6}>
             <Form.Group controlId="address" className="mb-3">
               <Form.Label>Address</Form.Label>
               <Form.Control
@@ -184,7 +181,7 @@ const AddInstitute = () => {
             </Form.Group>
           </Col>
 
-          <Col md={4}>
+          <Col md={6}>
             <Form.Group controlId="state" className="mb-3">
               <Form.Label>State</Form.Label>
               <Form.Control
@@ -197,31 +194,17 @@ const AddInstitute = () => {
               />
             </Form.Group>
           </Col>
+        </Row>
 
-          <Col md={4}>
-            <Form.Group controlId="city" className="mb-3">
+        <Row>
+          <Col md={6}>
+           <Form.Group controlId="city" className="mb-3">
               <Form.Label>City</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="City"
                 name="city"
                 value={formData.city}
-                onChange={handleChange}
-                className="p-2"
-              />
-            </Form.Group>
-          </Col>
-        </Row>
-
-        <Row>
-          <Col md={6}>
-            <Form.Group controlId="instituteUrl" className="mb-3">
-              <Form.Label>Institute URL</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Institute URL"
-                name="instituteUrl"
-                value={formData.instituteUrl}
                 onChange={handleChange}
                 className="p-2"
               />

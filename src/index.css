@@ -51,6 +51,21 @@ code {
   padding: 20px;
 }
 
+.nav-scroll{
+  overflow: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; 
+  height: 100%;
+}
+
+.nav-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.cursor-pointer{
+  cursor: pointer;
+}
+
 /* Media Query for mobile */
 @media (max-width: 991px) {
   .sidebar-drawer {
@@ -76,4 +91,8 @@ code {
   .navbar-toggler {
     display: block;
   }
+}
+
+.small-text{
+  font-size: 14px !important;
 }

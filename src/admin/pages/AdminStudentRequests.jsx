@@ -1,42 +1,25 @@
 import React, { useEffect, useState } from "react";
-import { Breadcrumb, Row, Spinner, Table, Button } from "react-bootstrap";
-import ReactPaginate from "react-paginate";
+import { Breadcrumb, Row, Spinner, Table, Button, Form, Col } from "react-bootstrap";
+import { FaTrash } from "react-icons/fa";
 import DeleteModal from "../components/popup/DeleteModal";
 import { toast } from "react-toastify";
-import { FaTrash } from "react-icons/fa";
-import {
-  deleteStudentQueries,
-  getStudentQueries,
-} from "../services/adminContactQueries.service";
+import { deleteStudentQueries, getStudentQueries } from "../services/adminContactQueries.service";
 
 const AdminStudentRequests = () => {
+  const [studentFilter, setStudentFilter] = useState("");
   const [tableData, setTableData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
+  const [selectedId, setSelectedId] = useState("");
+  const [isDeletePopup, setIsDeletePopup] = useState(false);
+  const [dataLoading, setDataLoading] = useState(false);
   const [pagination, setPagination] = useState({
     currentPage: 1,
     totalPages: 1,
   });
-  const [selectedId, setSelectedId] = useState("");
-  const [isDeletePopup, setIsDeletePopup] = useState(false);
-  const [dataLoading, setDataLoading] = useState(false);
   const [filters, setFilters] = useState({
     dateRange: [null, null],
     status: "",
   });
-
-  function getFormattedDate(isoString) {
-    const date = new Date(isoString);
-    const options = {
-      day: "2-digit",
-      month: "long",
-      year: "numeric",
-    };
-    return date.toLocaleDateString("en-US", options);
-  }
-
-  const handlePageClick = (event) => {
-    const newPage = event.selected + 1; // ReactPaginate is zero-based
-    setPagination((prev) => ({ ...prev, currentPage: newPage }));
-  };
 
   useEffect(() => {
     fetchData(1);
@@ -48,6 +31,7 @@ const AdminStudentRequests = () => {
     if (response.data.status) {
       setDataLoading(false);
       setTableData(response.data.data);
+      setFilteredData(response.data.data); // Initially set filtered data to all data
       setPagination({
         ...pagination,
         totalPages: response.data.data.totalPages,
@@ -59,14 +43,12 @@ const AdminStudentRequests = () => {
   };
 
   const handleDelete = async () => {
-    try { 
+    try {
       if (selectedId) {
         await deleteStudentQueries(selectedId).then((response) => {
           if (response.data.status) {
             toast.success("Deleted Successfully");
-            fetchData({
-              page: pagination.currentPage,
-            });
+            fetchData(pagination.currentPage);
             setIsDeletePopup(false);
             setSelectedId("");
           } else {
@@ -79,6 +61,19 @@ const AdminStudentRequests = () => {
     }
   };
 
+  const handleSearchChange = (e) => {
+    setStudentFilter(e.target.value);
+    // Filter the data based on the name
+    if (e.target.value === "") {
+      setFilteredData(tableData); // If filter is empty, show all data
+    } else {
+      const filtered = tableData.filter((student) =>
+        student.fullName.toLowerCase().includes(e.target.value.toLowerCase())
+      );
+      setFilteredData(filtered);
+    }
+  };
+
   return (
     <div className="p-3">
       <Breadcrumb>
@@ -88,39 +83,45 @@ const AdminStudentRequests = () => {
         </Breadcrumb.Item>
       </Breadcrumb>
 
+      <Row>
+        <Col md={4}>
+          <Form.Group controlId="instituteName" className="mb-3">
+            <Form.Label className="small fw-semibold">Search by student name</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Search by name"
+              name="instituteName"
+              value={studentFilter}
+              onChange={handleSearchChange}
+              className="p-2"
+            />
+          </Form.Group>
+        </Col>
+      </Row>
+
       <Row className="g-4">
         <div className="table-responsive border p-0 rounded">
           <Table hover responsive className="align-middle mb-0">
             <thead className="bg-dark text-white">
-              <tr className="bg-dark text-white">
+              <tr>
                 <th className="ps-4 py-3 bg-dark text-white">Sr. No.</th>
                 <th className="py-3 bg-dark text-white">Name</th>
                 <th className="py-3 bg-dark text-white">Phone</th>
                 <th className="py-3 bg-dark text-white">Course</th>
                 <th className="py-3 bg-dark text-white">Subject</th>
-                <th className="py-3 bg-dark text-white">Created At</th>
                 <th className="py-3 bg-dark text-white text-center">Action</th>
               </tr>
             </thead>
             {!dataLoading ? (
               <tbody style={{ minHeight: "400px" }}>
-                {tableData?.length > 0 ? (
-                  tableData.map((data, index) => (
+                {filteredData.length > 0 ? (
+                  filteredData.map((data, index) => (
                     <tr key={index}>
                       <td className="ps-4 py-3">{index + 1}</td>
                       <td className=" py-3">{data?.fullName}</td>
-                      <td className=" py-3">
-                        {data?.phoneNumber}
-                      </td>
-                      <td className=" py-3">
-                        {data?.courseName}
-                      </td>
-                      <td className=" py-3">
-                        {data?.subjectName}
-                      </td>
-                      <td className=" py-3">
-                        {getFormattedDate(data?.createdAt)}
-                      </td>
+                      <td className=" py-3">{data?.phoneNumber}</td>
+                      <td className=" py-3">{data?.courseName}</td>
+                      <td className=" py-3">{data?.subjectName}</td>
                       <td className="text-center py-3">
                         <div className="d-flex justify-content-center">
                           <Button
@@ -155,32 +156,6 @@ const AdminStudentRequests = () => {
               </tbody>
             )}
           </Table>
-        </div>
-
-        {/* Pagination */}
-        <div className="d-flex justify-content-center mt-3">
-          {pagination?.totalPages > 1 && (
-            <ReactPaginate
-              breakLabel="..."
-              nextLabel="Next"
-              previousLabel="Prev"
-              onPageChange={handlePageClick}
-              pageCount={pagination.totalPages}
-              forcePage={pagination.currentPage - 1} // Sync with state
-              pageRangeDisplayed={3}
-              marginPagesDisplayed={2}
-              containerClassName="pagination justify-content-center mt-4"
-              pageClassName="page-item"
-              pageLinkClassName="page-link rounded px-3 py-2 border-0 shadow-sm"
-              previousClassName="page-item"
-              previousLinkClassName="page-link rounded px-3 py-2 border-0 shadow-sm"
-              nextClassName="page-item"
-              nextLinkClassName="page-link rounded px-3 py-2 border-0 shadow-sm"
-              breakClassName="page-item"
-              breakLinkClassName="page-link rounded px-3 py-2 border-0 shadow-sm"
-              activeClassName="active bg-primary text-white"
-            />
-          )}
         </div>
       </Row>
 
