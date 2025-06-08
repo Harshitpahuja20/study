@@ -57,7 +57,7 @@ const AdminViewFranchise = () => {
   return (
     <div className="p-3">
       <Breadcrumb>
-        <Breadcrumb.Item href="/admin/dashboard">Home</Breadcrumb.Item>
+        <Breadcrumb.Item href="/admin/dashboard/other">Home</Breadcrumb.Item>
         <Breadcrumb.Item active className="fw-semibold">
           View Franchise
         </Breadcrumb.Item>

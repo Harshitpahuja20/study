@@ -1,11 +1,9 @@
 import axios from "axios";
-import { getAuth } from "../../services/auth.service";
+import { getFranchiseAuth } from "../../services/auth.service";
 
 const baseUrl = process.env.REACT_APP_API_URL;
 
 const ADD_STUDENT = `${baseUrl}/api/student/add`;
-const ADD_MARKS = `${baseUrl}/api/student/addMarks`;
-const UPDATE_MARKS = `${baseUrl}/api/student/updateMarks`;
 const UPDATE_STUDENT = `${baseUrl}/api/student/update`;
 const VIEW_STUDENT = `${baseUrl}/api/student/view`;
 const DELETE_STUDENT = `${baseUrl}/api/student/delete/`;
@@ -14,7 +12,7 @@ const GET_SINGLE_STUDENT = `${baseUrl}/api/student/view/`;
 export const addStudents = async (data) => {
   return axios.post(`${ADD_STUDENT}`, data, {
     headers: {
-      Authorization: getAuth()?.token,
+      Authorization: getFranchiseAuth()?.token,
     },
   });
 };
@@ -22,7 +20,7 @@ export const addStudents = async (data) => {
 export const updateStudents = async (data) => {
   return axios.put(`${UPDATE_STUDENT}`, data, {
     headers: {
-      Authorization: getAuth()?.token,
+      Authorization: getFranchiseAuth()?.token,
     },
   });
 };
@@ -49,7 +47,7 @@ export const getStudents = async (page = 1, filters) => {
 
   return axios.get(`${VIEW_STUDENT}?${params.toString()}`, {
     headers: {
-      Authorization: getAuth()?.token,
+      Authorization: getFranchiseAuth()?.token,
     },
   });
 };
@@ -57,7 +55,7 @@ export const getStudents = async (page = 1, filters) => {
 export const getSingleStudent = async (id) => {
   return axios.get(`${GET_SINGLE_STUDENT}${id}`, {
     headers: {
-      Authorization: getAuth()?.token,
+      Authorization: getFranchiseAuth()?.token,
     },
   });
 };
@@ -65,23 +63,7 @@ export const getSingleStudent = async (id) => {
 export const deleteStudent = async (id) => {
   return axios.delete(`${DELETE_STUDENT}${id}`, {
     headers: {
-      Authorization: getAuth()?.token,
-    },
-  });
-};
-
-export const addStudentMarks = async (data) => {
-  return axios.post(`${ADD_MARKS}`, data, {
-    headers: {
-      Authorization: getAuth()?.token,
-    },
-  });
-};
-
-export const updateStudentMarks = async (data) => {
-  return axios.put(`${UPDATE_MARKS}`, data, {
-    headers: {
-      Authorization: getAuth()?.token,
+      Authorization: getFranchiseAuth()?.token,
     },
   });
 };

@@ -38,7 +38,7 @@ const AdminLayout = () => {
           </Col>
 
           {/* Main content area */}
-          <Col xs={12} lg={10} className="p-md-4 ps-lg-5 ps-xxl-3  p-0">
+          <Col xs={12} lg={10} className="p-md-4 ps-lg-5 ps-xxl-3  p-2">
             <Outlet /> {/* Dynamic pages rendered here */}
           </Col>
         </Row>

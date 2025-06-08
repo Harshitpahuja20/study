@@ -58,6 +58,11 @@ import AddFranchiseStudent from "./franchise/pages/AddStudent";
 import AddFranchiseVocationalCourse from "./franchise/pages/AddVocationalCourse";
 import ViewFranchiseVocationalCourse from "./franchise/pages/ViewVocationalCourse";
 import FranchiseSubjectForm from "./franchise/pages/AdminVocationalCourseSubject";
+import AddOtherDashboard from "./admin/pages/AddOtherDashboard";
+import AdminStreamAttach from "./admin/pages/AdminStreamAttach";
+import AdminAddMarks from "./admin/pages/AdminAddMarks";
+import AdminResults from "./admin/pages/AdminResults";
+import ViewSingleStudentMarks from "./admin/pages/ViewSingleStudentMarks";
 
 function App() {
   const { isEnquiryPopup, setIsEnquiryPopup, currentUser } = useStudy();
@@ -150,7 +155,9 @@ function App() {
           }
         >
           <Route path="dashboard" element={<AdminDashobard />} />
+          <Route path="dashboard/other" element={<AddOtherDashboard />} />
           <Route path="streams" element={<AdminStreams />} />
+          <Route path="streams/attach/:id" element={<AdminStreamAttach />} />
           <Route path="places" element={<AdminPlaces />} />
           <Route path="studentRequests" element={<AdminStudentRequests />} />
           <Route
@@ -162,11 +169,17 @@ function App() {
           <Route path="news/view" element={<AdminViewNews />} />
           <Route path="student/add" element={<AddStudent />} />
           <Route path="student/view/:id" element={<StudentDetailsCard />} />
+          <Route
+            path="student/marks/:studentId/:courseId"
+            element={<AdminAddMarks />}
+          />
           <Route path="students/view" element={<AdminViewStudents />} />
           <Route path="course/main" element={<AddMainCourse />} />
           <Route path="course/sub/add/:id" element={<AddSubCourse />} />
           <Route path="course/sub" element={<AdminViewSubCourses />} />
           <Route path="franchise/add" element={<AdminAddFranchise />} />
+          <Route path="results" element={<AdminResults />} />
+          <Route path="results/:id" element={<ViewSingleStudentMarks />} />
           <Route
             path="vocationalCourse/add"
             element={<AddVocationalCourse />}
@@ -184,13 +197,13 @@ function App() {
             path="franchise/view/:id"
             element={<AdminViewSingleFranchise />}
           />
-          <Route path="collage_iti/add" element={<AddInstitute />} />
+          <Route path="university/add" element={<AddInstitute />} />
           <Route
             path="university/view"
             element={<AdminViewInstitutes role={"University"} />}
           />
           <Route
-            path="collage/view"
+            path="college/view"
             element={<AdminViewInstitutes role={"Collage"} />}
           />
           <Route
@@ -210,7 +223,7 @@ function App() {
           }
         >
           <Route path="dashboard" element={<FranchiseDashobard />} />
-            <Route
+          <Route
             path="vocationalCourse/add"
             element={<AddFranchiseVocationalCourse />}
           />
@@ -222,9 +235,12 @@ function App() {
             path="vocationalCourse/subject/details"
             element={<FranchiseSubjectForm />}
           />
-          
+
           <Route path="students/add" element={<AddFranchiseStudent />} />
-          <Route path="student/view/:id" element={<FranchiseStudentDetailsCard />} />
+          <Route
+            path="student/view/:id"
+            element={<FranchiseStudentDetailsCard />}
+          />
           <Route path="students/view" element={<FranchiseViewStudents />} />
           <Route path="*" element={<Navigate to={"dashboard"} />} />
         </Route>

@@ -9,6 +9,7 @@ const StudyContext = createContext();
 
 export const StudyProvider = ({ children }) => {
   const [isEnquiryPopup, setIsEnquiryPopup] = useState(false);
+  const [isOther, setIsOther] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const token = localStorage.getItem("token");
   const [streams, setStreams] = useState([]);
@@ -138,6 +139,8 @@ export const StudyProvider = ({ children }) => {
         collages,
         getAllNews,
         news,
+        isOther,
+        setIsOther,
       }}
     >
       {children}

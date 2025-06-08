@@ -183,7 +183,7 @@ const AdminViewInstitutes = ({ role }) => {
       <Breadcrumb>
         <Breadcrumb.Item href="/admin/dashboard">Home</Breadcrumb.Item>
         <Breadcrumb.Item active className="fw-semibold">
-          View {role}
+          View {role === "Collage" ? "College" : role}
         </Breadcrumb.Item>
       </Breadcrumb>
 

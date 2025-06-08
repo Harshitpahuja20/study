@@ -5,6 +5,7 @@ const baseUrl = process.env.REACT_APP_API_URL;
 
 const ADD_STREAM = `${baseUrl}/api/stream/create`;
 const UPDATE_STREAM = `${baseUrl}/api/stream/update`;
+const UPDATE_STREAM_ATTACHMENT = `${baseUrl}/api/stream/update/attachment`;
 const VIEW_STREAM = `${baseUrl}/api/stream/view`;
 const DELETE_STREAM = `${baseUrl}/api/stream/delete`;
 
@@ -53,6 +54,14 @@ export const deleteStreams = async (id) => {
 
 export const updateStream = async (data) => {
   return axios.put(`${UPDATE_STREAM}`, data, {
+    headers: {
+      Authorization: getAuth()?.token,
+    },
+  });
+};
+
+export const updateStreamAttachemnt = async (data) => {
+  return axios.put(`${UPDATE_STREAM_ATTACHMENT}`, data, {
     headers: {
       Authorization: getAuth()?.token,
     },

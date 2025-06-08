@@ -33,15 +33,6 @@ const AdminViewStudents = () => {
   const [vocationalCourses, setVocationalCourses] = useState([]);
   const [formData, setFormData] = useState({});
 
-  const getFormattedDate = (isoString) => {
-    const date = new Date(isoString);
-    return date.toLocaleDateString("en-US", {
-      day: "2-digit",
-      month: "long",
-      year: "numeric",
-    });
-  };
-
   const handlePageClick = (event) => {
     const newPage = event.selected + 1;
     setPagination((prev) => ({ ...prev, currentPage: newPage }));
@@ -169,7 +160,7 @@ const AdminViewStudents = () => {
   return (
     <div className="p-3">
       <Breadcrumb>
-        <Breadcrumb.Item href="/admin/dashboard">Home</Breadcrumb.Item>
+        <Breadcrumb.Item href="/admin/dashboard/other">Home</Breadcrumb.Item>
         <Breadcrumb.Item active className="fw-semibold">
           Students
         </Breadcrumb.Item>

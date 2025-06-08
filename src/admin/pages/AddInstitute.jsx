@@ -123,7 +123,7 @@ const AddInstitute = () => {
         <Row>
           <Col md={4}>
             <Form.Group controlId="instituteName" className="mb-3">
-              <Form.Label>Institute Name</Form.Label>
+              <Form.Label>Role Type</Form.Label>
               <Form.Control
                 as="select"
                 name="role"

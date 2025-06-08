@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Form, Button, Breadcrumb } from "react-bootstrap";
 import { toast } from "react-toastify";
-import { addvocationCourse } from "../../admin/services/AdminVocationalCourse.service";
+import { addvocationCourse } from "../services/franchiseVocationalCourse.service";
 
 const AddFranchiseVocationalCourse = () => {
   const [formData, setFormData] = useState({

@@ -10,7 +10,7 @@ import {
   Form,
 } from "react-bootstrap";
 import ReactPaginate from "react-paginate";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import BrokenImage from "../../assets/image/png/broken-image.png";
 import mediaPicker from "../../assets/image/png/media-picker.png";
 import AddModal from "../components/popup/AddModal";
@@ -32,6 +32,7 @@ const AdminStreams = () => {
     currentPage: 1,
     totalPages: 1,
   });
+  const navigate = useNavigate();
   const [selectedId, setSelectedId] = useState("");
   const [isDeletePopup, setIsDeletePopup] = useState(false);
   const [isAddPopup, setIsAddPopup] = useState(false);
@@ -47,16 +48,6 @@ const AdminStreams = () => {
     dateRange: [null, null],
     status: "",
   });
-
-  function getFormattedDate(isoString) {
-    const date = new Date(isoString);
-    const options = {
-      day: "2-digit",
-      month: "long",
-      year: "numeric",
-    };
-    return date.toLocaleDateString("en-US", options);
-  }
 
   const handlePageClick = (event) => {
     const newPage = event.selected + 1; // ReactPaginate is zero-based
@@ -221,6 +212,18 @@ const AdminStreams = () => {
                       </td>
                       <td className="text-center">
                         <div className="d-flex justify-content-center">
+                          <Button
+                            variant=""
+                            className="fw-semibold pb-0"
+                            size="sm"
+                            onClick={() =>
+                              navigate(`/admin/streams/attach/${data?._id}`, {
+                                state: { university: data?.university },
+                              })
+                            }
+                          >
+                            Attach
+                          </Button>
                           <Button
                             variant=""
                             size="sm"

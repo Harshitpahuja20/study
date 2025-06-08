@@ -61,7 +61,7 @@ const StudentDetailsCard = () => {
   return (
     <>
       <Breadcrumb>
-        <Breadcrumb.Item href="/admin/dashboard">Home</Breadcrumb.Item>
+        <Breadcrumb.Item href="/admin/dashboard/other">Home</Breadcrumb.Item>
         <Breadcrumb.Item active className="fw-semibold">
           View Student
         </Breadcrumb.Item>
@@ -73,6 +73,7 @@ const StudentDetailsCard = () => {
             variant="primary"
             className="px-4 fw-bold d-flex align-items-center gap-2 bg-dark border-0"
             disabled={student === null}
+            onClick={()=>navigate(`/admin/student/marks/${student?._id}/${student?.course?._id}`)}
           >
             <FaPlus className="fs-6" /> Add Marks
           </Button>

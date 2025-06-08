@@ -433,6 +433,15 @@ button.btn-danger:hover {
   background-color: #f5f5f5; /* Customize toolbar background color */
 }
 
+.breadcrumb a {
+  color: rgba(33, 37, 41, 0.75);
+  font-weight: 500;
+}
+.breadcrumb {
+  color: rgba(33, 37, 41, 0.75);
+  font-weight: 500;
+}
+
 @keyframes revealText {
   0% {
     clip-path: inset(0 50% 0 50%);
@@ -474,5 +483,11 @@ button.btn-danger:hover {
   .heading {
     font-size: 40px;
     font-weight: 600;
+  }
+}
+
+@media (max-width: 550px) {
+  .htmlRender img {
+    width: 100%;
   }
 }

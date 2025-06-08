@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from "react";
 import CustomNavbar from "../components/common/CustomNavbar";
-import { Col, Container, Row } from "react-bootstrap";
+import { Breadcrumb, Col, Container, Row } from "react-bootstrap";
 import helpline from "../assets/image/png/helpline.png";
 import { useParams } from "react-router-dom";
 import { useStudy } from "../context/study.context";
+import { BsCheckSquare, BsHouseFill } from "react-icons/bs";
+import { FaHouse } from "react-icons/fa6";
 
 const DetailsPage = () => {
   const { name, id } = useParams();
   const [selectedData, setSelectedData] = useState({});
   const { getInstitutes, universities, iti, collages, getAllNews, news } =
     useStudy();
+  const currentYear = new Date().getFullYear();
+  const nextYear = currentYear + 1;
 
   useEffect(() => {
     if (id && name) {
@@ -50,10 +54,39 @@ const DetailsPage = () => {
   return (
     <div>
       <CustomNavbar />
-      <div className=" noticeboard-section">
-        <Container className="pb-5 pt-2">
+      <div className=" noticeboard-section pt-0">
+        <Container className="pb-5">
           <Row>
-            <Col className="mt-4 pe-0 pe-md-5" md={8}>
+            <Col md={12}>
+              <div className="bg-light border-bottom">
+                <div className="px-3 pt-3 pb-0">
+                  <Breadcrumb className="mb-0 small-text text-dark breadcrumb">
+                    <Breadcrumb.Item href="#">
+                      <FaHouse className="me-1" />
+                    </Breadcrumb.Item>
+                    <Breadcrumb.Item href="#" className="text-dark">
+                      {name}
+                    </Breadcrumb.Item>
+                    <Breadcrumb.Item active>
+                      {selectedData?.instituteName}
+                    </Breadcrumb.Item>
+                  </Breadcrumb>
+                </div>
+              </div>
+            </Col>
+            <Col className="pe-md-5" md={8}>
+              <div
+                style={{
+                  backgroundColor: "#fffbea",
+                  padding: "0.6rem 1rem",
+                  borderBottom: "3px solid #ffd700",
+                  fontWeight: "bold",
+                  fontSize: "1.1rem",
+                }}
+                className="mb-4"
+              >
+                {selectedData?.instituteName}
+              </div>
               {selectedData !== null && (
                 <>
                   <h4 className=" ff_p fw-bold fs_18 mb-0">
@@ -65,11 +98,38 @@ const DetailsPage = () => {
                     dangerouslySetInnerHTML={{
                       __html: selectedData?.description,
                     }}
+                    className="htmlRender"
                   />
                 </>
               )}
+              {selectedData !== null &&
+                selectedData?.linkedStreams?.length > 0 && (
+                  <>
+                    <div className="mb-4">
+                      <div
+                        className="px-3 py-2 text-white fw-bold"
+                        style={{
+                          backgroundColor: "#3a3a3a",
+                          fontSize: "1.1rem",
+                        }}
+                      >
+                        {selectedData?.instituteName} - Courses Offered{" "}
+                        {currentYear} - {nextYear}
+                      </div>
+
+                      {selectedData?.linkedStreams.map((item) => {
+                        return (
+                          <div className="mt-3 px-2 d-flex align-items-center fs-6">
+                            <BsCheckSquare className="text-danger me-2" />
+                            <span className="fs-6">{item?.title}</span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </>
+                )}
             </Col>
-            <Col className="mt-4" md={4}>
+            <Col className="" md={4}>
               <div className="card text-center p-4">
                 <img
                   className="mx-auto"

@@ -55,27 +55,6 @@ const states = [
   "Tamil Nadu",
 ];
 
-// const universities = [
-//   {
-//     name: "Maharaja Agrasen Himalayan Garhwal University",
-//     location: "Dhaid Gaon - Uttarakhand",
-//     approvals: ["UGC", "BCI", "PCI", "AIU"],
-//     logo: universityLogo, // Replace with actual URL
-//   },
-//   {
-//     name: "India Education Centre University (IECU)",
-//     location: "Solan - Himachal Pradesh",
-//     approvals: ["UGC", "PCI", "BCI", "AICTE"],
-//     logo: universityLogo, // Replace with actual URL
-//   },
-//   {
-//     name: "Himalayan University (HU)",
-//     location: "Papum Pare - Arunachal Pradesh",
-//     approvals: ["UGC", "AIU", "IAO", "BCI", "PCI", "RCI"],
-//     logo: universityLogo, // Replace with actual URL
-//   },
-// ];
-
 function getCurrentSession() {
   const now = new Date();
   const year = now.getFullYear();

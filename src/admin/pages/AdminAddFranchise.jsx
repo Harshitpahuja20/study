@@ -97,7 +97,7 @@ const AdminAddFranchise = () => {
   return (
     <div>
       <Breadcrumb>
-        <Breadcrumb.Item href="/admin/dashboard">Home</Breadcrumb.Item>
+        <Breadcrumb.Item href="/admin/dashboard/other">Home</Breadcrumb.Item>
         <Breadcrumb.Item active className="fw-semibold">
           Add Franchise
         </Breadcrumb.Item>

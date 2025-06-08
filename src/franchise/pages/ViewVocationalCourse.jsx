@@ -12,6 +12,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import AddModal from "../../admin/components/popup/AddModal";
 import DeleteModal from "../../admin/components/popup/DeleteModal";
+import { getFranchisevocationalCourses } from "../services/franchiseVocationalCourse.service";
 
 const ViewFranchiseVocationalCourse = () => {
   const navigate = useNavigate();
@@ -52,13 +53,9 @@ const ViewFranchiseVocationalCourse = () => {
 
   const fetchData = async (page) => {
     setDataLoading(true);
-    const response = await getvocationCourses(page);
+    const response = await getFranchisevocationalCourses();
     if (response.data.status) {
       setTableData(response.data.data || []);
-      setPagination({
-        currentPage: page,
-        totalPages: response.data.data.totalPages || 1,
-      });
     } else {
       toast.error("Something went wrong!");
     }

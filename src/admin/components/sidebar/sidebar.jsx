@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   FaHome,
   FaInfoCircle,
@@ -21,6 +21,12 @@ import { MdDeviceHub } from "react-icons/md";
 import { PiStudent } from "react-icons/pi";
 import { IoBookSharp } from "react-icons/io5";
 import { AiOutlineGlobal } from "react-icons/ai";
+import {
+  BsFillArrowLeftSquareFill,
+  BsFillArrowRightSquareFill,
+  BsFillFileEarmarkSpreadsheetFill,
+} from "react-icons/bs";
+import { useStudy } from "../../../context/study.context";
 
 // ✅ Reusable Dropdown Component
 function DropdownMenu({ label, icon, items = [], basePath = "" }) {
@@ -31,7 +37,7 @@ function DropdownMenu({ label, icon, items = [], basePath = "" }) {
   const isActive = location.pathname.includes(basePath);
 
   return (
-    <div className="w-100 mt-2">
+    <div className="w-100 mt-2 ">
       <div
         onClick={toggle}
         className={`text-white px-3 py-2 w-100 text-start sidebar-link dropdown-toggle d-flex justify-content-between align-items-center small-text ${
@@ -47,7 +53,7 @@ function DropdownMenu({ label, icon, items = [], basePath = "" }) {
 
       {isOpen && (
         <div className="mt-2 px-3">
-          <div className="bg-white rounded shadow-sm overflow-hidden">
+          <div className="bg-white rounded shadow-sm overflow-hidden small-text">
             {items.map((item) => (
               <Link
                 key={item.to}
@@ -66,11 +72,18 @@ function DropdownMenu({ label, icon, items = [], basePath = "" }) {
 
 // ✅ Main Sidebar Component
 function Sidebar({ isSidebarOpen }) {
+  const navigate = useNavigate();
   const location = useLocation();
+  const { isOther, setIsOther } = useStudy();
 
-  const navItems = [
+  const navItems1 = [
     { to: "/", label: "Visit Website", icon: <AiOutlineGlobal /> },
     { to: "/admin/dashboard", label: "Dashboard", icon: <FaHome /> },
+    {
+      to: "/admin/contactQuerys",
+      label: "Contact Queries",
+      icon: <FaPhoneAlt />,
+    },
     {
       to: "/admin/studentRequests",
       label: "Student Requests",
@@ -82,11 +95,6 @@ function Sidebar({ isSidebarOpen }) {
       icon: <FaHandshake />,
     },
     {
-      to: "/admin/contactQuerys",
-      label: "Contact Queries",
-      icon: <FaPhoneAlt />,
-    },
-    {
       to: "/admin/Streams",
       label: "Streams",
       icon: <FaStream />,
@@ -96,6 +104,10 @@ function Sidebar({ isSidebarOpen }) {
       label: "Places",
       icon: <FaMapMarkerAlt />,
     },
+  ];
+  const navItems2 = [
+    { to: "/", label: "Visit Website", icon: <AiOutlineGlobal /> },
+    { to: "/admin/dashboard/other", label: "Home", icon: <FaHome /> },
   ];
 
   return (
@@ -109,76 +121,143 @@ function Sidebar({ isSidebarOpen }) {
       </div>
 
       <div className="flex-grow-1 px-2 nav-scroll">
-        {navItems.map((item) => (
-          <Link
-            key={item.to}
-            to={item.to}
-            className={`d-flex rounded align-items-center px-3 py-2 mt-2 text-decoration-none text-white sidebar-link small-text ${
-              location.pathname === item.to ? "bg-secondary" : "bg-dark"
-            }`}
-          >
-            <span className="me-3">{item.icon}</span>
-            {item.label}
-          </Link>
-        ))}
+        {!isOther && (
+          <>
+            {navItems1.map((item, index) => {
+              return (
+                <React.Fragment key={item.to}>
+                  {index === 2 && (
+                    <div
+                      onClick={() => {
+                        setIsOther(true);
+                        navigate("/admin/dashboard/other");
+                      }}
+                      className="d-flex rounded align-items-center px-3 py-2 mt-2 text-decoration-none text-white sidebar-link small-text bg-dark"
+                      style={{ cursor: "pointer" }}
+                    >
+                      <span className="me-3">
+                        <BsFillArrowRightSquareFill />
+                      </span>
+                      Other Panel
+                    </div>
+                  )}
+
+                  <Link
+                    to={item.to}
+                    className={`d-flex rounded align-items-center px-3 py-2 mt-2 text-decoration-none text-white sidebar-link small-text ${
+                      location.pathname === item.to ? "bg-secondary" : "bg-dark"
+                    }`}
+                  >
+                    <span className="me-3">{item.icon}</span>
+                    {item.label}
+                  </Link>
+                </React.Fragment>
+              );
+            })}
+            <DropdownMenu
+              label="News"
+              icon={<FaTools />}
+              items={[
+                { to: "/admin/news/add", label: "Add News" },
+                { to: "/admin/news/view", label: "All News" },
+              ]}
+              basePath="/admin/news/add"
+            />
+            <DropdownMenu
+              label="Course Section"
+              icon={<FaBook />}
+              items={[
+                { to: "/admin/course/main", label: "Main Courses" },
+                { to: "/admin/course/sub", label: "All Sub Courses" },
+              ]}
+              basePath="/admin/news/add"
+            />
+            <DropdownMenu
+              label="University/ITI"
+              icon={<FaTools />}
+              items={[
+                { to: "/admin/university/add", label: "Add" },
+                { to: "/admin/university/view", label: "All University" },
+                { to: "/admin/college/view", label: "All colleges" },
+                { to: "/admin/iti/view", label: "All ITI" },
+              ]}
+              basePath="/admin/news/add"
+            />
+          </>
+        )}
+        {isOther && (
+          <>
+            {navItems2.map((item, index) => {
+              return (
+                <React.Fragment key={item.to}>
+                  <Link
+                    to={item.to}
+                    className={`d-flex rounded align-items-center px-3 py-2 mt-2 text-decoration-none text-white sidebar-link small-text ${
+                      location.pathname === item.to ? "bg-secondary" : "bg-dark"
+                    }`}
+                  >
+                    <span className="me-3">{item.icon}</span>
+                    {item.label}
+                  </Link>
+                  {index === 1 && (
+                    <div
+                      onClick={() => {
+                        setIsOther(false);
+                        navigate("/admin/dashboard");
+                      }}
+                      className="d-flex rounded align-items-center px-3 py-2 mt-2 text-decoration-none text-white sidebar-link small-text bg-dark"
+                      style={{ cursor: "pointer" }}
+                    >
+                      <span className="me-3">
+                        <BsFillArrowLeftSquareFill />
+                      </span>
+                      Main Dashboard
+                    </div>
+                  )}
+                </React.Fragment>
+              );
+            })}
+            <DropdownMenu
+              label="Franchise"
+              icon={<MdDeviceHub />}
+              items={[
+                { to: "/admin/franchise/add", label: "Add Franchise" },
+                { to: "/admin/franchise/view", label: "All Franchise" },
+              ]}
+              basePath="/admin/franchise/add"
+            />
+            <DropdownMenu
+              label="Manage Students"
+              icon={<PiStudent />}
+              items={[
+                { to: "/admin/student/add", label: "Add Student" },
+                { to: "/admin/students/view", label: "All Verified" },
+              ]}
+              basePath="/admin/student/add"
+            />
+
+            <DropdownMenu
+              label="Vocational Courses"
+              icon={<IoBookSharp />}
+              items={[
+                { to: "/admin/vocationalCourse/add", label: "Add Course" },
+                { to: "/admin/vocationalCourse/view", label: "All Course" },
+              ]}
+              basePath="/admin/vocationalCourse/add"
+            />
+            <Link
+              to={"/admin/results"}
+              className={`d-flex rounded align-items-center px-3 py-2 mt-2 text-decoration-none text-white sidebar-link small-text ${
+                location.pathname === "/admin/results" ? "bg-secondary" : "bg-dark"
+              }`}
+            >
+              <span className="me-3">{<BsFillFileEarmarkSpreadsheetFill/>}</span>
+              Results
+            </Link>
+          </>
+        )}
 
         {/* ✅ Reusable Dropdown */}
-        <DropdownMenu
-          label="News"
-          icon={<FaTools />}
-          items={[
-            { to: "/admin/news/add", label: "Add" },
-            { to: "/admin/news/view", label: "List" },
-          ]}
-          basePath="/admin/news/add"
-        />
-        <DropdownMenu
-          label="University/ITI"
-          icon={<FaTools />}
-          items={[
-            { to: "/admin/collage_iti/add", label: "Add" },
-            { to: "/admin/university/view", label: "All University" },
-            { to: "/admin/collage/view", label: "All collages" },
-            { to: "/admin/iti/view", label: "All ITI" },
-          ]}
-          basePath="/admin/news/add"
-        />
-        <DropdownMenu
-          label="Franchise"
-          icon={<MdDeviceHub />}
-          items={[
-            { to: "/admin/franchise/add", label: "Add" },
-            { to: "/admin/franchise/view", label: "List" },
-          ]}
-          basePath="/admin/franchise/add"
-        />
-        <DropdownMenu
-          label="Students"
-          icon={<PiStudent />}
-          items={[
-            { to: "/admin/student/add", label: "Add Students" },
-            { to: "/admin/students/view", label: "Students List" },
-          ]}
-          basePath="/admin/student/add"
-        />
-        <DropdownMenu
-          label="Courses"
-          icon={<FaBook />}
-          items={[
-            { to: "/admin/course/main", label: "Main Courses" },
-            { to: "/admin/course/sub", label: "Sub Courses" },
-          ]}
-          basePath="/admin/news/add"
-        />
-        <DropdownMenu
-          label="Vocational Courses"
-          icon={<IoBookSharp />}
-          items={[
-            { to: "/admin/vocationalCourse/add", label: "Add" },
-            { to: "/admin/vocationalCourse/view", label: "List" },
-          ]}
-          basePath="/admin/vocationalCourse/add"
-        />
       </div>
     </div>
   );

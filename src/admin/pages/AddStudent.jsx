@@ -127,7 +127,7 @@ const AddStudent = () => {
   return (
     <div className="container mt-4">
       <Breadcrumb>
-        <Breadcrumb.Item href="/admin/dashboard">Home</Breadcrumb.Item>
+        <Breadcrumb.Item href="/admin/dashboard/other">Home</Breadcrumb.Item>
         <Breadcrumb.Item active className="fw-semibold">
           Add Students
         </Breadcrumb.Item>
