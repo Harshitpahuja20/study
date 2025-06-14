@@ -57,7 +57,9 @@ import FranchiseStudentDetailsCard from "./franchise/pages/ViewSingleStudent";
 import AddFranchiseStudent from "./franchise/pages/AddStudent";
 import AddFranchiseVocationalCourse from "./franchise/pages/AddVocationalCourse";
 import ViewFranchiseVocationalCourse from "./franchise/pages/ViewVocationalCourse";
-import FranchiseSubjectForm from "./franchise/pages/AdminVocationalCourseSubject";
+import FranchiseSubjectForm from "./franchise/pages/FranchiseVocationalCourseSubject";
+import FranchiseAddMarks from "./franchise/pages/FranchiseAddMarks";
+import FranchiseVocationalCourseSubject from "./franchise/pages/FranchiseVocationalCourseSubject";
 import AddOtherDashboard from "./admin/pages/AddOtherDashboard";
 import AdminStreamAttach from "./admin/pages/AdminStreamAttach";
 import AdminAddMarks from "./admin/pages/AdminAddMarks";
@@ -190,7 +192,7 @@ function App() {
           />
           <Route
             path="vocationalCourse/subject/details"
-            element={<AdminVocationalCourseSubject />}
+            element={<FranchiseVocationalCourseSubject />}
           />
           <Route path="franchise/view" element={<AdminViewFranchise />} />
           <Route
@@ -236,6 +238,11 @@ function App() {
             element={<FranchiseSubjectForm />}
           />
 
+          <Route path="students/add" element={<AddFranchiseStudent />} />
+           <Route
+            path="student/marks/:studentId/:courseId"
+            element={<FranchiseAddMarks />}
+          />
           <Route path="students/add" element={<AddFranchiseStudent />} />
           <Route
             path="student/view/:id"

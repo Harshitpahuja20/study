@@ -1,5 +1,3 @@
-// AdminViewStudents.js - Full working student management with edit functionality
-
 import React, { useEffect, useState, useRef } from "react";
 import { Breadcrumb, Row, Spinner, Table, Button } from "react-bootstrap";
 import ReactPaginate from "react-paginate";
@@ -8,11 +6,11 @@ import { FaEye, FaTrash } from "react-icons/fa";
 import { FaPencil } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import {
-  deleteStudent,
   getStudents,
+  deleteStudent,
   updateStudents,
-} from "../../admin/services/adminStudent.service";
-import { getFranchisevocationalCourses } from "../../admin/services/AdminVocationalCourse.service";
+} from "../services/franchiseAddStudent.service";
+import { getFranchisevocationalCourses } from "../services/franchiseVocationalCourse.service";
 import AddModal from "../../admin/components/popup/AddModal";
 import DeleteModal from "../../admin/components/popup/DeleteModal";
 
@@ -169,7 +167,7 @@ const FranchiseViewStudents = () => {
   return (
     <div className="p-3">
       <Breadcrumb>
-        <Breadcrumb.Item href="/admin/dashboard">Home</Breadcrumb.Item>
+        <Breadcrumb.Item href="/franchise/dashboard">Home</Breadcrumb.Item>
         <Breadcrumb.Item active className="fw-semibold">
           Students
         </Breadcrumb.Item>
@@ -224,7 +222,7 @@ const FranchiseViewStudents = () => {
                             variant=""
                             size="sm"
                             onClick={() =>
-                              navigate(`/admin/student/view/${data._id}`)
+                              navigate(`/franchise/student/view/${data._id}`)
                             }
                           >
                             <FaEye />

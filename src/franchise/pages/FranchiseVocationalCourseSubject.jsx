@@ -18,7 +18,7 @@ import {
   deletesubject,
   getsubjects,
   updatesubject,
-} from "../../admin/services/AdminSubjects.service";
+} from "../services/FranchiseSubjects.service";
 import AddModal from "../../admin/components/popup/AddModal";
 import DeleteModal from "../../admin/components/popup/DeleteModal";
 

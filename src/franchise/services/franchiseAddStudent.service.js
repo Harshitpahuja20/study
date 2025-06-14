@@ -5,7 +5,7 @@ const baseUrl = process.env.REACT_APP_API_URL;
 
 const ADD_STUDENT = `${baseUrl}/api/student/add`;
 const UPDATE_STUDENT = `${baseUrl}/api/student/update`;
-const VIEW_STUDENT = `${baseUrl}/api/student/view`;
+const VIEW_STUDENT = `${baseUrl}/api/student/franchise/view`;
 const DELETE_STUDENT = `${baseUrl}/api/student/delete/`;
 const GET_SINGLE_STUDENT = `${baseUrl}/api/student/view/`;
 

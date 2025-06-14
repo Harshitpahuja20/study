@@ -58,7 +58,7 @@ export const login = async (data) => {
 export const getCurrentUser = (token) => {
   return axios.get(`${GET_CURRENT_USER}`, {
     headers: {
-      Authorization: token || getAuth()?.token,
+      Authorization: token,
     },
   });
 };

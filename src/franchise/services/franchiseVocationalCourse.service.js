@@ -53,7 +53,7 @@ export const getvocationCourses = async (page = 1, filters) => {
 };
 
 export const getFranchisevocationalCourses = async () => {
-  return axios.get(`${VIEW_FRANCHISE_VOCATIONAL_COURSE}`, {
+  return axios.get(`${VIEW_VOCATIONAL_COURSE}`, {
     headers: {
       Authorization: getFranchiseAuth()?.token,
     },

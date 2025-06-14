@@ -12,7 +12,7 @@ import {
 import { FaPlus } from "react-icons/fa";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { getSingleStudent } from "../../admin/services/adminStudent.service";
+import { getSingleStudent } from "../services/franchiseAddStudent.service";
 
 const FranchiseStudentDetailsCard = () => {
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ const FranchiseStudentDetailsCard = () => {
   useEffect(() => {
     if (!id) {
       toast.error("Student Id not found!");
-      navigate("/admin/students/view");
+      navigate("/franchise/students/view");
       return;
     }
     getSingleStudentDetail();
@@ -37,13 +37,13 @@ const FranchiseStudentDetailsCard = () => {
           setStudent(res?.data?.data);
         } else {
           toast.error(res?.data?.message);
-          navigate("/admin/students/view");
+          navigate("/franchise/students/view");
         }
       })
       .catch((err) => {
         console.log(err);
         toast.error(err?.message);
-        navigate("/admin/students/view");
+        navigate("/franchise/students/view");
       })
       .finally(() => setLoading(false));
   };
@@ -61,7 +61,7 @@ const FranchiseStudentDetailsCard = () => {
   return (
     <>
       <Breadcrumb>
-        <Breadcrumb.Item href="/admin/dashboard">Home</Breadcrumb.Item>
+        <Breadcrumb.Item href="/admin/dashboard/other">Home</Breadcrumb.Item>
         <Breadcrumb.Item active className="fw-semibold">
           View Student
         </Breadcrumb.Item>
@@ -73,6 +73,11 @@ const FranchiseStudentDetailsCard = () => {
             variant="primary"
             className="px-4 fw-bold d-flex align-items-center gap-2 bg-dark border-0"
             disabled={student === null}
+            onClick={() =>
+              navigate(
+                `/admin/student/marks/${student?._id}/${student?.course?._id}`
+              )
+            }
           >
             <FaPlus className="fs-6" /> Add Marks
           </Button>
@@ -108,57 +113,79 @@ const FranchiseStudentDetailsCard = () => {
               <Table borderless size="sm" className="mb-0">
                 <tbody>
                   <tr>
-                    <td><strong>Student Name</strong></td>
+                    <td>
+                      <strong>Student Name</strong>
+                    </td>
                     <td>:</td>
                     <td>{student?.studentName || "-"}</td>
                   </tr>
                   <tr>
-                    <td><strong>Father Name</strong></td>
+                    <td>
+                      <strong>Father Name</strong>
+                    </td>
                     <td>:</td>
                     <td>{student?.fatherName || "-"}</td>
                   </tr>
                   <tr>
-                    <td><strong>Mother Name</strong></td>
+                    <td>
+                      <strong>Mother Name</strong>
+                    </td>
                     <td>:</td>
                     <td>{student?.motherName || "-"}</td>
                   </tr>
                   <tr>
-                    <td><strong>Enrollment Number</strong></td>
+                    <td>
+                      <strong>Enrollment Number</strong>
+                    </td>
                     <td>:</td>
                     <td>{student?.enrollmentId || "-"}</td>
                   </tr>
                   <tr>
-                    <td><strong>Course</strong></td>
+                    <td>
+                      <strong>Course</strong>
+                    </td>
                     <td>:</td>
                     <td>{student?.course?.name || student?.course || "-"}</td>
                   </tr>
                   <tr>
-                    <td><strong>Franchise</strong></td>
+                    <td>
+                      <strong>Franchise</strong>
+                    </td>
                     <td>:</td>
                     <td>{student?.franchiseId?.franchiseName || "-"}</td>
                   </tr>
                   <tr>
-                    <td><strong>Date Of Birth</strong></td>
+                    <td>
+                      <strong>Date Of Birth</strong>
+                    </td>
                     <td>:</td>
                     <td>{formatDOB(student?.dob)}</td>
                   </tr>
                   <tr>
-                    <td><strong>Gender</strong></td>
+                    <td>
+                      <strong>Gender</strong>
+                    </td>
                     <td>:</td>
                     <td>{student?.gender || "-"}</td>
                   </tr>
                   <tr>
-                    <td><strong>Mobile</strong></td>
+                    <td>
+                      <strong>Mobile</strong>
+                    </td>
                     <td>:</td>
                     <td>{student?.mobile || "-"}</td>
                   </tr>
                   <tr>
-                    <td><strong>Email</strong></td>
+                    <td>
+                      <strong>Email</strong>
+                    </td>
                     <td>:</td>
                     <td>{student?.email || "-"}</td>
                   </tr>
                   <tr>
-                    <td><strong>Address</strong></td>
+                    <td>
+                      <strong>Address</strong>
+                    </td>
                     <td>:</td>
                     <td>{student?.address || "-"}</td>
                   </tr>

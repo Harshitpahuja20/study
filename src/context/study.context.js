@@ -12,6 +12,7 @@ export const StudyProvider = ({ children }) => {
   const [isOther, setIsOther] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
   const token = localStorage.getItem("token");
+  const franchisetoken = localStorage.getItem("franchisetoken");
   const [streams, setStreams] = useState([]);
   const [places, setPlaces] = useState([]);
   const [universities, setUniversities] = useState({ data: [], loading: true });
@@ -20,8 +21,8 @@ export const StudyProvider = ({ children }) => {
   const [news, setNews] = useState({ data: [], loading: true });
 
   const getUser = async () => {
-    if (token) {
-      await getCurrentUser()
+    if (token || franchisetoken) {
+      await getCurrentUser(token || franchisetoken)
         .then((response) => {
           if (response?.data?.status) {
             console.log(response?.data?.data);

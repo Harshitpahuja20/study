@@ -140,7 +140,7 @@ const AdminDashboard = () => {
 
         <Col md={3} sm={6} xs={12}>
           <StatCard
-            navigate={() => navigate("/admin/collage/view")}
+            navigate={() => navigate("/admin/college/view")}
             title="colleges"
             value={data.totalColleges}
             label="Total colleges"
