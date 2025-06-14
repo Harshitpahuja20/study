@@ -10,7 +10,7 @@ const AdminLogin = () => {
   const navigate = useNavigate();
   const { setCurrentUser } = useStudy();
   const [formData, setFormData] = useState({
-    email: "admin@gmail.com",
+    userName: "admin",
     password: "admin@123",
     role: "admin",
   });
@@ -20,11 +20,9 @@ const AdminLogin = () => {
   };
 
   const handleSubmit = async () => {
-    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    const isEmail = emailRegex.test(formData.email || "");
 
-    if (!formData.email || !isEmail)
-      return toast.warning("Please enter a valid Email!");
+    if (!formData.userName)
+      return toast.warning("Please enter a valid Username!");
 
     if (!formData.password || formData.password.length < 3)
       return toast.warning("Password must contain three characters!");
@@ -33,15 +31,15 @@ const AdminLogin = () => {
       .then(async (res) => {
         if (res.data.status) {
           setFormData({
-            email: "",
+            userName: "",
             password: "",
             role: "admin",
           });
 
-          localStorage.setItem("token", res?.data?.data?.token);
           await getCurrentUser(res?.data?.data?.token).then((response) => {
             if (response?.data?.status) {
-              setCurrentUser(response?.data?.data?.data);
+              localStorage.setItem("token", res?.data?.data?.token);
+              setCurrentUser(response?.data?.data);
             }
           });
           toast.success("Login Successfully");
@@ -72,13 +70,13 @@ const AdminLogin = () => {
                   Check your all details before submit
                 </p>
                 <div className="d-flex mt-4 ff_p flex-column">
-                  <label htmlFor="EnrollmentNumber">Email</label>
+                  <label htmlFor="EnrollmentNumber">Username</label>
                   <input
                     className="mt-2 py-2 px-3"
-                    type="email"
-                    name="email"
+                    type="text"
+                    name="userName"
                     onChange={handleChange}
-                    value={formData?.email}
+                    value={formData?.userName}
                   />
                 </div>
                 <div className="d-flex mt-3 ff_p flex-column">

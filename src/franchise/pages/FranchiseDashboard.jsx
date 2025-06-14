@@ -10,8 +10,9 @@ const FranchiseDashboard = () => {
   const navigate = useNavigate();
   const [data, setData] = useState({
     totalStudents: 0,
-    totalCourses: 0,
-    totalResults: 0,
+    totalAppliedResult: 0,
+    totalResultIssued: 0,
+    balance: 0,
   });
 
   const getAdminStatistic = async () => {
@@ -44,17 +45,17 @@ const FranchiseDashboard = () => {
       <Row className="g-4">
         <Col md={3} sm={6} xs={12}>
           <StatCard
-            navigate={() => navigate("/admin/vocationalCourse/view")}
-            title="courses"
-            value={data?.totalCourses}
-            label="Total Course"
+            navigate={() => navigate("/franchise/students/view")}
+            title="students"
+            value={data?.totalStudents}
+            label="Total Students"
             color="primary"
           />
         </Col>
 
         <Col md={3} sm={6} xs={12}>
           <StatCard
-            navigate={() => navigate("/admin/franchise/view")}
+            navigate={() => navigate("/franchise/dashboard")}
             title="wallet"
             value={currentUser?.balance || 0}
             label="wallet balance"
@@ -64,20 +65,20 @@ const FranchiseDashboard = () => {
 
         <Col md={3} sm={6} xs={12}>
           <StatCard
-            navigate={() => navigate("/admin/students/view")}
-            title="students"
-            value={data?.totalStudents}
-            label="Total Students"
+            navigate={() => navigate("/franchise/dashboard")}
+            title="Certificate Requests"
+            value={data?.totalAppliedResult}
+            label="Not Issued To Student "
             color="warning"
           />
         </Col>
 
         <Col md={3} sm={6} xs={12}>
           <StatCard
-            navigate={() => navigate("/admin/results")}
-            title="results"
-            value={data?.totalResults}
-            label="total results"
+            navigate={() => navigate("/franchise/dashboard")}
+            title="Certificate Issued"
+            value={data?.totalResultIssued}
+            label="Total Certificate Issued"
             color="info"
           />
         </Col>

@@ -120,7 +120,7 @@ const AdminNavbar = () => {
                         className="d-flex align-items-center gap-2 clr_theme small p-0 border-0 shadow-none"
                       >
                         <span className="mb-0 fs_14 fw-semibold text-end">
-                          {currentUser?.fullName} <br /> {currentUser?.email}
+                          {currentUser?.franchiseName} <br /> {currentUser?.email}
                         </span>
                         <FaUserCircle size={34} />
                       </Dropdown.Toggle>

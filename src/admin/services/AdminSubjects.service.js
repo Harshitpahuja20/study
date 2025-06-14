@@ -32,6 +32,14 @@ export const getsubjects = async (id) => {
   });
 };
 
+export const getStudentwithSubjects = async (id , studentId) => {
+  return axios.get(`${VIEW_SUBJECT}/${id}/${studentId}`, {
+    headers: {
+      Authorization: getAuth()?.token,
+    },
+  });
+};
+
 export const deletesubject = async (id) => {
   return axios.delete(`${DELETE_SUBJECT}${id}`, {
     headers: {

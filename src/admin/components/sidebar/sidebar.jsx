@@ -91,7 +91,7 @@ function Sidebar({ isSidebarOpen }) {
     },
     {
       to: "/admin/franchiseRequests",
-      label: "Franchise Requests",
+      label: "Center Requests",
       icon: <FaHandshake />,
     },
     {
@@ -218,13 +218,13 @@ function Sidebar({ isSidebarOpen }) {
               );
             })}
             <DropdownMenu
-              label="Franchise"
+              label="Center"
               icon={<MdDeviceHub />}
               items={[
-                { to: "/admin/franchise/add", label: "Add Franchise" },
-                { to: "/admin/franchise/view", label: "All Franchise" },
+                { to: "/admin/center/add", label: "Add Center" },
+                { to: "/admin/center/view", label: "All Centers" },
               ]}
-              basePath="/admin/franchise/add"
+              basePath="/admin/center/add"
             />
             <DropdownMenu
               label="Manage Students"
@@ -245,15 +245,15 @@ function Sidebar({ isSidebarOpen }) {
               ]}
               basePath="/admin/vocationalCourse/add"
             />
-            <Link
-              to={"/admin/results"}
-              className={`d-flex rounded align-items-center px-3 py-2 mt-2 text-decoration-none text-white sidebar-link small-text ${
-                location.pathname === "/admin/results" ? "bg-secondary" : "bg-dark"
-              }`}
-            >
-              <span className="me-3">{<BsFillFileEarmarkSpreadsheetFill/>}</span>
-              Results
-            </Link>
+            <DropdownMenu
+              label="Results"
+              icon={<IoBookSharp />}
+              items={[
+                { to: "/admin/results/issue", label: "Issue Result" },
+                { to: "/admin/results", label: "Delete Result" },
+              ]}
+              basePath="/admin/results/issue"
+            />
           </>
         )}
 

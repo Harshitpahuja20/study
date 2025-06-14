@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Breadcrumb, Col, Container, Form, Row } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
-import { getsubjects } from "../services/AdminSubjects.service";
+import {
+  getStudentwithSubjects,
+  getsubjects,
+} from "../services/AdminSubjects.service";
 import { toast } from "react-toastify";
 import { addStudentMarks } from "../services/adminStudent.service";
 
@@ -11,20 +14,23 @@ const AdminAddMarks = () => {
   const [loading, setLoading] = useState(false);
   const [dataLoading, setDataLoading] = useState(false);
   const [tableData, setTableData] = useState([]);
+  const [studentData, setStudentData] = useState(null);
   const [issueDate, setIssueDate] = useState(null);
+  const [duration, setDuration] = useState("45 Days");
 
   const fetchData = async () => {
     setDataLoading(true);
-    const response = await getsubjects(courseId);
+    const response = await getStudentwithSubjects(courseId, studentId);
     if (response.data.status) {
-      const formattedData = response?.data?.data?.map((item) => ({
+      const formattedData = response?.data?.data?.subjects?.map((item) => ({
         ...item,
         status: "P",
-        theoryMarks: "20",
-        practicalMarks: "20",
+        theoryMarks: "25",
+        practicalMarks: "25",
       }));
 
       setTableData(formattedData);
+      setStudentData(response?.data?.data?.student);
     } else {
       toast.error("Something went wrong!");
     }
@@ -66,6 +72,7 @@ const AdminAddMarks = () => {
         courseId,
         marks: JSON.stringify(tableData),
         issueDate,
+        duration,
       };
 
       setLoading(true);
@@ -73,7 +80,7 @@ const AdminAddMarks = () => {
       const res = await addStudentMarks(data);
       if (res.data.status) {
         toast.success("Marks Added Successfully");
-        navigate("/admin/students/view");
+        navigate("/admin/results/issue");
       } else {
         toast.error(res?.data?.message || "Failed to add marks");
       }
@@ -85,15 +92,77 @@ const AdminAddMarks = () => {
     }
   };
 
+  function getFormattedDate(date) {
+      const today = new Date(date);
+      const dd = String(today.getDate()).padStart(2, '0');
+      const mm = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+      const yyyy = today.getFullYear();
+      return `${dd}/${mm}/${yyyy}`;
+    }
+
   return (
     <div>
       <Breadcrumb>
         <Breadcrumb.Item href="/admin/dashboard/other">Home</Breadcrumb.Item>
-        <Breadcrumb.Item active>Add Student Marks</Breadcrumb.Item>
+        <Breadcrumb.Item active>Issue Result</Breadcrumb.Item>
       </Breadcrumb>
 
       <Container fluid className="bg-light rounded mt-4 p-3">
-        {tableData?.length &&
+        <h5 className="mb-4">Issue Result</h5>
+        <Form>
+          <Form.Group as={Row} className="mb-3" controlId="enrollmentNumber">
+            <Form.Label column sm={3}>
+              Enrollment Number
+            </Form.Label>
+            <Col sm={9}>
+              <Form.Control type="text" value={studentData?.enrollmentId} readOnly />
+            </Col>
+          </Form.Group>
+
+          <Form.Group as={Row} className="mb-3" controlId="studentName">
+            <Form.Label column sm={3}>
+              Student Name
+            </Form.Label>
+            <Col sm={9}>
+              <Form.Control type="text" value={studentData?.studentName} readOnly />
+            </Col>
+          </Form.Group>
+
+          <Form.Group as={Row} className="mb-3" controlId="fatherName">
+            <Form.Label column sm={3}>
+              Father Name
+            </Form.Label>
+            <Col sm={9}>
+              <Form.Control type="text" value={studentData?.fatherName} readOnly />
+            </Col>
+          </Form.Group>
+
+          <Form.Group as={Row} className="mb-3" controlId="dob">
+            <Form.Label column sm={3}>
+              Date of Birth
+            </Form.Label>
+            <Col sm={9}>
+              <Form.Control type="text" value={getFormattedDate(studentData?.dob)} readOnly />
+            </Col>
+          </Form.Group>
+
+          <Form.Group as={Row} className="mb-3" controlId="courseName">
+            <Form.Label column sm={3}>
+              Course Name
+            </Form.Label>
+            <Col sm={9}>
+              <Form.Control
+                type="text"
+                value={`${studentData?.course?.name} (${studentData?.course?.duration})`}
+                readOnly
+              />
+            </Col>
+          </Form.Group>
+        </Form>
+      </Container>
+
+      <Container fluid className="bg-light rounded mt-4 p-3">
+        {tableData?.length > 0 ?
           tableData?.map((item, index) => {
             return (
               <Row className="mb-3">
@@ -166,7 +235,7 @@ const AdminAddMarks = () => {
                 </Col>
               </Row>
             );
-          })}
+          }) : <div className="fw-semibold text-center my-4">No Subjects Added to this Course Currently! <br /> Please add subjects firstly!</div>}
 
         <Row>
           <Form.Group controlId="input4">
@@ -178,6 +247,23 @@ const AdminAddMarks = () => {
               value={issueDate}
               onChange={(e) => setIssueDate(e?.target?.value)}
             />
+          </Form.Group>
+          <Form.Group controlId="input4">
+            <Form.Label className="fw-semibold small">Duration</Form.Label>
+            <Form.Control
+              as="select"
+              name="duration"
+              value={duration}
+              onChange={(e) => setDuration(e.target?.value)}
+              className="p-2"
+            >
+              <option value="45 Days">45 Days</option>
+              <option value="3 month">3 month</option>
+              <option value="6 Month">6 Month</option>
+              <option value="1 Year">1 Year</option>
+              <option value="2 Year">2 Year</option>
+              <option value="3 Year">3 Year</option>
+            </Form.Control>
           </Form.Group>
         </Row>
 

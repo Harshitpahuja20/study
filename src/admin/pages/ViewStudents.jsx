@@ -172,13 +172,15 @@ const AdminViewStudents = () => {
             <thead className="bg-dark text-white">
               <tr>
                 <th className="ps-4 py-3 bg-dark text-white">Sr. No.</th>
-                <th className="bg-dark text-white py-3 ">Profile</th>
-                <th className="bg-dark text-white py-3 ">Details</th>
-                <th className="bg-dark text-white py-3 ">Subject / Comment</th>
+                <th className="bg-dark text-white py-3 ">Image</th>
+                <th className="bg-dark text-white py-3">Reg No</th>
+                <th className="bg-dark text-white py-3 ">Student Details</th>
+                <th className="bg-dark text-white py-3 ">Guardian</th>
+                <th className="bg-dark text-white py-3 ">Contact</th>
                 <th className="bg-dark text-white py-3 text-center">Action</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="small-text">
               {!dataLoading ? (
                 tableData.length ? (
                   tableData.map((data, index) => (
@@ -196,30 +198,62 @@ const AdminViewStudents = () => {
                         )}
                       </td>
                       <td>
-                        {data?.studentName}
+                        <span className="fw-semibold"> Reg No. : </span>{" "}
+                        {data?.enrollmentId}
                         <br />
-                        {data?.mobile}
-                        <br />
-                        {data?.email}
-                      </td>
-                      <td>
+                        <span className="fw-semibold">
+                          {" "}
+                          Course Name :{" "}
+                        </span>{" "}
                         {data?.vocationalCourse?.name}
                         <br />
-                        {data?.vocationalCourse?.duration}
+                        <span className="fw-semibold"> Session : </span>{" "}
+                        {data?.session}
+                      </td>
+                      <td>
+                        <span className="fw-semibold"> Student Name : </span>{" "}
+                        {data?.studentName}
                         <br />
-                        {data?.vocationalCourse?.code}
+                        <span className="fw-semibold"> Gender. : </span>{" "}
+                        {data?.gender}
+                        <br />
+                        <span className="fw-semibold"> D.O.B : </span>{" "}
+                        {formatDOBForInput(data?.dob)}
+                      </td>
+                      <td>
+                        <span className="fw-semibold"> Father Name : </span>{" "}
+                        {data?.fatherName}
+                        <br />
+                        <span className="fw-semibold">
+                          {" "}
+                          Mother Name :{" "}
+                        </span>{" "}
+                        {data?.motherName}
+                      </td>
+                      <td>
+                        <span className="fw-semibold"> Phone : </span>{" "}
+                        {data?.mobile}
+                        <br />
+                        <span className="fw-semibold"> Email : </span>{" "}
+                        {data?.email}
+                        <hr />
+                        <span className="fw-semibold">
+                          {" "}
+                          Center Code :{" "}
+                        </span>{" "}
+                        {data?.franchise?.userName}
+                        <br />
+                        <span className="fw-semibold"> Email : </span>{" "}
+                        {data?.result === "pending"
+                          ? "NOT APPLIED"
+                          : data?.result === "apply"
+                          ? "APPLIED"
+                          : data?.result === "done"
+                          ? "ISSUED"
+                          : "-"}
                       </td>
                       <td className="text-center">
                         <div className="d-flex justify-content-center gap-2">
-                          <Button
-                            variant=""
-                            size="sm"
-                            onClick={() =>
-                              navigate(`/admin/student/view/${data._id}`)
-                            }
-                          >
-                            <FaEye />
-                          </Button>
                           <Button
                             variant=""
                             size="sm"

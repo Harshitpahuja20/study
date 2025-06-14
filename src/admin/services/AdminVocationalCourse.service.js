@@ -6,7 +6,7 @@ const baseUrl = process.env.REACT_APP_API_URL;
 const ADD_VOCATIONAL_COURSE = `${baseUrl}/api/vocationalCourse/add`;
 const UPDATE_VOCATIONAL_COURSE = `${baseUrl}/api/vocationalCourse/update`;
 const VIEW_VOCATIONAL_COURSE = `${baseUrl}/api/vocationalCourse/view`;
-const VIEW_FRANCHISE_VOCATIONAL_COURSE = `${baseUrl}/api/vocationalCourse/franchise/view`;
+const VIEW_FRANCHISE_VOCATIONAL_COURSE = `${baseUrl}/api/vocationalCourse/view`;
 const DELETE_VOCATIONAL_COURSE = `${baseUrl}/api/vocationalCourse/delete/`;
 
 export const addvocationCourse = async (data) => {

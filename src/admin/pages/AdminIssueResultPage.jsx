@@ -3,9 +3,9 @@ import { Breadcrumb, Row, Spinner, Table, Button } from "react-bootstrap";
 import ReactPaginate from "react-paginate";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { getFranchisevocationalCourses } from "../services/franchiseVocationalCourse.service";
+import { getStudentsForResults } from "../services/adminStudent.service";
 
-const ViewFranchiseVocationalCourse = () => {
+const AdminIssueResultPage = () => {
   const navigate = useNavigate();
   const [tableData, setTableData] = useState([]);
   const [pagination, setPagination] = useState({
@@ -14,18 +14,9 @@ const ViewFranchiseVocationalCourse = () => {
   });
   const [dataLoading, setDataLoading] = useState(false);
 
-  const durations = [
-    "3 MONTH",
-    "6 MONTH",
-    "1 YEAR",
-    "2 YEAR",
-    "3 YEAR",
-    "4 YEAR",
-  ];
-
   const fetchData = async (page) => {
     setDataLoading(true);
-    const response = await getFranchisevocationalCourses();
+    const response = await getStudentsForResults(page);
     if (response.data.status) {
       setTableData(response.data.data || []);
     } else {
@@ -44,12 +35,22 @@ const ViewFranchiseVocationalCourse = () => {
     fetchData(1);
   }, []);
 
+  function getFormattedDate(isoString) {
+    const date = new Date(isoString);
+    const options = {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+    };
+    return date.toLocaleDateString("en-US", options);
+  }
+
   return (
     <div className="p-3">
       <Breadcrumb>
         <Breadcrumb.Item href="/admin/dashboard">Home</Breadcrumb.Item>
         <Breadcrumb.Item active className="fw-semibold">
-          All Vocational Courses
+          Issue Result
         </Breadcrumb.Item>
       </Breadcrumb>
 
@@ -58,13 +59,12 @@ const ViewFranchiseVocationalCourse = () => {
           <Table hover responsive className="align-middle mb-0">
             <thead className="bg-dark text-white">
               <tr>
-                <th className="ps-4 py-3 bg-dark text-white">Sr. No.</th>
+                <th className="ps-4 py-3 bg-dark text-white">Reg. No</th>
+                <th className="py-3 bg-dark text-white">Name</th>
+                <th className="py-3 bg-dark text-white">Father Name</th>
+                <th className="py-3 bg-dark text-white">Date Of Birth</th>
                 <th className="py-3 bg-dark text-white">Course Name</th>
-                <th className="py-3 bg-dark text-white">Duration</th>
-                <th className="py-3 bg-dark text-white">Mode</th>
-                <th className="py-3 bg-dark text-white">Code</th>
-                <th className="py-3 bg-dark text-white">Amount</th>
-                <th className="py-3 bg-dark text-white">Subjects</th>
+                <th className="py-3 bg-dark text-white">Action</th>
               </tr>
             </thead>
             {!dataLoading ? (
@@ -72,30 +72,20 @@ const ViewFranchiseVocationalCourse = () => {
                 {tableData.length > 0 ? (
                   tableData.map((data, index) => (
                     <tr key={data._id}>
-                      <td className="ps-4 py-3">{index + 1}</td>
-                      <td className="py-3">{data.name}</td>
-                      <td className="py-3">{data.duration}</td>
-                      <td className="py-3">{data.mode}</td>
-                      <td className="py-3">{data.code}</td>
-                      <td className="py-3">{data.amount}</td>
+                      <td className="ps-4 py-3">{data.enrollmentId}</td>
+                      <td className="py-3">{data.studentName}</td>
+                      <td className="py-3">{data.fatherName}</td>
+                      <td className="py-3">{getFormattedDate(data?.dob)}</td>
+                      <td className="py-3">{`${data?.vocationalCourse?.name} (${data?.vocationalCourse?.duration}) `}</td>
                       <td className="py-3">
                         <Button
                           variant="outline-primary"
                           size="sm"
-                          onClick={() => {
-                            navigate("/franchise/vocationalCourse/subject/details", {
-                              state: {
-                                id: data?._id,
-                                name: data?.name,
-                              },
-                            });
-                            // navigation/modal can go here
-                          }}
+                          onClick={()=>navigate(`/admin/student/marks/${data?._id}/${data?.vocationalCourse?._id}`)}
                         >
-                          View Subjects
+                          Issue Result
                         </Button>
                       </td>
-                      
                     </tr>
                   ))
                 ) : (
@@ -143,9 +133,8 @@ const ViewFranchiseVocationalCourse = () => {
           </div>
         )}
       </Row>
-
     </div>
   );
 };
 
-export default ViewFranchiseVocationalCourse;
+export default AdminIssueResultPage;

@@ -65,6 +65,11 @@ import AdminStreamAttach from "./admin/pages/AdminStreamAttach";
 import AdminAddMarks from "./admin/pages/AdminAddMarks";
 import AdminResults from "./admin/pages/AdminResults";
 import ViewSingleStudentMarks from "./admin/pages/ViewSingleStudentMarks";
+import FranchiseApplyResult from "./franchise/pages/FranchiseApplyResult";
+import FranchiseWallet from "./franchise/pages/FranchiseWallet";
+import FranchiseWalletTopUp from "./franchise/pages/franchiseWalletTopUp";
+import FranchiseWalletTransactions from "./franchise/pages/FranchiseWalletTransactions";
+import AdminIssueResultPage from "./admin/pages/AdminIssueResultPage";
 
 function App() {
   const { isEnquiryPopup, setIsEnquiryPopup, currentUser } = useStudy();
@@ -179,8 +184,9 @@ function App() {
           <Route path="course/main" element={<AddMainCourse />} />
           <Route path="course/sub/add/:id" element={<AddSubCourse />} />
           <Route path="course/sub" element={<AdminViewSubCourses />} />
-          <Route path="franchise/add" element={<AdminAddFranchise />} />
+          <Route path="center/add" element={<AdminAddFranchise />} />
           <Route path="results" element={<AdminResults />} />
+          <Route path="results/issue" element={<AdminIssueResultPage />} />
           <Route path="results/:id" element={<ViewSingleStudentMarks />} />
           <Route
             path="vocationalCourse/add"
@@ -194,7 +200,7 @@ function App() {
             path="vocationalCourse/subject/details"
             element={<FranchiseVocationalCourseSubject />}
           />
-          <Route path="franchise/view" element={<AdminViewFranchise />} />
+          <Route path="center/view" element={<AdminViewFranchise />} />
           <Route
             path="franchise/view/:id"
             element={<AdminViewSingleFranchise />}
@@ -225,10 +231,14 @@ function App() {
           }
         >
           <Route path="dashboard" element={<FranchiseDashobard />} />
-          <Route
+          <Route path="results" element={<FranchiseApplyResult />} />
+          <Route path="wallet" element={<FranchiseWallet />} />
+          <Route path="wallet/topup" element={<FranchiseWalletTopUp />} />
+          <Route path="wallet/transactions" element={<FranchiseWalletTransactions />} />
+          {/* <Route
             path="vocationalCourse/add"
             element={<AddFranchiseVocationalCourse />}
-          />
+          /> */}
           <Route
             path="vocationalCourse/view"
             element={<ViewFranchiseVocationalCourse />}
@@ -239,7 +249,7 @@ function App() {
           />
 
           <Route path="students/add" element={<AddFranchiseStudent />} />
-           <Route
+          <Route
             path="student/marks/:studentId/:courseId"
             element={<FranchiseAddMarks />}
           />

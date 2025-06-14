@@ -5,6 +5,7 @@ const baseUrl = process.env.REACT_APP_API_URL;
 
 const ADD_STUDENT = `${baseUrl}/api/student/add`;
 const UPDATE_STUDENT = `${baseUrl}/api/student/update`;
+const APPLY_RESULT_STUDENT = `${baseUrl}/api/student/applyResult`;
 const VIEW_STUDENT = `${baseUrl}/api/student/franchise/view`;
 const DELETE_STUDENT = `${baseUrl}/api/student/delete/`;
 const GET_SINGLE_STUDENT = `${baseUrl}/api/student/view/`;
@@ -41,8 +42,8 @@ export const getStudents = async (page = 1, filters) => {
   if (filters?.status) {
     params.append("status", filters.status);
   }
-  if (filters?.userId) {
-    params.append("userId", filters.userId);
+  if (filters?.type) {
+    params.append("type", filters.type);
   }
 
   return axios.get(`${VIEW_STUDENT}?${params.toString()}`, {
@@ -62,6 +63,14 @@ export const getSingleStudent = async (id) => {
 
 export const deleteStudent = async (id) => {
   return axios.delete(`${DELETE_STUDENT}${id}`, {
+    headers: {
+      Authorization: getFranchiseAuth()?.token,
+    },
+  });
+};
+
+export const applyResult = async (data) => {
+  return axios.put(`${APPLY_RESULT_STUDENT}`, data, {
     headers: {
       Authorization: getFranchiseAuth()?.token,
     },

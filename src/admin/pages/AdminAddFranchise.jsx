@@ -6,11 +6,11 @@ import { toast } from "react-toastify";
 const AdminAddFranchise = () => {
   const [formData, setFormData] = useState({
     franchiseName: "",
-    fullName: "",
+    city: "",
     phoneNumber: "",
     email: "",
     franchiseCode: "",
-    password: "",
+    state: "",
     address: "",
   });
   const [loading, setLoading] = useState(false);
@@ -35,11 +35,11 @@ const AdminAddFranchise = () => {
 
     const requiredFields = [
       "franchiseName",
-      "fullName",
+      "city",
       "phoneNumber",
       "email",
       "franchiseCode",
-      "password",
+      "state",
       "address",
     ];
 
@@ -59,12 +59,12 @@ const AdminAddFranchise = () => {
     // ✅ Manually append each field to FormData
     const submissionData = new FormData();
     submissionData.append("franchiseName", formData.franchiseName);
-    submissionData.append("fullName", formData.fullName);
+    submissionData.append("city", formData.city);
     submissionData.append("phoneNumber", formData.phoneNumber);
     submissionData.append("email", formData.email);
     submissionData.append("franchiseProfile", file);
     submissionData.append("franchiseCode", formData.franchiseCode);
-    submissionData.append("password", formData.password);
+    submissionData.append("state", formData.state);
     submissionData.append("address", formData.address);
     submissionData.append("role", "franchise");
 
@@ -75,11 +75,11 @@ const AdminAddFranchise = () => {
           toast.success("Added Successfully");
           setFormData({
             franchiseName: "",
-            fullName: "",
+            city: "",
             phoneNumber: "",
             email: "",
             franchiseCode: "",
-            password: "",
+            state: "",
             address: "",
           });
           setFile(null);
@@ -107,15 +107,13 @@ const AdminAddFranchise = () => {
         <Row className="mb-3">
           <Col md={6} sm={12}>
             <Form.Group>
-              <Form.Label className="small fw-semibold">
-                Franchise Name
-              </Form.Label>
+              <Form.Label className="small fw-semibold">Center Name</Form.Label>
               <Form.Control
                 type="text"
                 name="franchiseName"
                 value={formData.franchiseName}
                 onChange={handleChange}
-                placeholder="Enter franchise name"
+                placeholder="Enter center name"
                 className="py-3 bg-transparent"
               />
             </Form.Group>
@@ -123,13 +121,13 @@ const AdminAddFranchise = () => {
 
           <Col md={6} sm={12}>
             <Form.Group>
-              <Form.Label className="small fw-semibold">Full Name</Form.Label>
+              <Form.Label className="small fw-semibold">Email</Form.Label>
               <Form.Control
-                type="text"
-                name="fullName"
-                value={formData.fullName}
+                type="email"
+                name="email"
+                value={formData.email}
                 onChange={handleChange}
-                placeholder="Enter full name"
+                placeholder="Enter email"
                 className="py-3 bg-transparent"
               />
             </Form.Group>
@@ -155,13 +153,13 @@ const AdminAddFranchise = () => {
 
           <Col md={6} sm={12}>
             <Form.Group>
-              <Form.Label className="small fw-semibold">Email</Form.Label>
+              <Form.Label className="small fw-semibold">City</Form.Label>
               <Form.Control
-                type="email"
-                name="email"
-                value={formData.email}
+                type="text"
+                name="city"
+                value={formData.city}
                 onChange={handleChange}
-                placeholder="Enter email"
+                placeholder="Enter full name"
                 className="py-3 bg-transparent"
               />
             </Form.Group>
@@ -202,13 +200,13 @@ const AdminAddFranchise = () => {
         <Row className="mb-3">
           <Col md={6} sm={12}>
             <Form.Group>
-              <Form.Label className="small fw-semibold">Password</Form.Label>
+              <Form.Label className="small fw-semibold">State</Form.Label>
               <Form.Control
-                type="password"
-                name="password"
-                value={formData.password}
+                type="text"
+                name="state"
+                value={formData.state}
                 onChange={handleChange}
-                placeholder="Enter password"
+                placeholder="Enter state"
                 className="py-3 bg-transparent"
               />
             </Form.Group>

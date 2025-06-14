@@ -1,10 +1,25 @@
 import React, { useEffect, useState } from "react";
-import { Breadcrumb, Row, Spinner, Table, Button } from "react-bootstrap";
+import {
+  Breadcrumb,
+  Row,
+  Spinner,
+  Table,
+  Button,
+  Form,
+  Col,
+} from "react-bootstrap";
 import ReactPaginate from "react-paginate";
 import { toast } from "react-toastify";
-import { FaEye } from "react-icons/fa";
-import { getFranchises } from "../services/adminFranchise.service";
+import { FaEdit, FaEye, FaTrash } from "react-icons/fa";
+import {
+  deleteFranchise,
+  getFranchises,
+  updateFranchise,
+} from "../services/adminFranchise.service";
 import { useNavigate } from "react-router-dom";
+import DeleteModal from "../components/popup/DeleteModal";
+import AddModal from "../components/popup/AddModal";
+import { FaPencil } from "react-icons/fa6";
 
 const AdminViewFranchise = () => {
   const navigate = useNavigate();
@@ -14,25 +29,11 @@ const AdminViewFranchise = () => {
     totalPages: 1,
   });
   const [dataLoading, setDataLoading] = useState(false);
-  const [filters, setFilters] = useState({
-    dateRange: [null, null],
-    status: "",
-  });
-
-  function getFormattedDate(isoString) {
-    const date = new Date(isoString);
-    const options = {
-      day: "2-digit",
-      month: "long",
-      year: "numeric",
-    };
-    return date.toLocaleDateString("en-US", options);
-  }
-
-  const handlePageClick = (event) => {
-    const newPage = event.selected + 1; // ReactPaginate is zero-based
-    setPagination((prev) => ({ ...prev, currentPage: newPage }));
-  };
+  const [loading, setLoading] = useState(false);
+  const [editFormData, setEditFormData] = useState(null);
+  const [file, setFile] = useState(null);
+  const [isEditPopup, setIsEditPopup] = useState(false);
+  const [isDeletePopup, setIsDeletePopup] = useState(false);
 
   useEffect(() => {
     fetchData(1);
@@ -40,7 +41,7 @@ const AdminViewFranchise = () => {
 
   const fetchData = async (page) => {
     setDataLoading(true);
-    const response = await getFranchises(page, filters);
+    const response = await getFranchises(page, {});
     if (response.data.status) {
       setDataLoading(false);
       setTableData(response.data.data);
@@ -54,12 +55,90 @@ const AdminViewFranchise = () => {
     }
   };
 
+  const handleDelete = async (e) => {
+    try {
+      if (editFormData?._id) {
+        await deleteFranchise(editFormData?._id).then((response) => {
+          if (response.data.status) {
+            toast.success(response.data.message);
+            navigate("/admin/franchise/view");
+          } else {
+            toast.error(response.data.message);
+          }
+        });
+      }
+    } catch (error) {
+      toast.error("Something went wrong!");
+    }
+  };
+
+  const handleEditSubmit = async (e) => {
+    e.preventDefault();
+
+    const requiredFields = [
+      "franchiseName",
+      "state",
+      "city",
+      "phoneNumber",
+      "email",
+      "address",
+    ];
+
+    for (const field of requiredFields) {
+      const value = editFormData[field];
+      if (!value) {
+        const fieldLabel = field
+          .replace(/([A-Z])/g, " $1")
+          .replace(/^./, (char) => char.toUpperCase());
+
+        toast.warning(`Please fill in the ${fieldLabel}`);
+        return;
+      }
+    }
+
+    setLoading(true);
+
+    const submissionData = new FormData();
+    submissionData.append("id", editFormData._id);
+    submissionData.append("franchiseName", editFormData.franchiseName);
+    submissionData.append("fullName", editFormData.fullName);
+    submissionData.append("phoneNumber", editFormData.phoneNumber);
+    submissionData.append("email", editFormData.email);
+    if (file) {
+      submissionData.append("franchiseProfile", file);
+    }
+    submissionData.append("franchiseCode", editFormData.franchiseCode);
+    submissionData.append("password", editFormData.password);
+    submissionData.append("address", editFormData.address);
+    submissionData.append("state", editFormData.state);
+    submissionData.append("city", editFormData.city);
+
+    await updateFranchise(submissionData)
+      .then((res) => {
+        setLoading(false);
+        if (res.data.status) {
+          fetchData();
+          toast.success("Updated Successfully");
+          setEditFormData(null);
+          setFile(null);
+          setIsEditPopup(false);
+        } else {
+          toast.error(res?.data?.message);
+        }
+      })
+      .catch((err) => {
+        setLoading(false);
+        toast.error("Something went wrong!");
+        console.log(`err : ${err?.message}`);
+      });
+  };
+
   return (
     <div className="p-3">
       <Breadcrumb>
         <Breadcrumb.Item href="/admin/dashboard/other">Home</Breadcrumb.Item>
         <Breadcrumb.Item active className="fw-semibold">
-          View Franchise
+          View Centers
         </Breadcrumb.Item>
       </Breadcrumb>
 
@@ -68,11 +147,12 @@ const AdminViewFranchise = () => {
           <Table hover responsive className="align-middle mb-0">
             <thead className="bg-dark text-white">
               <tr className="bg-dark text-white">
-                <th className="ps-4 py-3 bg-dark text-white">Sr. No.</th>
-                <th className="py-3 bg-dark text-white">Franchise Name</th>
-                <th className="py-3 bg-dark text-white">Name</th>
-                <th className="py-3 bg-dark text-white">Phone</th>
-                <th className="py-3 bg-dark text-white">Email</th>
+                <th className="ps-4 py-3 bg-dark text-white">
+                  UserName / Password
+                </th>
+                <th className="py-3 bg-dark text-white">Center Code</th>
+                <th className="py-3 bg-dark text-white">Center Details</th>
+                <th className="py-3 bg-dark text-white">Address</th>
                 <th className="py-3 bg-dark text-white text-center">Action</th>
               </tr>
             </thead>
@@ -81,15 +161,43 @@ const AdminViewFranchise = () => {
                 {tableData?.length > 0 ? (
                   tableData.map((data, index) => (
                     <tr key={index}>
-                      <td className="ps-4 py-3">{index + 1}</td>
-                      <td className=" py-3">{data?.franchiseName}</td>
-                      <td className=" py-3">{data?.fullName}</td>
-                      <td className=" py-3">{data?.phoneNumber}</td>
-                      <td className=" py-3">{data?.email}</td>
+                      <td className="ps-4 py-3">
+                        <strong className="text-info">{data?.userName}</strong>{" "}
+                        <br /> <span className="fw-semibold">Password :</span>{" "}
+                        {data?.userName}
+                      </td>
+                      <td className=" py-3">{data?.franchiseCode}</td>
+                      <td className=" py-3">
+                        <strong className="text-danger">
+                          {data?.franchiseName}
+                        </strong>{" "}
+                        <br /> ({data?.phoneNumber})
+                      </td>
+                      <td className=" py-3">
+                        {data?.address}
+                        <br /> {`${data?.city} - ${data?.state}`}
+                      </td>
                       <td className="text-center py-3">
                         <div className="d-flex justify-content-center">
-                          <Button variant="" size="sm" onClick={()=>navigate(`/admin/franchise/view/${data?._id}`)}>
-                            <FaEye />
+                          <Button
+                            variant=""
+                            size="sm"
+                            onClick={() => {
+                              setIsEditPopup(true);
+                              setEditFormData(data);
+                            }}
+                          >
+                            <FaPencil />
+                          </Button>
+                          <Button
+                            variant=""
+                            size="sm"
+                            onClick={() => {
+                              setIsDeletePopup(true);
+                              setEditFormData(data);
+                            }}
+                          >
+                            <FaTrash />
                           </Button>
                         </div>
                       </td>
@@ -114,33 +222,171 @@ const AdminViewFranchise = () => {
             )}
           </Table>
         </div>
-
-        {/* Pagination */}
-        <div className="d-flex justify-content-center mt-3">
-          {pagination?.totalPages > 1 && (
-            <ReactPaginate
-              breakLabel="..."
-              nextLabel="Next"
-              previousLabel="Prev"
-              onPageChange={handlePageClick}
-              pageCount={pagination.totalPages}
-              forcePage={pagination.currentPage - 1} // Sync with state
-              pageRangeDisplayed={3}
-              marginPagesDisplayed={2}
-              containerClassName="pagination justify-content-center mt-4"
-              pageClassName="page-item"
-              pageLinkClassName="page-link rounded px-3 py-2 border-0 shadow-sm"
-              previousClassName="page-item"
-              previousLinkClassName="page-link rounded px-3 py-2 border-0 shadow-sm"
-              nextClassName="page-item"
-              nextLinkClassName="page-link rounded px-3 py-2 border-0 shadow-sm"
-              breakClassName="page-item"
-              breakLinkClassName="page-link rounded px-3 py-2 border-0 shadow-sm"
-              activeClassName="active bg-primary text-white"
-            />
-          )}
-        </div>
       </Row>
+
+      {/* ✅ Edit Modal using your AddModal */}
+      <AddModal
+        show={isEditPopup}
+        handleClose={() => {
+          setIsEditPopup(false);
+          setEditFormData(null);
+        }}
+        isUpdate={true}
+        title="Update Franchise"
+        loading={loading}
+        size="lg"
+        content={
+          <Form>
+            <Row className="mb-3">
+              <Col md={6}>
+                <Form.Group>
+                  <Form.Label className="small fw-semibold">
+                    Franchise Name
+                  </Form.Label>
+                  <Form.Control
+                    className="py-2"
+                    type="text"
+                    name="franchiseName"
+                    value={editFormData?.franchiseName || ""}
+                    onChange={(e) =>
+                      setEditFormData((prev) => ({
+                        ...prev,
+                        [e.target.name]: e.target.value,
+                      }))
+                    }
+                  />
+                </Form.Group>
+              </Col>
+              <Col md={6}>
+                <Form.Group>
+                  <Form.Label className="small fw-semibold">Email</Form.Label>
+                  <Form.Control
+                    className="py-2"
+                    type="email"
+                    name="email"
+                    value={editFormData?.email || ""}
+                    onChange={(e) =>
+                      setEditFormData((prev) => ({
+                        ...prev,
+                        [e.target.name]: e.target.value,
+                      }))
+                    }
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
+            <Row className="mb-3">
+              <Col md={6}>
+                <Form.Group>
+                  <Form.Label className="small fw-semibold">
+                    State
+                  </Form.Label>
+                  <Form.Control
+                    className="py-2"
+                    type="text"
+                    name="state"
+                    value={editFormData?.state || ""}
+                    onChange={(e) =>
+                      setEditFormData((prev) => ({
+                        ...prev,
+                        [e.target.name]: e.target.value,
+                      }))
+                    }
+                  />
+                </Form.Group>
+              </Col>
+              <Col md={6}>
+                <Form.Group>
+                  <Form.Label className="small fw-semibold">
+                    Mobile Number
+                  </Form.Label>
+                  <Form.Control
+                    className="py-2"
+                    type="tel"
+                    name="phoneNumber"
+                    value={editFormData?.phoneNumber || ""}
+                    onChange={(e) =>
+                      setEditFormData((prev) => ({
+                        ...prev,
+                        [e.target.name]: e.target.value,
+                      }))
+                    }
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
+
+            <Row className="mb-3">
+              <Col md={6}>
+                <Form.Group>
+                  <Form.Label className="small fw-semibold">
+                    Franchise Code
+                  </Form.Label>
+                  <Form.Control
+                    className="py-2"
+                    type="text"
+                    name="franchiseCode"
+                    value={editFormData?.franchiseCode || ""}
+                    onChange={(e) =>
+                      setEditFormData((prev) => ({
+                        ...prev,
+                        [e.target.name]: e.target.value,
+                      }))
+                    }
+                    disabled
+                  />
+                </Form.Group>
+              </Col>
+              <Col md={6}>
+                <Form.Group>
+                  <Form.Label className="small fw-semibold">City</Form.Label>
+                  <Form.Control
+                    className="py-2"
+                    type="text"
+                    name="city"
+                    value={editFormData?.city || ""}
+                    onChange={(e) =>
+                      setEditFormData((prev) => ({
+                        ...prev,
+                        [e.target.name]: e.target.value,
+                      }))
+                    }
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
+
+            <Row className="mb-3">
+              <Col>
+                <Form.Group>
+                  <Form.Label className="small fw-semibold">Address</Form.Label>
+                  <Form.Control
+                    className="py-2"
+                    type="text"
+                    name="address"
+                    value={editFormData?.address || ""}
+                    onChange={(e) =>
+                      setEditFormData((prev) => ({
+                        ...prev,
+                        [e.target.name]: e.target.value,
+                      }))
+                    }
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
+          </Form>
+        }
+        onConfirm={handleEditSubmit}
+      />
+
+      <DeleteModal
+        show={isDeletePopup}
+        handleClose={() => {
+          setIsDeletePopup(false);
+        }}
+        onConfirm={handleDelete}
+      />
     </div>
   );
 };

@@ -103,19 +103,19 @@ function FranchiseSidebar({ isSidebarOpen }) {
           label="Wallet"
           icon={<BsWallet />}
           items={[
-            { to: "/franchise/vocationalCourse/add", label: "Wallet" },
-            { to: "/franchise/vocationalCourse/view", label: "Top Up" },
+            { to: "/franchise/wallet", label: "Wallet" },
+            { to: "/franchise/wallet/topup", label: "Top Up" },
             {
-              to: "/franchise/vocationalCourse/view",
+              to: "/franchise/wallet/transactions",
               label: "All Transactions",
             },
           ]}
           basePath="/franchise/vocationalCourse/add"
         />
         <Link
-          to={"/admin/results"}
+          to={"/franchise/results"}
           className={`d-flex rounded align-items-center px-3 py-2 mt-2 text-decoration-none text-white sidebar-link small-text ${
-            location.pathname === "/admin/results" ? "bg-secondary" : "bg-dark"
+            location.pathname === "/franchise/results" ? "bg-secondary" : "bg-dark"
           }`}
         >
           <span className="me-3">{<BsFillFileEarmarkSpreadsheetFill />}</span>

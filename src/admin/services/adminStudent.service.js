@@ -8,6 +8,7 @@ const ADD_MARKS = `${baseUrl}/api/student/addMarks`;
 const UPDATE_MARKS = `${baseUrl}/api/student/updateMarks`;
 const UPDATE_STUDENT = `${baseUrl}/api/student/update`;
 const VIEW_STUDENT = `${baseUrl}/api/student/view`;
+const VIEW_STUDENT_FOR_RESULT = `${baseUrl}/api/student/view/getStudentsForResults`;
 const DELETE_STUDENT = `${baseUrl}/api/student/delete/`;
 const GET_SINGLE_STUDENT = `${baseUrl}/api/student/view/`;
 
@@ -21,6 +22,33 @@ export const addStudents = async (data) => {
 
 export const updateStudents = async (data) => {
   return axios.put(`${UPDATE_STUDENT}`, data, {
+    headers: {
+      Authorization: getAuth()?.token,
+    },
+  });
+};
+
+export const getStudentsForResults = async (page = 1, filters) => {
+  const params = new URLSearchParams();
+  params.append("page", String(page));
+  params.append("limit", "10");
+
+  const [startDate, endDate] = filters?.dateRange || [];
+
+  if (startDate) {
+    params.append("start_date", startDate.toISOString());
+  }
+  if (endDate) {
+    params.append("end_date", endDate.toISOString());
+  }
+  if (filters?.status) {
+    params.append("status", filters.status);
+  }
+  if (filters?.userId) {
+    params.append("userId", filters.userId);
+  }
+
+  return axios.get(`${VIEW_STUDENT_FOR_RESULT}?${params.toString()}`, {
     headers: {
       Authorization: getAuth()?.token,
     },

@@ -89,7 +89,7 @@ const FranchiseAddMarks = () => {
     <div>
       <Breadcrumb>
         <Breadcrumb.Item href="/franchise/dashboard">Home</Breadcrumb.Item>
-        <Breadcrumb.Item active>Add Student Marks</Breadcrumb.Item>
+        <Breadcrumb.Item active>Issue Result</Breadcrumb.Item>
       </Breadcrumb>
 
       <Container fluid className="bg-light rounded mt-4 p-3">
