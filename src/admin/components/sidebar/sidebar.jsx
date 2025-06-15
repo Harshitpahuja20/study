@@ -25,6 +25,8 @@ import {
   BsFillArrowLeftSquareFill,
   BsFillArrowRightSquareFill,
   BsFillFileEarmarkSpreadsheetFill,
+  BsWallet,
+  BsWallet2,
 } from "react-icons/bs";
 import { useStudy } from "../../../context/study.context";
 
@@ -253,6 +255,19 @@ function Sidebar({ isSidebarOpen }) {
                 { to: "/admin/results", label: "Delete Result" },
               ]}
               basePath="/admin/results/issue"
+            />
+            <DropdownMenu
+              label="Wallet"
+              icon={<BsWallet />}
+              items={[
+                { to: "/admin/wallet", label: "Wallet" },
+                { to: "/admin/wallet/topup", label: "Top Up" },
+                {
+                  to: "/admin/wallet/transactions",
+                  label: "Top Up Requests",
+                },
+              ]}
+              basePath="/franchise/vocationalCourse/add"
             />
           </>
         )}

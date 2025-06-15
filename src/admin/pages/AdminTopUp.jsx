@@ -1,20 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Breadcrumb } from "react-bootstrap";
 import { useStudy } from "../../context/study.context";
-import { addTopUpRequest } from "../services/franchiseTopup.service";
 import { toast } from "react-toastify";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { addTopUpRequest } from "../services/AdminTopUp.service";
 
-const FranchiseWalletTopUp = () => {
-  const { currentUser } = useStudy();
+const AdminTopUp = () => {
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const clearedParams = useRef(false); // Flag to prevent multiple navigations
 
   const [formData, setFormData] = useState({
-    walletId: currentUser?.userName,
+    franchiseId: "",
+    walletId: "",
     amount: "",
     method: "Joining Topup",
     date: "",
     transactionId: "",
     description: "",
   });
+
+  useEffect(() => {
+    const franchiseId = searchParams.get("id");
+    const walletId = searchParams.get("wallet");
+
+    if (franchiseId && walletId && !clearedParams.current) {
+      setFormData((prev) => ({
+        ...prev,
+        franchiseId,
+        walletId,
+      }));
+
+      // Delay the navigation to ensure state is set
+      window.history.replaceState({}, document.title, "/admin/wallet/topup");
+    }
+  }, [searchParams, navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,8 +48,16 @@ const FranchiseWalletTopUp = () => {
     e.preventDefault();
 
     // Check if all required fields are present and non-empty
-    const { walletId, amount, method, date, transactionId, description } = formData;
-    if (!walletId || !amount || !method || !date || !transactionId || !description) {
+    const { walletId, amount, method, date, transactionId, description } =
+      formData;
+    if (
+      !walletId ||
+      !amount ||
+      !method ||
+      !date ||
+      !transactionId ||
+      !description
+    ) {
       toast.error("All fields are required!");
       return;
     }
@@ -39,7 +67,7 @@ const FranchiseWalletTopUp = () => {
       if (res?.data?.status) {
         // Reset form data on success
         setFormData({
-          walletId: currentUser?.userName,
+          walletId: "",
           amount: "",
           method: "Joining Topup",
           date: "",
@@ -76,7 +104,7 @@ const FranchiseWalletTopUp = () => {
             value={formData.walletId}
             placeholder="Wallet Id"
             required
-            disabled
+            onChange={handleChange}
           />
         </div>
 
@@ -138,7 +166,10 @@ const FranchiseWalletTopUp = () => {
 
         {/* Transaction ID */}
         <div className="form-group mb-2">
-          <label className="fw-semibold small-text mb-2" htmlFor="transactionId">
+          <label
+            className="fw-semibold small-text mb-2"
+            htmlFor="transactionId"
+          >
             Transaction Id
           </label>
           <input
@@ -181,4 +212,4 @@ const FranchiseWalletTopUp = () => {
   );
 };
 
-export default FranchiseWalletTopUp;
+export default AdminTopUp;

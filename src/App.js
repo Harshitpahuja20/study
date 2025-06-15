@@ -70,6 +70,9 @@ import FranchiseWallet from "./franchise/pages/FranchiseWallet";
 import FranchiseWalletTopUp from "./franchise/pages/franchiseWalletTopUp";
 import FranchiseWalletTransactions from "./franchise/pages/FranchiseWalletTransactions";
 import AdminIssueResultPage from "./admin/pages/AdminIssueResultPage";
+import AdminWallet from "./admin/pages/AdminWallet";
+import AdminTopUp from "./admin/pages/AdminTopUp";
+import AdminTopUpRequests from "./admin/pages/AdminTopUpRequests";
 
 function App() {
   const { isEnquiryPopup, setIsEnquiryPopup, currentUser } = useStudy();
@@ -218,6 +221,9 @@ function App() {
             path="iti/view"
             element={<AdminViewInstitutes role={"ITI"} />}
           />
+           <Route path="wallet" element={<AdminWallet />} />
+           <Route path="wallet/topup" element={<AdminTopUp />} />
+           <Route path="wallet/transactions" element={<AdminTopUpRequests />} />
           <Route path="*" element={<Navigate to={"dashboard"} />} />
         </Route>
 
