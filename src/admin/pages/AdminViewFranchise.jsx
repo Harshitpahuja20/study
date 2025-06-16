@@ -22,6 +22,8 @@ import AddModal from "../components/popup/AddModal";
 import { FaPencil } from "react-icons/fa6";
 
 const AdminViewFranchise = () => {
+  const [studentFilter, setStudentFilter] = useState("");
+  const [filteredData, setFilteredData] = useState([]);
   const navigate = useNavigate();
   const [tableData, setTableData] = useState([]);
   const [pagination, setPagination] = useState({
@@ -45,6 +47,7 @@ const AdminViewFranchise = () => {
     if (response.data.status) {
       setDataLoading(false);
       setTableData(response.data.data);
+      setFilteredData(response.data.data);
       setPagination({
         ...pagination,
         totalPages: response.data.data.totalPages,
@@ -61,7 +64,7 @@ const AdminViewFranchise = () => {
         await deleteFranchise(editFormData?._id).then((response) => {
           if (response.data.status) {
             toast.success(response.data.message);
-            navigate("/admin/franchise/view");
+            navigate("/admin/center/view");
           } else {
             toast.error(response.data.message);
           }
@@ -133,6 +136,23 @@ const AdminViewFranchise = () => {
       });
   };
 
+  const handleSearchChange = (e) => {
+    const value = e.target.value.toLowerCase();
+    setStudentFilter(value);
+
+    if (value === "") {
+      setFilteredData(tableData); // If filter is empty, show all data
+    } else {
+      const filtered = tableData?.filter(
+        (center) =>
+          (center.userName && center.userName.toLowerCase().includes(value)) ||
+          (center.franchiseName &&
+            center.franchiseName.toLowerCase().includes(value))
+      );
+      setFilteredData(filtered);
+    }
+  };
+
   return (
     <div className="p-3">
       <Breadcrumb>
@@ -141,6 +161,25 @@ const AdminViewFranchise = () => {
           View Centers
         </Breadcrumb.Item>
       </Breadcrumb>
+
+      <Row>
+        <Col md={4}>
+          <Form.Group controlId="instituteName" className="mb-3">
+            <Form.Label className="small fw-semibold">
+              Search by center name or username
+            </Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Search by name"
+              name="instituteName"
+              value={studentFilter}
+              onChange={handleSearchChange}
+              className="p-2"
+              disabled={tableData?.length === 0}
+            />
+          </Form.Group>
+        </Col>
+      </Row>
 
       <Row className="g-4">
         <div className="table-responsive border p-0 rounded">
@@ -158,8 +197,8 @@ const AdminViewFranchise = () => {
             </thead>
             {!dataLoading ? (
               <tbody style={{ minHeight: "400px" }}>
-                {tableData?.length > 0 ? (
-                  tableData.map((data, index) => (
+                {filteredData?.length > 0 ? (
+                  filteredData.map((data, index) => (
                     <tr key={index}>
                       <td className="ps-4 py-3">
                         <strong className="text-info">{data?.userName}</strong>{" "}
@@ -278,9 +317,7 @@ const AdminViewFranchise = () => {
             <Row className="mb-3">
               <Col md={6}>
                 <Form.Group>
-                  <Form.Label className="small fw-semibold">
-                    State
-                  </Form.Label>
+                  <Form.Label className="small fw-semibold">State</Form.Label>
                   <Form.Control
                     className="py-2"
                     type="text"

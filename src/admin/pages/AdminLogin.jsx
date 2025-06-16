@@ -39,6 +39,7 @@ const AdminLogin = () => {
           await getCurrentUser(res?.data?.data?.token).then((response) => {
             if (response?.data?.status) {
               localStorage.setItem("token", res?.data?.data?.token);
+              localStorage.removeItem("franchisetoken");
               setCurrentUser(response?.data?.data);
             }
           });

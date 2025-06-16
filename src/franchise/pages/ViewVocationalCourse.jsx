@@ -61,10 +61,7 @@ const ViewFranchiseVocationalCourse = () => {
                 <th className="ps-4 py-3 bg-dark text-white">Sr. No.</th>
                 <th className="py-3 bg-dark text-white">Course Name</th>
                 <th className="py-3 bg-dark text-white">Duration</th>
-                <th className="py-3 bg-dark text-white">Mode</th>
-                <th className="py-3 bg-dark text-white">Code</th>
                 <th className="py-3 bg-dark text-white">Amount</th>
-                <th className="py-3 bg-dark text-white">Subjects</th>
               </tr>
             </thead>
             {!dataLoading ? (
@@ -75,27 +72,7 @@ const ViewFranchiseVocationalCourse = () => {
                       <td className="ps-4 py-3">{index + 1}</td>
                       <td className="py-3">{data.name}</td>
                       <td className="py-3">{data.duration}</td>
-                      <td className="py-3">{data.mode}</td>
-                      <td className="py-3">{data.code}</td>
-                      <td className="py-3">{data.amount}</td>
-                      <td className="py-3">
-                        <Button
-                          variant="outline-primary"
-                          size="sm"
-                          onClick={() => {
-                            navigate("/franchise/vocationalCourse/subject/details", {
-                              state: {
-                                id: data?._id,
-                                name: data?.name,
-                              },
-                            });
-                            // navigation/modal can go here
-                          }}
-                        >
-                          View Subjects
-                        </Button>
-                      </td>
-                      
+                      <td className="py-3">{data.amount}</td>  
                     </tr>
                   ))
                 ) : (

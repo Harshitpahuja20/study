@@ -1,7 +1,7 @@
 // AdminViewStudents.js - Full working student management with edit functionality
 
 import React, { useEffect, useState, useRef } from "react";
-import { Breadcrumb, Row, Spinner, Table, Button } from "react-bootstrap";
+import { Breadcrumb, Row, Spinner, Table, Button, Col, Form } from "react-bootstrap";
 import ReactPaginate from "react-paginate";
 import DeleteModal from "../components/popup/DeleteModal";
 import { toast } from "react-toastify";
@@ -25,7 +25,8 @@ const AdminViewStudents = () => {
     totalPages: 1,
   });
   const [selectedId, setSelectedId] = useState("");
-  const [selectedData, setSelectedData] = useState(null);
+  const [studentFilter, setStudentFilter] = useState("");
+  const [filteredData, setFilteredData] = useState([]);
   const [isDeletePopup, setIsDeletePopup] = useState(false);
   const [isEditPopup, setIsEditPopup] = useState(false);
   const [dataLoading, setDataLoading] = useState(false);
@@ -55,6 +56,7 @@ const AdminViewStudents = () => {
     try {
       const response = await getStudents(page);
       if (response.data.status) {
+        setFilteredData(response.data.data);
         setTableData(response.data.data);
         setPagination((prev) => ({
           ...prev,
@@ -157,6 +159,23 @@ const AdminViewStudents = () => {
     return date.toISOString().split("T")[0]; // Returns 'YYYY-MM-DD'
   };
 
+  const handleSearchChange = (e) => {
+    const value = e.target.value.toLowerCase();
+    setStudentFilter(value);
+
+    if (value === "") {
+      setFilteredData(tableData); // If filter is empty, show all data
+    } else {
+      const filtered = tableData?.filter(
+        (center) =>
+          (center.enrollmentId && center.enrollmentId.toLowerCase().includes(value)) ||
+          (center.studentName &&
+            center.studentName.toLowerCase().includes(value))
+      );
+      setFilteredData(filtered);
+    }
+  };
+
   return (
     <div className="p-3">
       <Breadcrumb>
@@ -165,6 +184,23 @@ const AdminViewStudents = () => {
           Students
         </Breadcrumb.Item>
       </Breadcrumb>
+
+     <Row> <Col md={4}>
+        <Form.Group controlId="instituteName" className="mb-3">
+          <Form.Label className="small fw-semibold">
+            Search by student name or reg no.
+          </Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Search by name"
+            name="instituteName"
+            value={studentFilter}
+            onChange={handleSearchChange}
+            className="p-2"
+            disabled={tableData?.length === 0}
+          />
+        </Form.Group>
+      </Col></Row>
 
       <Row className="g-4">
         <div className="table-responsive border p-0 rounded">
@@ -182,8 +218,8 @@ const AdminViewStudents = () => {
             </thead>
             <tbody className="small-text">
               {!dataLoading ? (
-                tableData.length ? (
-                  tableData.map((data, index) => (
+                filteredData.length ? (
+                  filteredData.map((data, index) => (
                     <tr key={data._id}>
                       <td className="ps-4 py-3">{index + 1}</td>
                       <td>

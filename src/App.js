@@ -73,6 +73,7 @@ import AdminIssueResultPage from "./admin/pages/AdminIssueResultPage";
 import AdminWallet from "./admin/pages/AdminWallet";
 import AdminTopUp from "./admin/pages/AdminTopUp";
 import AdminTopUpRequests from "./admin/pages/AdminTopUpRequests";
+import AdminSubjectForm from "./admin/pages/AdminVocationalCourseSubject";
 
 function App() {
   const { isEnquiryPopup, setIsEnquiryPopup, currentUser } = useStudy();
@@ -201,7 +202,7 @@ function App() {
           />
           <Route
             path="vocationalCourse/subject/details"
-            element={<FranchiseVocationalCourseSubject />}
+            element={<AdminSubjectForm />}
           />
           <Route path="center/view" element={<AdminViewFranchise />} />
           <Route

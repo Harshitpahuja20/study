@@ -35,6 +35,7 @@ const FranchiseLoginHero = () => {
           await getCurrentUser(res?.data?.data?.token).then((response) => {
             if (response?.data?.status) {
               localStorage.setItem("franchisetoken", res?.data?.data?.token);
+              localStorage.removeItem("token");
               setCurrentUser(response?.data?.data);
             }
           });

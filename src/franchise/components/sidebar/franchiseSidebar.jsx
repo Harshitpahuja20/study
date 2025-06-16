@@ -90,15 +90,6 @@ function FranchiseSidebar({ isSidebarOpen }) {
           ]}
           basePath="/franchise/students/add"
         />
-        {/* <DropdownMenu
-          label="Vocational Courses"
-          icon={<IoBookSharp />}
-          items={[
-            { to: "/franchise/vocationalCourse/add", label: "Add Course" },
-            { to: "/franchise/vocationalCourse/view", label: "All Course" },
-          ]}
-          basePath="/franchise/vocationalCourse/add"
-        /> */}
         <DropdownMenu
           label="Wallet"
           icon={<BsWallet />}
@@ -110,7 +101,7 @@ function FranchiseSidebar({ isSidebarOpen }) {
               label: "All Transactions",
             },
           ]}
-          basePath="/franchise/vocationalCourse/add"
+          basePath="/franchise/wallet"
         />
         <Link
           to={"/franchise/results"}

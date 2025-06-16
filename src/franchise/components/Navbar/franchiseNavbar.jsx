@@ -28,6 +28,7 @@ import { useStudy } from "../../../context/study.context";
 import { MdDeviceHub } from "react-icons/md";
 import { PiStudent } from "react-icons/pi";
 import { IoBookSharp } from "react-icons/io5";
+import { BsFillFileEarmarkSpreadsheetFill, BsWallet } from "react-icons/bs";
 
 // ✅ Reusable Dropdown Component
 function DropdownMenu({ label, icon, items = [], basePath = "", handleClick }) {
@@ -81,8 +82,9 @@ const AdminNavbar = () => {
   const location = useLocation();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // state to manage dropdown toggle
 
-  const navItems = [
+const navItems = [
     { to: "/franchise/dashboard", label: "Dashboard", icon: <FaHome /> },
+    { to: "/franchise/vocationalCourse/view", label: "Vocational Courses", icon: <IoBookSharp /> },
   ];
 
   // Toggle function for dropdown
@@ -120,7 +122,8 @@ const AdminNavbar = () => {
                         className="d-flex align-items-center gap-2 clr_theme small p-0 border-0 shadow-none"
                       >
                         <span className="mb-0 fs_14 fw-semibold text-end">
-                          {currentUser?.franchiseName} <br /> {currentUser?.email}
+                          {currentUser?.franchiseName} <br />{" "}
+                          {currentUser?.email}
                         </span>
                         <FaUserCircle size={34} />
                       </Dropdown.Toggle>
@@ -176,7 +179,7 @@ const AdminNavbar = () => {
                 <Link
                   key={item.to}
                   to={item.to}
-                  className={`d-flex align-items-center px-4 py-2 mt-3 text-decoration-none text-black ff_p sidebar-link rounded ${
+                  className={`d-flex align-items-center px-4 py-2 mt-2 text-decoration-none text-black ff_p sidebar-link rounded small-text ${
                     location.pathname === item.to ? "bg-light" : ""
                   }`}
                 >
@@ -187,25 +190,40 @@ const AdminNavbar = () => {
 
               {/* ✅ Reusable Dropdown */}
               <DropdownMenu
-                label="Students"
+                label="Manage Students"
                 icon={<FaUserGraduate />}
                 items={[
-                  { to: "/franchise/students/add", label: "Add" },
-                  { to: "/franchise/students/view", label: "List" },
+                  { to: "/franchise/students/add", label: "Add Student" },
+                  { to: "/franchise/students/view", label: "All Verified" },
                 ]}
                 basePath="/franchise/students/add"
-                handleClick={toggleOffcanvas}
               />
               <DropdownMenu
-                label="Vocational Courses"
-                icon={<IoBookSharp />}
+                label="Wallet"
+                icon={<BsWallet />}
                 items={[
-                  { to: "/franchise/vocationalCourse/add", label: "Add" },
-                  { to: "/franchise/vocationalCourse/view", label: "List" },
+                  { to: "/franchise/wallet", label: "Wallet" },
+                  { to: "/franchise/wallet/topup", label: "Top Up" },
+                  {
+                    to: "/franchise/wallet/transactions",
+                    label: "All Transactions",
+                  },
                 ]}
                 basePath="/franchise/vocationalCourse/add"
-                handleClick={toggleOffcanvas}
               />
+              <Link
+                to={"/franchise/results"}
+                className={`d-flex align-items-center px-4 py-2 mt-3 text-decoration-none text-black ff_p sidebar-link rounded small-text ${
+                  location.pathname === "/franchise/results"
+                    ? "bg-light"
+                    : ""
+                }`}
+              >
+                <span className="me-3">
+                  {<BsFillFileEarmarkSpreadsheetFill />}
+                </span>
+                Results
+              </Link>
             </div>
           </Nav>
         </Offcanvas.Body>

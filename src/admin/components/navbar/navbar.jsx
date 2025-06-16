@@ -10,7 +10,7 @@ import {
 } from "react-bootstrap";
 
 import { FaUserCircle } from "react-icons/fa";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   FaHome,
   FaMinus,
@@ -28,6 +28,8 @@ import { useStudy } from "../../../context/study.context";
 import { MdDeviceHub } from "react-icons/md";
 import { PiStudent } from "react-icons/pi";
 import { IoBookSharp } from "react-icons/io5";
+import { AiOutlineGlobal } from "react-icons/ai";
+import { BsFillArrowLeftSquareFill, BsFillArrowRightSquareFill, BsWallet } from "react-icons/bs";
 
 // ✅ Reusable Dropdown Component
 function DropdownMenu({ label, icon, items = [], basePath = "", handleClick }) {
@@ -73,7 +75,8 @@ function DropdownMenu({ label, icon, items = [], basePath = "", handleClick }) {
 }
 
 const AdminNavbar = () => {
-  const { currentUser, handleLogOut } = useStudy();
+  const navigate = useNavigate()
+  const { currentUser, handleLogOut , isOther, setIsOther} = useStudy();
   const [showSidebar, setShowSidebar] = useState(false);
   const handleClose = () => setShowSidebar(false);
   const handleShow = () => setShowSidebar(true);
@@ -81,8 +84,14 @@ const AdminNavbar = () => {
   const location = useLocation();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // state to manage dropdown toggle
 
-  const navItems = [
+  const navItems1 = [
+    { to: "/", label: "Visit Website", icon: <AiOutlineGlobal /> },
     { to: "/admin/dashboard", label: "Dashboard", icon: <FaHome /> },
+    {
+      to: "/admin/contactQuerys",
+      label: "Contact Queries",
+      icon: <FaPhoneAlt />,
+    },
     {
       to: "/admin/studentRequests",
       label: "Student Requests",
@@ -90,13 +99,8 @@ const AdminNavbar = () => {
     },
     {
       to: "/admin/franchiseRequests",
-      label: "Franchise Requests",
+      label: "Center Requests",
       icon: <FaHandshake />,
-    },
-    {
-      to: "/admin/contactQuerys",
-      label: "Contact Queries",
-      icon: <FaPhoneAlt />,
     },
     {
       to: "/admin/Streams",
@@ -108,6 +112,10 @@ const AdminNavbar = () => {
       label: "Places",
       icon: <FaMapMarkerAlt />,
     },
+  ];
+  const navItems2 = [
+    { to: "/", label: "Visit Website", icon: <AiOutlineGlobal /> },
+    { to: "/admin/dashboard/other", label: "Home", icon: <FaHome /> },
   ];
 
   // Toggle function for dropdown
@@ -145,7 +153,8 @@ const AdminNavbar = () => {
                         className="d-flex align-items-center gap-2 clr_theme small p-0 border-0 shadow-none"
                       >
                         <span className="mb-0 fs_14 fw-semibold text-end">
-                          {currentUser?.franchiseName} <br /> {currentUser?.email}
+                          {currentUser?.franchiseName} <br />{" "}
+                          {currentUser?.email}
                         </span>
                         <FaUserCircle size={34} />
                       </Dropdown.Toggle>
@@ -197,82 +206,172 @@ const AdminNavbar = () => {
         <Offcanvas.Body className="pt-0">
           <Nav className="flex-column gap-2">
             <div className="flex-grow-1 px-2">
-              {navItems.map((item) => (
-                <Link
-                  key={item.to}
-                  to={item.to}
-                  className={`d-flex align-items-center px-4 py-2 mt-3 text-decoration-none text-black ff_p sidebar-link rounded ${
-                    location.pathname === item.to ? "bg-light" : ""
-                  }`}
-                >
-                  <span className="me-3">{item.icon}</span>
-                  {item.label}
-                </Link>
-              ))}
+              {!isOther && (
+                <>
+                  {navItems1.map((item, index) => {
+                    return (
+                      <React.Fragment key={item.to}>
+                        {index === 2 && (
+                          <div
+                            onClick={() => {
+                              setIsOther(true);
+                              navigate( "/admin/dashboard/other");
+                            }}
+                            className="d-flex align-items-center px-4 py-2 mt-3 text-decoration-none text-black ff_p sidebar-link rounded small-text"
+                            style={{ cursor: "pointer" }}
+                          >
+                            <span className="me-3">
+                              <BsFillArrowRightSquareFill />
+                            </span>
+                            Other Panel
+                          </div>
+                        )}
 
-              {/* ✅ Reusable Dropdown */}
-              <DropdownMenu
-                label="News"
-                icon={<FaTools />}
-                items={[
-                  { to: "/admin/news/add", label: "Add" },
-                  { to: "/admin/news/view", label: "List" },
-                ]}
-                basePath="/admin/news/add"
-                handleClick={toggleOffcanvas}
-              />
-              <DropdownMenu
-                label="University/ITI"
-                icon={<FaTools />}
-                items={[
-                  { to: "/admin/collage_iti/add", label: "Add" },
-                  { to: "/admin/university/view", label: "All University" },
-                  { to: "/admin/collage/view", label: "All collages" },
-                  { to: "/admin/iti/view", label: "All ITI" },
-                ]}
-                basePath="/admin/news/add"
-                handleClick={toggleOffcanvas}
-              />
-              <DropdownMenu
-                label="Franchise"
-                icon={<MdDeviceHub />}
-                items={[
-                  { to: "/admin/franchise/add", label: "Add" },
-                  { to: "/admin/franchise/view", label: "List" },
-                ]}
-                basePath="/admin/franchise/add"
-                handleClick={toggleOffcanvas}
-              />
-              <DropdownMenu
-                label="Students"
-                icon={<PiStudent />}
-                items={[
-                  { to: "/admin/student/add", label: "Add Students" },
-                  { to: "/admin/students/view", label: "Students List" },
-                ]}
-                basePath="/admin/student/add"
-                handleClick={toggleOffcanvas}
-              />
-              <DropdownMenu
-                label="Courses"
-                icon={<FaBook />}
-                items={[
-                  { to: "/admin/course/main", label: "Main Courses" },
-                  { to: "/admin/course/sub", label: "Sub Courses" },
-                ]}
-                basePath="/admin/news/add"
-                handleClick={toggleOffcanvas}
-              />
-              <DropdownMenu
-                label="Vocational Courses"
-                icon={<IoBookSharp />}
-                items={[
-                  { to: "/admin/vocationalCourse/add", label: "Add" },
-                  { to: "/admin/vocationalCourse/view", label: "List" },
-                ]}
-                basePath="/admin/vocationalCourse/add"
-                handleClick={toggleOffcanvas}
-              />
+                        <Link
+                          to={item.to}
+                          className={`d-flex align-items-center px-4 py-2 mt-3 text-decoration-none text-black ff_p sidebar-link rounded small-text ${
+                            location.pathname === item.to
+                              ? "bg-light"
+                              : ""
+                          }`}
+                        >
+                          <span className="me-3">{item.icon}</span>
+                          {item.label}
+                        </Link>
+                      </React.Fragment>
+                    );
+                  })}
+                  <DropdownMenu
+                    onClick={toggleOffcanvas}
+                    label="News"
+                    icon={<FaTools />}
+                    items={[
+                      { to: "/admin/news/add", label: "Add News" },
+                      { to: "/admin/news/view", label: "All News" },
+                    ]}
+                    basePath="/admin/news/add"
+                  />
+                  <DropdownMenu
+                    onClick={toggleOffcanvas}
+                    label="Course Section"
+                    icon={<FaBook />}
+                    items={[
+                      { to: "/admin/course/main", label: "Main Courses" },
+                      { to: "/admin/course/sub", label: "All Sub Courses" },
+                    ]}
+                    basePath="/admin/news/add"
+                  />
+                  <DropdownMenu
+                    onClick={toggleOffcanvas}
+                    label="University/ITI"
+                    icon={<FaTools />}
+                    items={[
+                      { to: "/admin/university/add", label: "Add" },
+                      { to: "/admin/university/view", label: "All University" },
+                      { to: "/admin/college/view", label: "All colleges" },
+                      { to: "/admin/iti/view", label: "All ITI" },
+                    ]}
+                    basePath="/admin/news/add"
+                  />
+                </>
+              )}
+              {isOther && (
+                <>
+                  {navItems2.map((item, index) => {
+                    return (
+                      <React.Fragment key={item.to}>
+                        <Link
+                          to={item.to}
+                          className={`d-flex align-items-center px-4 py-2 mt-3 text-decoration-none text-black ff_p sidebar-link rounded small-text ${
+                            location.pathname === item.to
+                              ? "bg-light"
+                              : ""
+                          }`}
+                        >
+                          <span className="me-3">{item.icon}</span>
+                          {item.label}
+                        </Link>
+                        {index === 1 && (
+                          <div
+                            onClick={() => {
+                              setIsOther(false);
+                              navigate("/admin/dashboard");
+                            }}
+                            className="d-flex align-items-center px-4 py-2 mt-3 text-decoration-none text-black ff_p sidebar-link rounded small-text"
+                            style={{ cursor: "pointer" }}
+                          >
+                            <span className="me-3">
+                              <BsFillArrowLeftSquareFill />
+                            </span>
+                            Main Dashboard
+                          </div>
+                        )}
+                      </React.Fragment>
+                    );
+                  })}
+                  <DropdownMenu
+                    onClick={toggleOffcanvas}
+                    label="Center"
+                    icon={<MdDeviceHub />}
+                    items={[
+                      { to: "/admin/center/add", label: "Add Center" },
+                      { to: "/admin/center/view", label: "All Centers" },
+                    ]}
+                    basePath="/admin/center/add"
+                  />
+                  <DropdownMenu
+                    onClick={toggleOffcanvas}
+                    label="Manage Students"
+                    icon={<PiStudent />}
+                    items={[
+                      { to: "/admin/student/add", label: "Add Student" },
+                      { to: "/admin/students/view", label: "All Verified" },
+                    ]}
+                    basePath="/admin/student/add"
+                  />
+
+                  <DropdownMenu
+                    onClick={toggleOffcanvas}
+                    label="Vocational Courses"
+                    icon={<IoBookSharp />}
+                    items={[
+                      {
+                        to: "/admin/vocationalCourse/add",
+                        label: "Add Course",
+                      },
+                      {
+                        to: "/admin/vocationalCourse/view",
+                        label: "All Course",
+                      },
+                    ]}
+                    basePath="/admin/vocationalCourse/add"
+                  />
+                  <DropdownMenu
+                    onClick={toggleOffcanvas}
+                    label="Results"
+                    icon={<IoBookSharp />}
+                    items={[
+                      { to: "/admin/results/issue", label: "Issue Result" },
+                      { to: "/admin/results", label: "Delete Result" },
+                    ]}
+                    basePath="/admin/results/issue"
+                  />
+                  <DropdownMenu
+                    onClick={toggleOffcanvas}
+                    label="Wallet"
+                    icon={<BsWallet />}
+                    items={[
+                      { to: "/admin/wallet", label: "Wallet" },
+                      { to: "/admin/wallet/topup", label: "Top Up" },
+                      {
+                        to: "/admin/wallet/transactions",
+                        label: "Top Up Requests",
+                      },
+                    ]}
+                    basePath="/franchise/vocationalCourse/add"
+                  />
+                </>
+              )}
             </div>
           </Nav>
         </Offcanvas.Body>

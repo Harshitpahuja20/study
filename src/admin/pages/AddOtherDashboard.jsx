@@ -43,7 +43,7 @@ const AddOtherDashboard = () => {
       <Row className="g-4">
         <Col md={3} sm={6} xs={12}>
           <StatCard
-            navigate={() => navigate("/admin/franchise/view")}
+            navigate={() => navigate("/admin/center/view")}
             title="center"
             value={data?.totalFranchise}
             label="Total Center"
