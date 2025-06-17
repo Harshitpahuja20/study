@@ -138,6 +138,13 @@ const CustomNavbar = () => {
               <Nav.Link
                 className=" fs_12 ff_p mb-0 pb-0 clr_theme ps-0 "
                 as={Link}
+                to="/course-category"
+              >
+                Course Category
+              </Nav.Link>
+              <Nav.Link
+                className=" fs_12 ff_p mb-0 pb-0 clr_theme ps-0 "
+                as={Link}
                 to="/news"
               >
                 News
@@ -177,13 +184,7 @@ const CustomNavbar = () => {
               >
                 Franchise Login
               </Nav.Link>
-              <Nav.Link
-                className=" fs_12 ff_p mb-0 pb-0 clr_theme ps-0 "
-                as={Link}
-                to="/category"
-              >
-                Category
-              </Nav.Link>
+              
             </Nav>
           </Navbar.Collapse>
         </Container>
@@ -238,6 +239,14 @@ const CustomNavbar = () => {
             >
               Iti
             </Nav.Link>
+             <Nav.Link
+              className=" fs_12 ff_p mb-0 pb-0 clr_theme ps-0 mt-2"
+              as={Link}
+              to="/course-category"
+              onClick={toggleOffcanvas}
+            >
+              Course Category
+            </Nav.Link>
             <Nav.Link
               className=" fs_12 ff_p mb-0 pb-0 clr_theme ps-0 mt-2"
               as={Link}
@@ -286,14 +295,7 @@ const CustomNavbar = () => {
             >
               Franchise Login
             </Nav.Link>
-            <Nav.Link
-              className=" fs_12 ff_p mb-0 pb-0 clr_theme ps-0 mt-2"
-              as={Link}
-              to="/category"
-              onClick={toggleOffcanvas}
-            >
-              Category
-            </Nav.Link>
+           
           </Nav>
         </Offcanvas.Body>
       </Offcanvas>

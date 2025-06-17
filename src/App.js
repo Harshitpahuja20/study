@@ -97,6 +97,22 @@ function App() {
     return <Navigate to="/" />;
   };
 
+  useEffect(() => {
+    const alreadySet = sessionStorage.getItem("globalContentInitialized");
+
+    if (!alreadySet && !(
+        location.pathname.includes("/admin") ||
+        location.pathname.includes("/franchise")
+      )) {
+      const timer = setTimeout(() => {
+        setIsEnquiryPopup(true); // activate after 5 seconds
+        sessionStorage.setItem("globalContentInitialized", "true");
+      }, 3500); //
+
+      return () => clearTimeout(timer); // cleanup
+    }
+  }, []);
+
   return (
     <>
       {isEnquiryPopup && (
@@ -119,7 +135,7 @@ function App() {
         <Route path="/enrollment" element={<StudentVerificationPage />} />
         <Route path="/result" element={<ResultPage />} />
         <Route path="/contact-us" element={<ContactUsPage />} />
-        <Route path="/category" element={<CourseCategoriesPage />} />
+        <Route path="/course-category" element={<CourseCategoriesPage />} />
         <Route path="/news" element={<NewsPage />} />
         <Route path="/top-university" element={<TopUniversityPage />} />
         <Route path="/top-iti" element={<TopITIPage />} />
@@ -222,9 +238,9 @@ function App() {
             path="iti/view"
             element={<AdminViewInstitutes role={"ITI"} />}
           />
-           <Route path="wallet" element={<AdminWallet />} />
-           <Route path="wallet/topup" element={<AdminTopUp />} />
-           <Route path="wallet/transactions" element={<AdminTopUpRequests />} />
+          <Route path="wallet" element={<AdminWallet />} />
+          <Route path="wallet/topup" element={<AdminTopUp />} />
+          <Route path="wallet/transactions" element={<AdminTopUpRequests />} />
           <Route path="*" element={<Navigate to={"dashboard"} />} />
         </Route>
 
@@ -241,7 +257,10 @@ function App() {
           <Route path="results" element={<FranchiseApplyResult />} />
           <Route path="wallet" element={<FranchiseWallet />} />
           <Route path="wallet/topup" element={<FranchiseWalletTopUp />} />
-          <Route path="wallet/transactions" element={<FranchiseWalletTransactions />} />
+          <Route
+            path="wallet/transactions"
+            element={<FranchiseWalletTransactions />}
+          />
           {/* <Route
             path="vocationalCourse/add"
             element={<AddFranchiseVocationalCourse />}

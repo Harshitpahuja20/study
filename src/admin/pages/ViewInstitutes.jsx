@@ -297,15 +297,6 @@ const AdminViewInstitutes = ({ role }) => {
         handleClose={() => setIsViewPopup(false)}
         content={
           <>
-            {/* Heading Section */}
-            <div className="card p-4 mb-3 shadow-sm">
-              <div className="fs-3 fw-bold text-primary mb-2">
-                {selectedData?.heading}
-              </div>
-              <div className="fw-semibold fs-6 text-muted">
-                {selectedData?.shortDescription}
-              </div>
-            </div>
 
             {/* Description Section */}
             <div className="p-4 bg-light border rounded-3 shadow-sm">
@@ -317,7 +308,7 @@ const AdminViewInstitutes = ({ role }) => {
           </>
         }
         size="lg"
-        title="News Article"
+        title={`${selectedData?.instituteName}`}
         noSize
       />
 
