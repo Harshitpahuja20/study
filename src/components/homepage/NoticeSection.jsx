@@ -5,29 +5,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Container } from "react-bootstrap";
 import noticeImg from "../../assets/image/png/noticeImg.jpg";
-
-const notices = [
-  {
-    img: noticeImg,
-    title: "Admission Start For Session 2023-204",
-    buttonText: "Center Login",
-  },
-  {
-    img: noticeImg,
-    title: "Apply For Online Admission",
-    buttonText: "Apply Now",
-  },
-  {
-    img: noticeImg,
-    title: "Admission Start For Session 2023-204",
-    buttonText: "Center Login",
-  },
-  {
-    img: noticeImg,
-    title: "New Batch Admission Started",
-    buttonText: "Apply Now",
-  },
-];
+import { useNavigate } from "react-router-dom";
+import { useStudy } from "../../context/study.context";
 
 const Arrow = ({ className, style, onClick, direction }) => (
   <div
@@ -39,6 +18,21 @@ const Arrow = ({ className, style, onClick, direction }) => (
 );
 
 const NoticeBoardSlider = () => {
+  const navigate = useNavigate();
+  const { setIsEnquiryPopup } = useStudy();
+
+  function getCurrentSession() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth() + 1; // 0-based index
+
+    // Assuming session starts in April (typical in schools/fiscal years in many countries)
+    const startYear = month >= 4 ? year : year - 1;
+    const endYear = startYear + 1;
+
+    return `${startYear}-${endYear}`;
+  }
+
   const settings = {
     dots: false,
     infinite: true,
@@ -59,6 +53,41 @@ const NoticeBoardSlider = () => {
     ],
   };
 
+  const notices = [
+    {
+      img: noticeImg,
+      title: `Register Your Franchise Today!`,
+      buttonText: "Apply Franchise",
+      func: () => {
+        navigate("/apply-franchise");
+      },
+    },
+    {
+      img: noticeImg,
+      title: `Admission Start For Session ${getCurrentSession()}`,
+      buttonText: "Apply Now",
+      func: () => {
+        setIsEnquiryPopup(true);
+      },
+    },
+    {
+      img: noticeImg,
+      title: "Step into Success!",
+      buttonText: "Center Login",
+      func: () => {
+        navigate("/apply-franchise");
+      },
+    },
+    {
+      img: noticeImg,
+      title: `New Batch Started for ${getCurrentSession()}`,
+      buttonText: "Apply Now",
+      func: () => {
+        setIsEnquiryPopup(true);
+      },
+    },
+  ];
+
   return (
     <div className="noticeboard-section ff_p py-5">
       <Container>
@@ -72,7 +101,9 @@ const NoticeBoardSlider = () => {
               <div className="card-content text-start">
                 <img src={notice.img} alt="Notice" />
                 <h4>{notice.title}</h4>
-                <button>{notice.buttonText}</button>
+                <button onClick={() => notice.func()}>
+                  {notice.buttonText}
+                </button>
               </div>
             </div>
           ))}

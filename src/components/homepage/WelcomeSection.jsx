@@ -22,12 +22,10 @@ const WelcomeSection = () => {
             >
               <FaRegClock size={40} className="mb-3" />
               <h6 className=" ff_p fw-bold mb-0 ">
-                Flexible & convenient schedule
+                Wide Range of Courses
               </h6>
               <p className=" ff_p mb-0 mt-2">
-                Balance your academic pursuits with personal and professional
-                commitments by learning anywhere and at any time, as per your
-                convenience.
+                At JBS Institute, students can choose from diploma, certificate, vocational, and university-level programs—all in one place. Whether it's teaching, computers, health, fashion, or business, we offer the course that matches your passion.
               </p>
             </div>
           </Col>
@@ -38,12 +36,10 @@ const WelcomeSection = () => {
             >
               <FaUniversity size={40} className="mb-3" />
               <h6 className=" ff_p fw-bold mb-0 ">
-                At par with on-campus degrees
+                Learn What You Love
               </h6>
               <p className=" ff_p mb-0 mt-2">
-                Access UGC-entitled online degrees that are at par with
-                on-campus degrees and accepted for govt. or corporate jobs and
-                higher education.
+                We believe education should be flexible. That’s why students can tell us what course they want, and we make it available. From skill training to full degree programs, JBS supports customized learning for every student.
               </p>
             </div>
           </Col>
@@ -54,11 +50,10 @@ const WelcomeSection = () => {
             >
               <FaChalkboardTeacher size={40} className="mb-3" />
               <h6 className=" ff_p fw-bold mb-0 ">
-                Experienced faculty & mentors
+                Expert Faculty & Practical Training
               </h6>
               <p className=" ff_p mb-0 mt-2">
-                Acquire quality education and guidance from esteemed faculty and
-                mentors who share their expertise and practical knowledge.
+                Our teachers are not only qualified but also experienced in real-life skills. We focus on hands-on training, so students don’t just learn theory—they gain the confidence to succeed in jobs or self-employment.
               </p>
             </div>
           </Col>
@@ -68,11 +63,9 @@ const WelcomeSection = () => {
               style={{ backgroundColor: "#F5FFD9" }}
             >
               <FaNetworkWired size={40} className="mb-3" />
-              <h6 className=" ff_p fw-bold mb-0 ">Shiksha Sangam network</h6>
+              <h6 className=" ff_p fw-bold mb-0 ">Recognized & Trusted Education</h6>
               <p className=" ff_p mb-0 mt-2">
-                Be a part of the prestigious Manipal alumni network to build
-                connections and to gain easy access to a wide range of career
-                opportunities.
+                All our university courses and many diplomas are affiliated with recognized boards and universities, ensuring that your education is valid, trusted, and useful for jobs, further studies, or competitive exams.
               </p>
             </div>
           </Col>

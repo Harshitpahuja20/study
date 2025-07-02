@@ -77,7 +77,7 @@ const CustomNavbar = () => {
                     <div className="d-flex  align-items-center gap-2 clr_theme small">
                       <FaPhoneAlt />
                       <span className=" fs_14">
-                        +91-7357777796 | 9729957434
+                        +91-9682636956
                       </span>
                     </div>
                   </div>

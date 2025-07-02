@@ -14,29 +14,10 @@ const AboutContentSection = () => {
               borderRadius: "50px",
             }}
           ></span>
-          <h5 className=" fw-bold mb-0">Shikshasangam.in Online</h5>
+          <h5 className=" fw-bold mb-0">About JBS Institute of Skill Education – Online</h5>
         </div>
         <p className=" mb-0 ff_p mt-2">
-          Shikshasangam.in Online is one more branch of Shikshasangam.in
-          dedicated to assisting working people advance their occupations. We at
-          Shikshasangam.in Online comprehend the requirement of continuously
-          enhancing one's capacities and the vibrant nature of today's business.
-          Our goal is to help specialists across a series of markets in
-          narrowing the success void that separates hard initiative from need.
-          By 2024, Shikshasangam.in Online will certainly offer greater than 12
-          million people yearly with a catalog of even more than 38,000 on the
-          internet programs from more than 2000 training course providers, or
-          Indian organizations and universities. We can please a vast array of
-          specialist rate of interests and learning preferences many thanks to
-          this varied collection. Many of the quickly growing and sought-after
-          areas today-- like blockchain, electronic advertising, fabricated
-          intelligence, information scientific research, equipment
-          understanding, deep discovering, monitoring, programs, databases,
-          cybersecurity, cloud computer, internet advancement, financing, item,
-          procedures, and logistics-- are covered by the internet site's listing
-          of online training courses. Among the courses offered are on the
-          internet bachelor's, master's, and postgraduate degree programs from
-          distinguished colleges along with qualification programs.
+          JBS Institute of Skill Education – Online is an innovative platform launched by JBS to empower students, professionals, and job-seekers through flexible, career-focused education. We recognize the importance of continuous learning in today’s rapidly evolving world. Our mission is to bridge the gap between ambition and achievement by offering high-quality, accessible online and offline programs that meet current industry demands.
         </p>
         <div className="d-flex mt-4 align-items-center gap-3">
           <span
@@ -47,17 +28,10 @@ const AboutContentSection = () => {
               borderRadius: "50px",
             }}
           ></span>
-          <h5 className=" fw-bold mb-0">College Reviews</h5>
+          <h5 className=" fw-bold mb-0">Courses and Learning Opportunities</h5>
         </div>
         <p className=" mb-0 ff_p mt-2">
-          University Reviews are a vital attribute of Shikshasangam.in. Students
-          on this web site share their university experiences, which helps
-          future students in picking their scholastic course. Shikshasangam.in
-          has developed itself as a trustworthy resource thanks to the more than
-          4 lakh validated pupil testimonials that trainees from all across
-          India have actually sent for colleges and programs. Trainees can get
-          info concerning college placement, scholastic standards, and
-          infrastructure needs through these testimonials.
+          JBS Institute Online aims to support over 1 million learners annually through a diverse catalog of more than 2,500 online and offline programs. These include diplomas, certificates, and university-affiliated courses. Our programs are available in collaboration with reputed Indian institutions and industry professionals. Key areas include Digital Marketing, Artificial Intelligence, Machine Learning, Cybersecurity, Cloud Computing, Web & App Development, Data Science, Computer Applications, Financial Management, Product & Operations, Beauty and Wellness, Yoga and Naturopathy, Nursery Teacher Training (NTT), and more.
         </p>
         <div className="d-flex mt-4 align-items-center gap-3">
           <span
@@ -68,16 +42,10 @@ const AboutContentSection = () => {
               borderRadius: "50px",
             }}
           ></span>
-          <h5 className=" fw-bold mb-0">Campus Ambassador Program</h5>
+          <h5 className=" fw-bold mb-0">Student Reviews and Community Feedback</h5>
         </div>
         <p className=" mb-0 ff_p mt-2">
-          As the best resource for trusted college admissions advice in India,
-          Shikshasangam.in boasts a robust nationwide network of university
-          ambassadors. With the program, university student can broaden their
-          networks and acquire new abilities, but school ambassadors serve as
-          Shikshasangam.in face and voice on school, supplying essential info
-          that helps various other candidates enter into the universities of
-          their option.
+          Student experiences are central to our mission. With over 1 lakh verified student reviews from across India, learners regularly share their feedback on courses, faculty, placement support, and digital infrastructure. These honest reviews help new students make informed decisions and also guide us in improving our offerings continually.
         </p>
         <div className="d-flex mt-4 align-items-center gap-3">
           <span
@@ -89,17 +57,27 @@ const AboutContentSection = () => {
             }}
           ></span>
           <h5 className=" fw-bold mb-0">
-            Shikshasangam.in Assistant & Counselling
+            Campus Ambassador Program
           </h5>
         </div>
         <p className=" mb-0 ff_p mt-2">
-          A huge selection of details relating to universities, courses, and
-          tests can be found on several of Shikshasangam.in web sites.
-          Shikshasangam.in state-of-the-art expert system (AI) assistant helps
-          emerge the vast quantity of knowledge in an organized fashion so that
-          it may be swiftly and conveniently understood. The aide is available
-          for students to ask any type of inquiries they might have, and she
-          will browse the system and provide the finest solutions.
+          The JBS Campus Ambassador Program provides an exciting opportunity for college students to represent JBS on their campuses. Ambassadors act as the voice and face of JBS, guiding their peers and spreading awareness about various career and educational opportunities. They also get the chance to develop leadership, communication, and networking skills while earning certificates and exclusive rewards.
+        </p>
+        <div className="d-flex mt-4 align-items-center gap-3">
+          <span
+            style={{
+              width: "50px",
+              height: "3px",
+              backgroundColor: "black",
+              borderRadius: "50px",
+            }}
+          ></span>
+          <h5 className=" fw-bold mb-0">
+            Empowering Futures, One Skill at a Time
+          </h5>
+        </div>
+        <p className=" mb-0 ff_p mt-2">
+          Whether you're a working professional seeking career advancement, a student preparing for the future, or someone looking to start a new journey, JBS Institute of Skill Education is your trusted partner in learning and growth. We are committed to equipping every learner with skills that truly matter in the real world.
         </p>
       </Container>
     </div>

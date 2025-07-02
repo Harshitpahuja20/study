@@ -155,7 +155,7 @@ const ResultHero = () => {
                   value={formData.enrollmentId}
                   onChange={handleChange}
                   className="mt-2 py-2 px-3"
-                  type="number"
+                  type="text"
                 />
               </div>
 

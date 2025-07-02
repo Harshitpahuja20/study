@@ -67,9 +67,11 @@ const DetailsPage = () => {
                     <Breadcrumb.Item href="#" className="text-dark">
                       {name}
                     </Breadcrumb.Item>
-                    <Breadcrumb.Item active>
-                      {selectedData?.instituteName}
-                    </Breadcrumb.Item>
+                   {name !== "news" && <Breadcrumb.Item active>
+                      {name === "news"
+                      ? ""
+                      : selectedData?.instituteName}
+                    </Breadcrumb.Item>}
                   </Breadcrumb>
                 </div>
               </div>
@@ -85,13 +87,15 @@ const DetailsPage = () => {
                 }}
                 className="mb-4"
               >
-                {selectedData?.instituteName}
+                {name === "news"
+                      ? selectedData?.heading 
+                      : selectedData?.instituteName}
               </div>
               {selectedData !== null && (
                 <>
                   <h4 className=" ff_p fw-bold fs_18 mb-0">
-                    {id === "news"
-                      ? selectedData?.heading
+                    {name === "news"
+                      ? "" 
                       : selectedData?.instituteName}
                   </h4>
                   <div

@@ -55,36 +55,33 @@ const ContactUsHero = () => {
           <Col className="pe-md-5" md={6}>
             <h4 className="fw-bold mb-0 ">Feel Free To Contact Us</h4>
             <p className=" mb-0 mt-1">
-              We are experienced in handling the formalities and
-              documentationrequired for your imports and exports. We work with
-              all international station to guarantee that your load will safely
-              reach without any delays.
+              Have questions or need guidance? Feel free to reach out to us anytime—our team is always here to assist you with the right information and support. Your success is our priority, and we’re just a call or message away! We expertly handle all import-export documentation and formalities, ensuring your shipment reaches any international destination safely and without delay.
             </p>
             <div className="mt-4">
               <h6 className="fw-bold mb-0 ">Postal Address :</h6>
-              <p className=" mb-0 mt-1">Hisar Haryana India, 125001</p>
+              <p className=" mb-0 mt-1">Chadwal ,Kathua, Jammu, 184144</p>
             </div>
             <div className="border w-100 my-4"></div>
             <Row>
               <Col md={6}>
                 <h6 className="fw-bold mb-0 ">Phone :</h6>
-                <p className=" mb-0 mt-1">+91 94668-20098</p>
+                <p className=" mb-0 mt-1">+91 9682636956</p>
               </Col>
               <Col md={6}>
                 <h6 className="fw-bold mb-0 ">Email :</h6>
-                <p className=" mb-0 mt-1">shiskhasangamindia@gmail.com</p>
+                <p className=" mb-0 mt-1">jbsinstitute02@gmail.com</p>
               </Col>
             </Row>
             <div className="border w-100 my-4"></div>
             <Row>
               <Col md={6}>
                 <h6 className="fw-bold mb-0 ">Website :</h6>
-                <p className=" mb-0 mt-1">https://www.shikshasangam.in</p>
+                <p className=" mb-0 mt-1">{window.location.origin}</p>
               </Col>
               <Col md={6}>
-                <h6 className="fw-bold mb-0 ">Website :</h6>
+                <h6 className="fw-bold mb-0 ">Social Media :</h6>
                 <p className=" mb-0 mt-1">
-                  Facebook / Instagram - shikshasangamindia
+                  Facebook / Instagram - JBSEDUCATION
                 </p>
               </Col>
             </Row>

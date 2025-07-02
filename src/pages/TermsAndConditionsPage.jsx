@@ -169,8 +169,8 @@ const TermsAndConditionsPage = () => {
         <p>
           <strong>Contact Information:</strong> If you have any questions or
           concerns about these Terms and Conditions, please contact us at{" "}
-          <a href="mailto:shiskhasangamindia@gmail.com">
-            shiskhasangamindia@gmail.com
+          <a href="mailto:jbsinstitute02@gmail.com">
+            jbsinstitute02@gmail.com
           </a>
         </p>
 
