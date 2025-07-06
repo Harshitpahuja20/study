@@ -1,27 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import image from "../../assets/image/png/bg.jpg";
 import { useStudy } from "../../context/study.context";
 import { getAbsoluteUrl } from "../../services/common.service";
+import ViewModal from "../../admin/components/popup/ViewModal";
 
 const CourseCategoriesHero = () => {
   const { streams } = useStudy();
-
-  console.log(streams);
+  const [selectedData, setSelectedData] = useState(null);
 
   return (
     <div className="py-5">
       <Container>
         <h4 className=" ff_p mb-0 fw-bold">Explore our Categories.</h4>
         <p className=" ff_p mb-0 mt-1">
-        Find different topics to learn what you like and grow your skills.
+          Find different topics to learn what you like and grow your skills.
         </p>
         <Row>
           {streams?.length > 0 ? (
             streams?.map((stream) => {
               let image = getAbsoluteUrl(stream?.image);
               return (
-                <Col lg={3} mb={4} sm={6} className="mt-4 col-12">
+                <Col
+                  lg={3}
+                  mb={4}
+                  sm={6}
+                  className="mt-4 col-12 cursor-pointer"
+                  onClick={() => setSelectedData(stream)}
+                >
                   <div
                     className="hero-section w-100 rounded-3 py-5 ff_p d-flex align-items-center justify-content-center text-white"
                     style={{
@@ -61,6 +67,26 @@ const CourseCategoriesHero = () => {
           )}
         </Row>
       </Container>
+      <ViewModal
+        show={selectedData !== null}
+        handleClose={() => setSelectedData(null)}
+        content={
+          <>
+            {selectedData?.mainCourse?.length === 0 ? (
+              <p className="text-center fw-semibold fs-6 mt-3">
+                No Courses Added!
+              </p>
+            ) : (
+              <>
+                  {selectedData?.mainCourse?.map((course , index) => {
+                    return <p className="fs-6 mb-2"><span className="fw-semibold">{index + 1}.</span> {course?.heading} ({course?.shortName})</p>;
+                  })}
+              </>
+            )}
+          </>
+        }
+        title={selectedData && `${selectedData?.title} Courses`}
+      />
     </div>
   );
 };
