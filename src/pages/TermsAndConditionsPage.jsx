@@ -26,7 +26,7 @@ const TermsAndConditionsPage = () => {
         </div>
         <p>
           <strong>Eligibility:</strong> You must be at least 18 years old or
-          have the legal capacity in your jurisdiction to use Shiksha Sangam.
+          have the legal capacity in your jurisdiction to use JBS Institute.
           Minors under 18 must have parental or guardian consent.
         </p>
         <p>
@@ -52,8 +52,7 @@ const TermsAndConditionsPage = () => {
           <h5 className="fw-bold mb-0">Admission and Participation</h5>
         </div>
         <p>
-          <strong>Course Enrollment:</strong> Enrollment in courses on Shiksha
-          Sangam is subject to availability. We reserve the right to cancel or
+          <strong>Course Enrollment:</strong> Enrollment in courses on JBS Institute is subject to availability. We reserve the right to cancel or
           modify courses at our discretion.
         </p>
         <p>
@@ -65,7 +64,7 @@ const TermsAndConditionsPage = () => {
         <p>
           <strong>Intellectual Property:</strong> All course materials,
           including text, videos, and assessments, are the intellectual property
-          of Shiksha Sangam or our instructors. You may not reproduce,
+          of JBS Institute or our instructors. You may not reproduce,
           distribute, or modify these materials without permission.
         </p>
 
@@ -82,7 +81,7 @@ const TermsAndConditionsPage = () => {
         </div>
         <p>
           <strong>Payment:</strong> You agree to pay all fees associated with
-          courses or services you purchase on Shiksha Sangam. Payment is due
+          courses or services you purchase on JBS Institute. Payment is due
           upon enrollment, and we may use third-party payment processors to
           facilitate transactions.
         </p>
@@ -106,13 +105,13 @@ const TermsAndConditionsPage = () => {
           </h5>
         </div>
         <p>
-          <strong>Disclaimer:</strong> Shiksha Sangam provides educational
+          <strong>Disclaimer:</strong> JBS Institute provides educational
           content, but we do not guarantee the accuracy or completeness of
           course materials. We are not responsible for any errors or omissions.
         </p>
         <p>
           <strong>Limitation of Liability:</strong> To the extent permitted by
-          law, Shiksha Sangam shall not be liable for any indirect,
+          law, JBS Institute shall not be liable for any indirect,
           consequential, or incidental damages arising out of your use of our
           platform.
         </p>
@@ -175,7 +174,7 @@ const TermsAndConditionsPage = () => {
         </p>
 
         <p className="mt-5">
-          Thank you for choosing Shiksha Sangam. We look forward to providing
+          Thank you for choosing JBS Institute. We look forward to providing
           you with a valuable educational experience.
         </p>
       </Container>

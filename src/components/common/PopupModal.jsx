@@ -40,7 +40,7 @@ const PopupModal = ({ show, handleClose }) => {
         </button>
         {/* Left Section */}
         <div className="left-section p-4 w-50">
-          <h5 className="mb-4">How Shiksha Sangam helps you in</h5>
+          <h5 className="mb-4">How JBS Institute helps you in</h5>
           <Row>
             {featureList.map((item, index) => (
               <Col key={index} xs={6} className="mb-4">

@@ -34,13 +34,13 @@ const PrivacyPolicy = () => {
         </p>
         <p className="ff_r mt-3">
           <strong>User Data: </strong>
-          We may gather data about your usage of Shiksha Sangam, including your
+          We may gather data about your usage of JBS Institute, including your
           course history, progress, and interactions with our platform.
         </p>
         <p className="ff_r mt-3">
           <strong>Cookies and Tracking Technologies: </strong>
           We employ cookies and similar tracking technologies to enhance your
-          experience on Shiksha Sangam. These technologies assist us in
+          experience on JBS Institute. These technologies assist us in
           personalizing content, analyzing usage patterns, and improving our
           services.
         </p>

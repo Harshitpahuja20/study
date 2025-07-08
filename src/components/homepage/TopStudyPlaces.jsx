@@ -16,7 +16,7 @@ const TopStudyPlaces = () => {
               Top study <strong>places</strong>
             </h4>
             <p className=" mb-0 ff_p mt-1">
-              Shikshasangam.in is an extensive search engine for education
+              Jbsinstitute.com is an extensive search engine for education
               industry players.
             </p>
             <Row className="mt-3">

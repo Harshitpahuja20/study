@@ -121,7 +121,7 @@ const EnquiryPopupModal = ({ show, handleClose }) => {
         {/* Left Section */}
         <Row>
           <div className="left-section col-lg-6 col-12 p-4 ">
-            <h5 className="mb-4">How Shiksha Sangam helps you in</h5>
+            <h5 className="mb-4">How JBS Institute helps you in</h5>
             <Row>
               {featureList.map((item, index) => (
                 <Col key={index} xs={6} className="mb-4">

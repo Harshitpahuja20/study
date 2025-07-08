@@ -81,7 +81,7 @@ const ContactUsHero = () => {
               <Col md={6}>
                 <h6 className="fw-bold mb-0 ">Social Media :</h6>
                 <p className=" mb-0 mt-1">
-                  Facebook / Instagram - JBSEDUCATION
+                  Instagram - jbs_institute_7054
                 </p>
               </Col>
             </Row>
