@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import CustomNavbar from "../components/common/CustomNavbar";
 import BannerSection from "../components/common/BannerSection";
 import ContactUsHero from "../components/contactuspage/ContactUsHero";
+import DirectorSection from "../components/contactuspage/director";
 
 const ContactUsPage = () => {
   useEffect(() => {
@@ -11,6 +12,7 @@ const ContactUsPage = () => {
     <div>
       <CustomNavbar />
       <BannerSection title="Contact Us" page="Contact Us" />
+      <DirectorSection/>
       <ContactUsHero />
     </div>
   );

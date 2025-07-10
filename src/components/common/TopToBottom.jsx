@@ -1,7 +1,9 @@
+import React from "react";
 import whatsaapIcon from "../../assets/image/png/whatsapp.png";
 import callIcon from "../../assets/image/png/telephone.png";
 
 const TopToBottom = () => {
+  const phoneNumber = "+919682636956"; // no hyphen
   return (
     <div>
       <div
@@ -12,15 +14,18 @@ const TopToBottom = () => {
           zIndex: "345678",
         }}
       >
-        <div className="d-flex flex-column ">
-          <img width={40} height={40} src={callIcon} alt="top_arrow" />
-          <img
+        <div className="d-flex flex-column">
+          <a href={`tel:${phoneNumber}`} target="_blank" rel="noopener noreferrer">
+            <img width={40} height={40} src={callIcon} alt="Call Us" />
+          </a>
+          <a
             className="mt-2"
-            width={40}
-            height={40}
-            src={whatsaapIcon}
-            alt="top_arrow"
-          />
+            href={`https://wa.me/${phoneNumber.replace("+", "")}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img width={40} height={40} src={whatsaapIcon} alt="WhatsApp Us" />
+          </a>
         </div>
       </div>
     </div>

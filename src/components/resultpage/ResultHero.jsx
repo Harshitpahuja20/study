@@ -168,6 +168,7 @@ const ResultHero = () => {
                   className="mt-2 py-2 px-3"
                 >
                   <option value="">-- Choose Mode --</option>
+                  <option value="45 DAYS">45 DAYS</option>
                   <option value="3 MONTH">3 MONTHS</option>
                   <option value="6 MONTH">6 MONTHS</option>
                   <option value="1 YEAR">1 YEAR</option>

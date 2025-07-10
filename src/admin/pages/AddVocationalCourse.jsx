@@ -13,6 +13,7 @@ const AddVocationalCourse = () => {
   });
 
   const durations = [
+    "45 DAYS",
     "3 MONTH",
     "6 MONTH",
     "1 YEAR",

@@ -107,7 +107,7 @@ const DetailsPage = () => {
                 </>
               )}
               {selectedData !== null &&
-                selectedData?.linkedStreams?.length > 0 && (
+                selectedData?.mainCourses?.length > 0 && (
                   <>
                     <div className="mb-4">
                       <div
@@ -121,11 +121,11 @@ const DetailsPage = () => {
                         {currentYear} - {nextYear}
                       </div>
 
-                      {selectedData?.linkedStreams.map((item) => {
+                      {selectedData?.mainCourses.map((item) => {
                         return (
                           <div className="mt-3 px-2 d-flex align-items-center fs-6">
                             <BsCheckSquare className="text-danger me-2" />
-                            <span className="fs-6">{item?.title}</span>
+                            <span className="fs-6">{item?.heading} ({item?.shortName})</span>
                           </div>
                         );
                       })}
