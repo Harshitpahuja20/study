@@ -6,6 +6,7 @@ const baseUrl = process.env.REACT_APP_API_URL;
 const ADD_SUB_COURSE = `${baseUrl}/api/subCourse/add`;
 const UPDATE_COURSE = `${baseUrl}/api/subCourse/update`;
 const VIEW_SUB_COURSE = `${baseUrl}/api/subCourse/view`;
+const VIEW_SINGLE_SUB_COURSE = `${baseUrl}/api/subCourse/single`;
 const DELETE_SUB_COURSE = `${baseUrl}/api/subCourse/delete/`;
 
 export const addSubCourse = async (data) => {
@@ -61,6 +62,14 @@ export const deleteSubCourse = async (id) => {
 
 export const getSubCourseById = async (id) => {
   return axios.get(`${VIEW_SUB_COURSE}/${id}`, {
+    headers: {
+      Authorization: getAuth()?.token,
+    },
+  });
+};
+
+export const getsubCourseById = async (id) => {
+  return axios.get(`${VIEW_SINGLE_SUB_COURSE}/${id}`, {
     headers: {
       Authorization: getAuth()?.token,
     },

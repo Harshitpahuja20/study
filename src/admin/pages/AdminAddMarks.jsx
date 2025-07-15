@@ -258,6 +258,7 @@ const AdminAddMarks = () => {
               className="p-2"
             >
               <option value="45 Days">45 Days</option>
+              <option value="1 month">1 month</option>
               <option value="3 month">3 month</option>
               <option value="6 Month">6 Month</option>
               <option value="1 Year">1 Year</option>

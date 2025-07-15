@@ -16,6 +16,7 @@ const ViewFranchiseVocationalCourse = () => {
 
   const durations = [
     "45 DAYS",
+    "1 MONTH",
     "3 MONTH",
     "6 MONTH",
     "1 YEAR",

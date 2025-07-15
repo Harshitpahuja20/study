@@ -4,8 +4,10 @@ import image from "../../assets/image/png/bg.jpg";
 import { useStudy } from "../../context/study.context";
 import { getAbsoluteUrl } from "../../services/common.service";
 import ViewModal from "../../admin/components/popup/ViewModal";
+import { useNavigate } from "react-router-dom";
 
 const CourseCategoriesHero = () => {
+  const navigate = useNavigate()
   const { streams } = useStudy();
   const [selectedData, setSelectedData] = useState(null);
 
@@ -78,9 +80,28 @@ const CourseCategoriesHero = () => {
               </p>
             ) : (
               <>
-                  {selectedData?.mainCourse?.map((course , index) => {
-                    return <p className="fs-6 mb-2"><span className="fw-semibold">{index + 1}.</span> {course?.heading} ({course?.shortName})</p>;
-                  })}
+                {selectedData?.mainCourse?.map((course, index) => {
+                  return (
+                    <>
+                    <div className="d-flex justify-content-between p-2 border-bottom">
+                      <div>
+                        <p className="mb-0 fs-6">
+                          {course?.shortName} - {course?.heading}
+                        </p>
+                        <p className="text-primary fw-semibold mb-3 fs-6">
+                          {course?.heading}
+                        </p>
+                      </div>
+                      <div>
+                        <button className="p-2 btn btn-sm btn text-white fs-6  fw-semibold rounded-2 bg_theme" onClick={()=>{
+                          navigate(`/SubCourses/${course?._id}/${course?.heading}`)
+                        }}>
+                          View Details
+                        </button>
+                      </div>
+                    </div></>
+                  );
+                })}
               </>
             )}
           </>
@@ -90,5 +111,9 @@ const CourseCategoriesHero = () => {
     </div>
   );
 };
+
+{
+  /* <p className="fs-6 mb-2"><span className="fw-semibold">{index + 1}.</span> {course?.heading} ({course?.shortName})</p> */
+}
 
 export default CourseCategoriesHero;

@@ -4,6 +4,7 @@ import { getStreams } from "../admin/services/adminStreams.service";
 import { getPlaces } from "../admin/services/adminPlaces.service";
 import { getInstitute } from "../admin/services/AdminInstitute.service";
 import { getNews } from "../admin/services/adminNews.service";
+import { useLocation } from "react-router-dom";
 
 const StudyContext = createContext();
 
@@ -19,6 +20,7 @@ export const StudyProvider = ({ children }) => {
   const [iti, setIti] = useState({ data: [], loading: true });
   const [collages, setCollages] = useState({ data: [], loading: true });
   const [news, setNews] = useState({ data: [], loading: true });
+  const { pathname } = useLocation();
 
   const getUser = async () => {
     if (token || franchisetoken) {
@@ -123,6 +125,15 @@ export const StudyProvider = ({ children }) => {
     getStatePlaces();
     getStateStreams();
   }, []);
+
+  useEffect(() => {
+    if (pathname) {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
+  }, [pathname]);
 
   return (
     <StudyContext.Provider

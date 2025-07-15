@@ -74,6 +74,8 @@ import AdminWallet from "./admin/pages/AdminWallet";
 import AdminTopUp from "./admin/pages/AdminTopUp";
 import AdminTopUpRequests from "./admin/pages/AdminTopUpRequests";
 import AdminSubjectForm from "./admin/pages/AdminVocationalCourseSubject";
+import SubCoursesPage from "./pages/SubCourses";
+import SubCoursePage from "./pages/SubCourse";
 
 function App() {
   const { isEnquiryPopup, setIsEnquiryPopup, currentUser } = useStudy();
@@ -136,6 +138,8 @@ function App() {
         <Route path="/result" element={<ResultPage />} />
         <Route path="/contact-us" element={<ContactUsPage />} />
         <Route path="/course-category" element={<CourseCategoriesPage />} />
+        <Route path="/SubCourses/:id/:name" element={<SubCoursesPage />} />
+        <Route path="/SubCourse/:id/:name" element={<SubCoursePage />} />
         <Route path="/news" element={<NewsPage />} />
         <Route path="/top-university" element={<TopUniversityPage />} />
         <Route path="/top-iti" element={<TopITIPage />} />
