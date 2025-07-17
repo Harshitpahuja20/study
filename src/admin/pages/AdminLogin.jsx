@@ -10,8 +10,8 @@ const AdminLogin = () => {
   const navigate = useNavigate();
   const { setCurrentUser } = useStudy();
   const [formData, setFormData] = useState({
-    userName: "admin",
-    password: "admin@123",
+    userName: "",
+    password: "",
     role: "admin",
   });
 

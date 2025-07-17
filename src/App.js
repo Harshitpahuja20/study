@@ -76,6 +76,7 @@ import AdminTopUpRequests from "./admin/pages/AdminTopUpRequests";
 import AdminSubjectForm from "./admin/pages/AdminVocationalCourseSubject";
 import SubCoursesPage from "./pages/SubCourses";
 import SubCoursePage from "./pages/SubCourse";
+import AdminUpdatePassword from "./admin/pages/AdminUpdatePassword";
 
 function App() {
   const { isEnquiryPopup, setIsEnquiryPopup, currentUser } = useStudy();
@@ -185,6 +186,7 @@ function App() {
             </AdminPrivateRoute>
           }
         >
+          <Route path="updatePassword" element={<AdminUpdatePassword />} />
           <Route path="dashboard" element={<AdminDashobard />} />
           <Route path="dashboard/other" element={<AddOtherDashboard />} />
           <Route path="streams" element={<AdminStreams />} />

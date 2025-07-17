@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import CustomNavbar from "../components/common/CustomNavbar";
 import { Breadcrumb, Col, Container, Row } from "react-bootstrap";
 import helpline from "../assets/image/png/helpline.png";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useStudy } from "../context/study.context";
 import { BsCheckSquare, BsHouseFill } from "react-icons/bs";
 import { FaHouse } from "react-icons/fa6";
 
 const DetailsPage = () => {
+  const navigate = useNavigate()
   const { name, id } = useParams();
   const [selectedData, setSelectedData] = useState({});
   const { getInstitutes, universities, iti, collages, getAllNews, news } =
@@ -123,7 +124,8 @@ const DetailsPage = () => {
 
                       {selectedData?.mainCourses.map((item) => {
                         return (
-                          <div className="mt-3 px-2 d-flex align-items-center fs-6">
+                          <div className="cursor-pointer mt-3 px-2 d-flex align-items-center fs-6" onClick={()=>{
+                            navigate(`/SubCourses/${item?._id}/${item?.heading}`)}}>
                             <BsCheckSquare className="text-danger me-2" />
                             <span className="fs-6">{item?.heading} ({item?.shortName})</span>
                           </div>

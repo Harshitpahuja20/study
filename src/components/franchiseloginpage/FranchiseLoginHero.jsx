@@ -7,8 +7,8 @@ import { useStudy } from "../../context/study.context";
 const FranchiseLoginHero = () => {
   const { setCurrentUser } = useStudy();
   const [formData, setFormData] = useState({
-    userName: "admin@gmail.com",
-    password: "admin@123",
+    userName: "",
+    password: "",
     role: "franchise",
   });
 

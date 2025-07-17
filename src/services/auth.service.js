@@ -4,6 +4,7 @@ const AUTH_LOCAL_STORAGE_KEY_FRANCHISE = "franchisetoken";
 const baseUrl = process.env.REACT_APP_API_URL;
 
 const LOGIN = `${baseUrl}/api/login`;
+const UPDATE_PASSWORD = `${baseUrl}/api/updatePassword`;
 const GET_CURRENT_USER = `${baseUrl}/api/getCurrentRole`;
 
 export const getAuth = () => {
@@ -59,6 +60,14 @@ export const getCurrentUser = (token) => {
   return axios.get(`${GET_CURRENT_USER}`, {
     headers: {
       Authorization: token,
+    },
+  });
+};
+
+export const updatePassword = (data) => {
+  return axios.post(`${UPDATE_PASSWORD}`, data, {
+    headers: {
+      Authorization: getAuth()?.token,
     },
   });
 };

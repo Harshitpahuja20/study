@@ -29,7 +29,11 @@ import { MdDeviceHub } from "react-icons/md";
 import { PiStudent } from "react-icons/pi";
 import { IoBookSharp } from "react-icons/io5";
 import { AiOutlineGlobal } from "react-icons/ai";
-import { BsFillArrowLeftSquareFill, BsFillArrowRightSquareFill, BsWallet } from "react-icons/bs";
+import {
+  BsFillArrowLeftSquareFill,
+  BsFillArrowRightSquareFill,
+  BsWallet,
+} from "react-icons/bs";
 
 // ✅ Reusable Dropdown Component
 function DropdownMenu({ label, icon, items = [], basePath = "", handleClick }) {
@@ -75,8 +79,8 @@ function DropdownMenu({ label, icon, items = [], basePath = "", handleClick }) {
 }
 
 const AdminNavbar = () => {
-  const navigate = useNavigate()
-  const { currentUser, handleLogOut , isOther, setIsOther} = useStudy();
+  const navigate = useNavigate();
+  const { currentUser, handleLogOut, isOther, setIsOther } = useStudy();
   const [showSidebar, setShowSidebar] = useState(false);
   const handleClose = () => setShowSidebar(false);
   const handleShow = () => setShowSidebar(true);
@@ -146,20 +150,29 @@ const AdminNavbar = () => {
                   </Link>
 
                   <div className="d-lg-block d-none">
+                    
                     <Dropdown align="end">
+                      
                       <Dropdown.Toggle
                         variant="link"
                         id="dropdown-user"
                         className="d-flex align-items-center gap-2 clr_theme small p-0 border-0 shadow-none"
                       >
+                        
                         <span className="mb-0 fs_14 fw-semibold text-end">
-                          {currentUser?.franchiseName} <br />{" "}
+                          {currentUser?.franchiseName} <br />
                           {currentUser?.email}
                         </span>
                         <FaUserCircle size={34} />
                       </Dropdown.Toggle>
-
                       <Dropdown.Menu className="">
+                        
+                        <Dropdown.Item
+                          onClick={() => navigate("/admin/updatePassword")}
+                          className="bg-white text-dark"
+                        >
+                          Update Password
+                        </Dropdown.Item>
                         <Dropdown.Item
                           onClick={() => handleLogOut()}
                           className="bg-white text-dark"
@@ -215,7 +228,7 @@ const AdminNavbar = () => {
                           <div
                             onClick={() => {
                               setIsOther(true);
-                              navigate( "/admin/dashboard/other");
+                              navigate("/admin/dashboard/other");
                             }}
                             className="d-flex align-items-center px-4 py-2 mt-3 text-decoration-none text-black ff_p sidebar-link rounded small-text"
                             style={{ cursor: "pointer" }}
@@ -230,9 +243,7 @@ const AdminNavbar = () => {
                         <Link
                           to={item.to}
                           className={`d-flex align-items-center px-4 py-2 mt-3 text-decoration-none text-black ff_p sidebar-link rounded small-text ${
-                            location.pathname === item.to
-                              ? "bg-light"
-                              : ""
+                            location.pathname === item.to ? "bg-light" : ""
                           }`}
                         >
                           <span className="me-3">{item.icon}</span>
@@ -283,9 +294,7 @@ const AdminNavbar = () => {
                         <Link
                           to={item.to}
                           className={`d-flex align-items-center px-4 py-2 mt-3 text-decoration-none text-black ff_p sidebar-link rounded small-text ${
-                            location.pathname === item.to
-                              ? "bg-light"
-                              : ""
+                            location.pathname === item.to ? "bg-light" : ""
                           }`}
                         >
                           <span className="me-3">{item.icon}</span>
