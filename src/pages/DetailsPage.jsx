@@ -6,6 +6,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useStudy } from "../context/study.context";
 import { BsCheckSquare, BsHouseFill } from "react-icons/bs";
 import { FaHouse } from "react-icons/fa6";
+import UniversityCard from "../components/topuniversitypage/UniversityCard";
+import { getAbsoluteUrl } from "../services/common.service";
 
 const DetailsPage = () => {
   const navigate = useNavigate()
@@ -38,7 +40,6 @@ const DetailsPage = () => {
           getInstitutes("Collage");
         } else {
           const found = collages?.data?.find((item) => item._id === id) || null;
-          alert("found" + found);
           setSelectedData(found);
         }
       } else if (name === "news") {
@@ -103,7 +104,7 @@ const DetailsPage = () => {
                     dangerouslySetInnerHTML={{
                       __html: selectedData?.description,
                     }}
-                    className="htmlRender"
+                    className="htmlRender prose max-w-none"
                   />
                 </>
               )}
@@ -136,6 +137,7 @@ const DetailsPage = () => {
                 )}
             </Col>
             <Col className="" md={4}>
+            {name !== "news" && <UniversityCard title={selectedData?.instituteName} logo={getAbsoluteUrl(selectedData?.instituteLogo)} />}
               <div className="card text-center p-4">
                 <img
                   className="mx-auto"

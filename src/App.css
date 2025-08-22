@@ -491,3 +491,11 @@ button.btn-danger:hover {
     width: 100%;
   }
 }
+
+.htmlRender * {
+  all: revert !important;
+  display: revert !important;
+  font-size: inherit !important;
+}
+
+

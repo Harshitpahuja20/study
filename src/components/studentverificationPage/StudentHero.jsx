@@ -21,8 +21,10 @@ const StudentHero = () => {
   };
 
   const handleSubmit = async () => {
-    if (!formData?.enrollmentId || !formData?.dob)
-      return toast.warning("Both Fields are required!");
+    if (!formData?.enrollmentId || !formData?.dob) {
+      toast.warning("Both Fields are required!")
+      return
+    }
 
     await studentVerify(formData)
       .then(async (res) => {
@@ -32,9 +34,10 @@ const StudentHero = () => {
             dob: "",
           });
           setStudent(res?.data?.data);
-          toast.success("Student Data Loaded!");
+          toast.success("Student Data fetched!");
         } else {
-          return toast.error(res?.data?.message);
+          toast.error(res?.data?.message);
+          return
         }
       })
       .catch((err) => {
@@ -59,7 +62,7 @@ const StudentHero = () => {
                 <label htmlFor="EnrollmentNumber">Enrollment Number</label>
                 <input
                   className="mt-2 py-2 px-3"
-                  type="number"
+                  type="text"
                   name="enrollmentId"
                   onChange={handleChange}
                 />
@@ -101,7 +104,7 @@ const StudentHero = () => {
 
                 <Col xs={12} md={6} className="d-flex">
                   <strong className="me-2">Course Name</strong>
-                  <span>: {student?.courseName || "-"}</span>
+                  <span>: {student?.course?.name || "-"}</span>
                 </Col>
 
                 <Col xs={12} md={6} className="d-flex">
